@@ -1,0 +1,97 @@
+﻿
+@model TSTB.BLL.DTOs.BillingModelDTO.CreateDeclarationDTO
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.DAL.Models.Enums
+
+@{
+    ViewData["Title"] = SharedLocalizer["Yearly payment request"];
+}
+
+<h2 class="text-xl font-semibold"> @SharedLocalizer["Create yearly payment request and send declaration for amount confirmation"]</h2>
+<div class="mt-4">
+    <div id="gridContainer">
+        <form asp-action="Create" id="form" enctype="multipart/form-data">
+            <div class="col-md-12">
+                <div asp-validation-summary="All" class="text-danger">
+                    @if (ViewBag.ErrorList != null)
+                    {
+                        foreach (var err in ViewBag.ErrorList)
+                        {
+                            <p>@err.Description</p>
+                        }
+                    }
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label>@SharedLocalizer["Choose year"]</label>
+                            <div id="yearPayment"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>@SharedLocalizer["Upload declaration obtained from tax office"]</label>
+                            <div id="photo"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="dx-fieldset">
+                <br />
+                <div id="summary"></div>
+                <br />
+                <div id="button"></div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $(function () {
+            $("#photo").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a pictures"]',
+                name: "FormFiles",
+                labelText: '@SharedLocalizer["or drag pictures"]',
+                accept: "image/*",
+                uploadMode: '@SharedLocalizer["or drag"]',
+                multiple: true,
+            });
+
+            var yaers = [];
+            var year = new Date().getFullYear();
+            for (let y = year; y >= year - 10; y--){
+                yaers.push(y);
+            }
+
+            $("#yearPayment").dxSelectBox({
+                items: yaers,
+                value: year,
+                name: "YearDeclaration",
+                placeholder: '@SharedLocalizer["Choose year"]',
+                showClearButton: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please choose year"]'
+                }]
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Create"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+
+        });
+
+    </script>
+
+}

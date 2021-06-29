@@ -1,0 +1,44 @@
+﻿@model int
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Pay"];
+}
+
+<!-- Paste this code after body tag -->
+<div class="se-pre-con"></div>
+<!-- Ends -->
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-offset-6">
+            <img src="~/images/loader.gif" style=" width:10%; height: auto; ">
+        </div>
+
+        <form asp-area="Employee" asp-controller="Payment" asp-action="Tranzit" asp-route-id="@Model" id="formSubmit">
+
+            <input type="submit" style="visibility:hidden" />
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-offset-6">
+            <h3>Rediracting...</h3>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function submitForm() { // submits form
+            document.getElementById("formSubmit").submit();
+        }
+        if (document.getElementById("formSubmit")) {
+            setTimeout("submitForm()", 2000); // set timout
+        }
+    </script>
+}
+

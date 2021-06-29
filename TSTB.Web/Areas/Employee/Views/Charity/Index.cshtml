@@ -1,0 +1,310 @@
+﻿@using TSTB.Web.Areas.Admin.Utilities;
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Charity"];
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Charity"]
+            </h1>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div id="gridContainer">
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            @SharedLocalizer["My Donations"]
+        </h1>
+    </div>
+    <hr />
+    <div class="row">
+        <div id="gridContainerMy">
+        </div>
+    </div>
+
+
+</div>
+
+@section Scripts{
+    <script>
+
+        var PaymentStatus = [
+              { id: 0, name: "@SharedLocalizer["Not Paid! Order Registered in the Bank."]" },
+              { id: 1, name: "@SharedLocalizer["Not Paid! Preauthorized Amount frozen for 2 factor Authorization."]" },
+              { id: 2, name: "@SharedLocalizer["Charity Payed Successfully."]" },
+              { id: 3, name: "@SharedLocalizer["Not Paid ! Authorization Cancelled."]" },
+              { id: 4, name: "@SharedLocalizer["Not Paid ! Amount Refunded."]" },
+              { id: 5, name: "@SharedLocalizer["Not Paid ! Authorization Initiated by issuing Bank ACS."]" },
+              { id: 6, name: "@SharedLocalizer["Not Paid ! Authorization Rejected."]" },
+              { id: 99, name: "@SharedLocalizer["Not Paid ! "]" }
+        ];
+
+        $(function () {
+            let url = "/api/CharityAPI/Publish";
+            let urlDetail = '/api/CharityAPI/GetDetails';
+            let urlByUserAll = '/api/CharityAPI/GetAllCharities'
+            var returnUrl = '@Context.Request.Path@Context.Request.QueryString';
+            $("#gridContainer").dxDataGrid({
+                dataSource: DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: url,
+                    insertUrl: url,
+                    updateUrl: url,
+                    deleteUrl: url,
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),
+
+                selection: {
+                    mode: "multiple"
+                },
+
+                filterPanel: {
+                    visible: false
+                },
+                filterRow: { visible: false },
+                remoteOperations: true,
+                onRowUpdating: function (e) {
+                    e.newData = Object.assign(e.oldData, e.newData)
+                },
+                scrolling: {
+                    mode: "virtual",
+                    rowRenderingMode: "virtual"
+                },
+                paging: {
+                    pageSize: 100
+                },
+                editing: {
+                    useIcons: true,
+                    allowUpdating: false,
+                    allowDeleting: false,
+                    allowAdding: false,
+                },
+                headerFilter: {
+                    visible: true
+                },
+                wordWrapEnabled: true,
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                searchPanel: {
+                    visible: true
+                },
+
+                stateStoring: {
+                    enabled: true,
+                    type: "localStorage",
+                    storageKey: "charityAdmin"
+                },
+
+                columns: [
+                    {
+                        caption: '@SharedLocalizer["Name"]',
+                        dataField: "name",
+                        allowHeaderFiltering: false
+                    },
+
+                      {
+                        caption: '@SharedLocalizer["Description"]',
+                        dataField: "description",
+                        allowHeaderFiltering: false
+                    },
+
+                    {
+                        caption: '@SharedLocalizer["Created Date"]',
+                        dataField: "createdDate",
+                        allowHeaderFiltering: false
+                    },
+
+
+                    {
+                        caption: '@SharedLocalizer["Status"]',
+                        dataField: "isPublish",
+                        width: "130",
+                        allowHeaderFiltering: false
+                    },
+
+                    {
+                        type: "buttons",
+                        width: 110,
+                        buttons: [
+                            {
+                                hint: '@SharedLocalizer["Donate"]',
+                                icon: "money",
+                                onClick: function (e) {
+                                    var idString = e.row.data.id;
+                                    var url = `@Url.Action("Edit", "Charity", new { Area = "Employee" })`;
+                                    window.location = url + '?id=' + idString;
+                                }
+                            },
+                        ]
+                    }
+                ],
+                 masterDetail: {
+                    enabled: true,
+                    template: function (container, options) {
+                        var item = options.data;
+                        $("<div>")
+                            .addClass("master-detail-caption")
+                            .text(item.fullName)
+                            .appendTo(container);
+
+                        $("<div>")
+
+                            .dxDataGrid({
+                            dataSource: new DevExpress.data.AspNet.createStore({
+                            key: "id",
+                            loadUrl: urlDetail + "?charId=" + item.id,
+                                 onBeforeSend: function (method, ajaxOptions) {
+                                        ajaxOptions.xhrFields = { withCredentials: true };
+                                    }
+                            }),
+                            editing: {
+                                useIcons: true,
+                                allowUpdating: false,
+                                allowDeleting: false,
+                                allowAdding: false
+                            },
+                            columnAutoWidth: true,
+                            showColumnLines: true,
+                            showRowLines: true,
+                            showBorders: true,
+                            stateStoring: {
+                                enabled: true,
+                                type: "localStorage",
+                                storageKey: "decImageAcc"
+                            },
+                                columns: [
+                                    {
+                                            caption: '@SharedLocalizer["Amount"]',
+                                            dataField: "amount",
+                                            allowHeaderFiltering: false
+                                    },
+                                    {
+                                            dataField: "paymentStatus",
+                                            caption: '@SharedLocalizer["Status"]',
+                                            lookup: {
+                                            dataSource: PaymentStatus,
+                                            displayExpr: "name",
+                                            valueExpr: "id"
+                                    }
+                                    },
+                                    {
+                                            caption: '@SharedLocalizer["Payment Date"]',
+                                            dataField: "paymentDate",
+                                            allowHeaderFiltering: false
+                                    },
+                                    {
+                                            caption: '@SharedLocalizer["Comment"]',
+                                            dataField: "description",
+                                            allowHeaderFiltering: false
+                                    }
+
+                                ]
+                        }).appendTo(container);
+                    }
+                }
+            });
+
+
+            $("#gridContainerMy").dxDataGrid({
+                dataSource: DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: urlByUserAll,
+                    insertUrl: urlByUserAll,
+                    updateUrl: urlByUserAll,
+                    deleteUrl: urlByUserAll,
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),
+
+                selection: {
+                    mode: "multiple"
+                },
+
+                filterPanel: {
+                    visible: false
+                },
+                filterRow: { visible: false },
+                remoteOperations: true,
+                onRowUpdating: function (e) {
+                    e.newData = Object.assign(e.oldData, e.newData)
+                },
+                scrolling: {
+                    mode: "virtual",
+                    rowRenderingMode: "virtual"
+                },
+                paging: {
+                    pageSize: 100
+                },
+                editing: {
+                    useIcons: true,
+                    allowUpdating: false,
+                    allowDeleting: false,
+                    allowAdding: false,
+                },
+                headerFilter: {
+                    visible: true
+                },
+                wordWrapEnabled: true,
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                searchPanel: {
+                    visible: true
+                },
+
+                stateStoring: {
+                    enabled: true,
+                    type: "localStorage",
+                    storageKey: "charityMyAdmin"
+                },
+
+                columns: [
+                   {
+                                            caption: '@SharedLocalizer["Amount"]',
+                                            dataField: "amount",
+                                            allowHeaderFiltering: false
+                                    },
+                                    {
+                                            dataField: "paymentStatus",
+                                            caption: '@SharedLocalizer["Status"]',
+                                            lookup: {
+                                            dataSource: PaymentStatus,
+                                            displayExpr: "name",
+                                            valueExpr: "id"
+                                    }
+                                    },
+                                    {
+                                            caption: '@SharedLocalizer["Payment Date"]',
+                                            dataField: "paymentDate",
+                                            allowHeaderFiltering: false
+                                    },
+                                    {
+                                            caption: '@SharedLocalizer["Comment"]',
+                                            dataField: "description",
+                                            allowHeaderFiltering: false
+                                    }
+                ]
+            });
+
+        });
+    </script>
+}

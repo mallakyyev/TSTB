@@ -1,0 +1,114 @@
+﻿@model List<TSTB.BLL.ViewModel.CountryCount>
+@{
+    Layout = "_StatisticsPartial";
+    Random rnd = new Random();
+}
+
+<h2 class="text-xl font-semibold"> General Statistics </h2>
+<div class="mt-4">
+    <h1 class="text-xl font-semibold" id="totalCount"></h1>
+    <canvas id="line-chart" width="800" height="450"></canvas>
+    <h3>Dealy Growth</h3>
+    <canvas id="line-chart1" width="800" height="450"></canvas>
+
+</div>
+
+@section Scripts{
+    <script>
+    document.getElementById("General").className = "aside-link-active";
+
+     var Country = [];
+     var Count = [];
+    var backcol = [];
+    var total = [];
+    var sum = 0;
+     @foreach (TSTB.BLL.ViewModel.CountryCount d in Model)
+    {
+        @:Country.push("@d.Country");
+        @:Count.push("@d.Count");
+        @:backcol.push('rgba(@rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255))')
+        @:sum += @d.Count;
+        @:total.push(sum);
+    }
+    document.getElementById("totalCount").textContent = ' '+sum;
+    new Chart(document.getElementById("line-chart1"), {
+  type: 'line',
+        data: {
+            labels: Country,
+            datasets: [{
+                data: Count,
+        label: "Dealy Statistics",
+        borderColor: 'rgba(@rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255))',
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Dealy Stats'
+    }
+  }
+    });
+     new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+        data: {
+            labels: Country,
+            datasets: [{
+                data: total,
+        label: "Growth",
+        borderColor: 'rgba(@rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255))',
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Growth'
+    }
+  }
+     });
+
+    function animateValue(id, start, end, duration) {
+    // assumes integer values for start and end
+
+    var obj = document.getElementById(id);
+    var range = end - start;
+    // no timer shorter than 50ms (not really visible any way)
+    var minTimer = 50;
+    // calc step time to show all interediate values
+    var stepTime = Math.abs(Math.floor(duration / range));
+
+    // never go below minTimer
+    stepTime = Math.max(stepTime, minTimer);
+
+    // get current time and calculate desired end time
+    var startTime = new Date().getTime();
+    var endTime = startTime + duration;
+    var timer;
+
+    function run() {
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        var value = Math.round(end - (remaining * range));
+        obj.innerHTML = value;
+        if (value == end) {
+            clearInterval(timer);
+        }
+    }
+
+    timer = setInterval(run, stepTime);
+    run();
+    }
+    animateValue("totalCount", 0, sum, 2000);
+
+    </script>
+}
+
+
+<style>
+    #totalCount {
+        font-size: 50px;
+    }
+</style>

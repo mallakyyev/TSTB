@@ -1,0 +1,211 @@
+﻿@model TSTB.BLL.DTOs.AdvertisementDTO.EditAdvertisementDTO
+@using TSTB.Web
+@using TSTB.BLL.DTOs.LanguageDTO
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Edit advert"];
+
+
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Edit advert"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Edit" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Name"] *</label>
+                                <div id="adv-name"></div>
+                            </div>
+                            @if (Model.PictureNameBig != null && Model.PictureNameBig.Length > 0)
+                            {
+                                <img src="~/images/Advertisement/@Model.PictureNameBig" class="img-responsive img-thumbnail" style="width: 130px;" />
+                            }
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Picture"]</label>
+                                <div id="filesBig"></div>
+                            </div>
+                            @if (Model.PictureNameSmall != null && Model.PictureNameSmall.Length > 0)
+                            {
+                                <img src="~/images/Advertisement/@Model.PictureNameSmall" class="img-responsive img-thumbnail" />
+                            }
+                            <input type="hidden" name="PictureNameSmall" value="@Model.PictureNameSmall" />
+                            <input type="hidden" name="PictureNameBig" value="@Model.PictureNameBig" />
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Picture for mobile versions"]</label>
+                                <div id="filesSmall"></div>
+                            </div>
+                            <br />
+
+                            <script>
+                                    $(function () {
+                                        $("#adv-name").dxTextBox({
+                                            name: "Name",
+                                            value: @Json.Serialize(@Model.Name)
+                                        }).dxValidator({
+                                            validationRules: [{
+                                                type: "required",
+                                                message: '@SharedLocalizer["Enter Name"]'
+                                            }]
+                                        });
+
+
+                                        $("#filesBig").dxFileUploader({
+                                            selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                                            name: "FormFileBig",
+                                            labelText: '@SharedLocalizer["or drag picture"]',
+                                            accept: "image/*",
+                                            uploadMode: '@SharedLocalizer["or drag"]',
+                                            multiple: false,
+                                        });
+
+                                         $("#filesSmall").dxFileUploader({
+                                            selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                                            name: "FormFileSmall",
+                                            labelText: '@SharedLocalizer["or drag picture"]',
+                                            accept: "image/*",
+                                            uploadMode: '@SharedLocalizer["or drag"]',
+                                            multiple: false,
+                                        });
+                                    });
+                            </script>
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Start date"] *</label>
+                                <div id="startdate"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["End date"] *</label>
+                                <div id="enddate"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Link"]</label>
+                                <div id="link"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Order"]</label>
+                                <div id="sortNumber"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Position"]</label>
+                                <div id="position"></div>
+                            </div>
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/CustomStore.js"></script>
+    <script>
+         var position = [
+            { Id: 0, name: '@SharedLocalizer["On the left"]' },
+            { Id: 1, name: '@SharedLocalizer["On the right"]' },
+            { Id: 2, name: '@SharedLocalizer["Slider"]' }
+
+        ];
+
+        $(function () {
+           let published = '@Model.IsPublish';
+        $("#published").dxCheckBox({
+            value: (published.toLowerCase() == 'true'),
+            text: '@SharedLocalizer["Active"]',
+            name: 'isPublish',
+        });
+
+        $("#startdate").dxDateBox({
+            type: "date",
+            name: "StartDate",
+            value: @Json.Serialize(Model.StartDate),
+            width: 150,
+        }).dxValidator({
+            validationRules: [{
+                type: "required",
+                message: '@SharedLocalizer["Please select start date"]'
+            }]
+        });
+
+        $("#enddate").dxDateBox({
+            type: "date",
+            name: "EndDate",
+            value: @Json.Serialize(Model.EndDate),
+            width: 150,
+        }).dxValidator({
+            validationRules: [{
+                type: "required",
+                message: '@SharedLocalizer["Please select end date"]'
+            }]
+        });
+
+        $("#link").dxTextBox({
+            name: "Link",
+            value: @Json.Serialize(Model.Link),
+        });
+
+            $("#sortNumber").dxNumberBox({
+                min: 0,
+                showSpinButtons: true,
+                name: 'Order',
+                value: @Model.Order
+            });
+
+
+          $("#position").dxSelectBox({
+                dataSource: position,
+                displayExpr: "name",
+                value: @Json.Serialize(Model.Position),
+                valueExpr: "Id",
+                name: 'Position',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select position"]'
+                }]
+            });
+
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Edit"]',
+                type: "default",
+                useSubmitBehavior: true,
+            });
+
+            $("#summary").dxValidationSummary({});
+        });
+    </script>
+}

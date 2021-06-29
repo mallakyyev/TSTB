@@ -1,0 +1,170 @@
+﻿@using TSTB.Web.Areas.Admin.Utilities;
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Payment request management"];
+
+}
+
+<h2 class="text-xl font-semibold"> @SharedLocalizer["Payment requests for a year"]</h2>
+<div class="mt-4">
+    <p class="text-danger">@ViewBag.Error</p>
+    <div id="gridContainer">
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var UserType = [
+            { Id: 0, name: '@SharedLocalizer["Pending"]' },
+            { Id: 1, name: '@SharedLocalizer["Confirmed"]' },
+            { Id: 2, name: '@SharedLocalizer["Cancelled"]' }
+        ];
+
+        $(function () {
+            let url = '/api/AccountantAPI';
+            let urlDetail = '/api/AccountantAPI/GetImages';
+            let Amount = new DevExpress.data.AspNet.createStore({
+                loadUrl: '/api/AccountantAPI/GetAmounts',
+                key: "id"
+            });
+
+            var returnUrl = '@Context.Request.Path@Context.Request.QueryString';
+            $("#gridContainer").dxDataGrid({
+                dataSource: DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: url,
+                    updateUrl: url,
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),
+
+                selection: {
+                    mode: "multiple"
+                },
+                "export": {
+                    enabled: true,
+                    fileName: "Documents",
+                    allowExportSelectedData: true
+                },
+                filterPanel: {
+                    visible: false
+                },
+                filterRow: { visible: false },
+                remoteOperations: true,
+                onRowUpdating: function (e) {
+                    e.newData = Object.assign(e.oldData, e.newData)
+                },
+                scrolling: {
+                    mode: "virtual",
+                    rowRenderingMode: "virtual"
+                },
+                paging: {
+                    pageSize: 100
+                },
+                editing: {
+                    useIcons: true,
+                    allowUpdating: true,
+                    allowDeleting: false,
+                    allowAdding: false
+                },
+                headerFilter: {
+                    visible: true
+                },
+                wordWrapEnabled: true,
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                searchPanel: {
+                    visible: true
+                },
+                columns: [
+                    {
+                        dataField: "amount",
+                        caption: '@SharedLocalizer["Amount"]',
+                        lookup: {
+                            dataSource: Amount,
+                            displayExpr: "amount",
+                            valueExpr: "amount"
+                        }
+                    },
+                    {
+                        dataField: "statusDeclaration",
+                        caption: '@SharedLocalizer["Status"]',
+                        lookup: {
+                            dataSource: UserType,
+                            displayExpr: "name",
+                            valueExpr: "Id"
+                        }
+                    },
+                    {
+                        caption: '@SharedLocalizer["Description"]',
+                        dataField: "description",
+                        allowHeaderFiltering: false
+                    },
+                    {
+                        caption: '@SharedLocalizer["Payment year"]',
+                        dataField: "yearDeclaration",
+                        width: "130",
+                        allowHeaderFiltering: false,
+                        allowEditing: false
+                    },
+                    {
+                        caption: '@SharedLocalizer["Created date"]',
+                        dataField: "dateCreateShort",
+                        width: "130",
+                        allowHeaderFiltering: false,
+                        allowEditing: false
+                    },
+                ],
+                masterDetail: {
+                    enabled: true,
+                    template: function (container, options) {
+                        var item = options.data;
+                        $("<div>")
+                            .addClass("master-detail-caption")
+                            .text(item.fullName)
+                            .appendTo(container);
+                        $("<div>")
+                            .dxDataGrid({
+                                dataSource: new DevExpress.data.AspNet.createStore({
+                                    key: "id",
+                                    loadUrl: urlDetail + "?decId=" + item.id,
+                                    onBeforeSend: function (method, ajaxOptions) {
+                                        ajaxOptions.xhrFields = { withCredentials: true };
+                                    }
+                                }),
+                                editing: {
+                                    useIcons: true,
+                                    allowUpdating: false,
+                                    allowDeleting: false,
+                                    allowAdding: false
+                                },
+                                columnAutoWidth: true,
+                                showColumnLines: true,
+                                showRowLines: true,
+                                showBorders: true,
+                                columns: [{
+                                    caption: '@SharedLocalizer["Declaration images"]',
+                                    dataField: "name",
+                                    allowFiltering: false,
+                                    allowSorting: false,
+                                    cellTemplate: function (container, options) {
+                                        $("<div>")
+                                            .append($("<img>", { "src": '/images/Declarations/' + options.value, "style": 'height: 700px; width: 100%; object-fit: contain' }))
+                                            .appendTo(container);
+                                    }
+                                }]
+                            }).appendTo(container);
+                    }
+                }
+            });
+
+        });
+    </script>
+}

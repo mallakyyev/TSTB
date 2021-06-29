@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TSTB.DAL.Models.Billing.Tariff>
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Membership fee"];
+}
+
+<div class="h-full xl:container xl:px-0 px-4">
+    <div class="bg-white sm:pt-12 pt-4 relative">
+        <h1 class="font-bold text-2xl sm:text-3xl lg:max-w-3xl lg:text-3xl text-primary">
+            @SharedLocalizer["Membership fee"]
+        </h1>
+    </div>
+    <!-- DESKTOP -->
+    <div class="my-12 px-1 xl:block hidden">
+        <div class="grid grid-cols-4">
+            @foreach (var tariff in Model)
+            {
+                <div class="price-card">
+                    @if (tariff.EntryAmount < 800)
+                    {
+                        <h2 class="text-center font-semibold text-lg text-link"> @SharedLocalizer["ENTREPRENEURS WITH ANNUAL PROFIT UP TO 200 000 MANATS"]</h2>
+                    }
+                    else
+                    {
+                        <h2 class="text-center font-semibold text-lg text-link"> @SharedLocalizer["ENTREPRENEURS WITH ANNUAL PROFIT MORE THAN 200 000 MANAT"]</h2>
+                    }
+                    <p class="text-center mt-12">
+                        @SharedLocalizer["Entrance fee"]:  <span class="block font-semibold"> @tariff.EntryAmount @SharedLocalizer["manat"] </span>
+                    </p>
+                    <div class="w-8/12 mx-auto h-px my-3 bg-secondary"></div>
+                    <p class="text-center ">
+                        @SharedLocalizer["Annual membership fee"]:  <span class="block font-semibold"> @tariff.Amount @SharedLocalizer["manat"] </span>
+                    </p>
+
+                    <div class="btn bg-secondary text-white rounded mt-12"> @SharedLocalizer["Total"] @(tariff.EntryAmount + tariff.Amount) @SharedLocalizer["manat"] </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- DESKTOP -->
+</div>
+
+<div class="prices-swiper-container swiper-container xl:hidden mt-12">
+    <div class="swiper-wrapper ">
+        @foreach (var tariff in Model)
+        {
+            <div class="swiper-slide pt-2 pb-16">
+                <div class="price-card">
+                    <h2 class="text-center font-semibold text-lg text-link"> @tariff.Name</h2>
+                    <p class="text-center mt-12">
+                        @SharedLocalizer["Entrance fee"]:  <span class="block font-semibold"> @tariff.EntryAmount @SharedLocalizer["manat"] </span>
+                    </p>
+                    <div class="w-8/12 mx-auto h-px my-3 bg-secondary"></div>
+                    <p class="text-center ">
+                        @SharedLocalizer["Annual membership fee"]:  <span class="block font-semibold"> @tariff.Amount @SharedLocalizer["manat"] </span>
+                    </p>
+
+                    <div class="btn bg-secondary text-white rounded mt-12"> @SharedLocalizer["Total"] @(tariff.EntryAmount + tariff.Amount) @SharedLocalizer["manat"] </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Slider main container -->
+</div>

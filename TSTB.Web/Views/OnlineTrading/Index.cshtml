@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TSTB.BLL.DTOs.OnlineTradeDTO.OnlineTradingDTO>
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Online trading"];
+    TSTB.BLL.DTOs.OnlineTradeDTO.OnlineTradingDTO prev = new TSTB.BLL.DTOs.OnlineTradeDTO.OnlineTradingDTO();
+}
+
+<div class="h-full xl:container xl:px-0 px-4">
+    <div class="bg-white sm:pt-12 pt-4 relative">
+        <h1 class="font-bold text-2xl sm:text-3xl lg:max-w-3xl lg:text-3xl text-primary">
+            @SharedLocalizer["Online trading"]
+        </h1>
+    </div>
+    <section class="max-w-6xl h-full grid gap-y-20 relative overflow-hidden mt-12" style="min-width: 768px">
+        @foreach (string city in Model.Select(p => p.CityName).Distinct())
+        {
+            <div class="table-section">
+                <h2 class="font-bold text-lg text-primary mb-4">@SharedLocalizer["City"] @city</h2>
+                <div class="flex flex-col w-full">
+                    @foreach (string activity in Model.Where(p => p.CityName == city).Select(p => p.ActivityTypeName).Distinct())
+                    {
+                        int count = 0;
+                        <div class="font-semibold text-center border-t border-l border-r border-gray-200 p-4 text-primary">
+                            @activity
+                        </div>
+                        <table>
+                            <tr>
+                                <th class="font-semibold text-primary">@SharedLocalizer["i/n"]</th>
+                                <th class="font-semibold text-primary">@SharedLocalizer["Name"]</th>
+                                <th class="font-semibold text-primary"> @SharedLocalizer["Phone"]</th>
+                                <th class="font-semibold text-primary"> @SharedLocalizer["Direction of activity"] </th>
+                                <th class="font-semibold text-primary"> @SharedLocalizer["Web site"] </th>
+                                <th class="font-semibold text-primary"> @SharedLocalizer["Address"] </th>
+                            </tr>
+                            @foreach (TSTB.BLL.DTOs.OnlineTradeDTO.OnlineTradingDTO data in Model.Where(p => p.CityName == city && p.ActivityTypeName == activity))
+                            {
+                                count++;
+                                <tr>
+                                    <td class="text-center">@count</td>
+                                    <td class="text-center">@data.Name</td>
+                                    <td class="text-center">@data.PhoneNumber</td>
+                                    <td class="text-center">@data.Description</td>
+                                    <td class="text-center">@data.Site</td>
+                                    <td class="text-center">@data.Address</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+
+    </section>
+</div>

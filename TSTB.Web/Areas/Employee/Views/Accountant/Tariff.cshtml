@@ -1,0 +1,118 @@
+﻿@using TSTB.Web.Areas.Admin.Utilities;
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Tariffs"];
+}
+
+<h2 class="text-xl font-semibold"> @SharedLocalizer["Tariff management"]</h2>
+<div class="mt-4">
+    <div id="gridContainer">
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var UserType = [
+            { Id: 0, name: '@SharedLocalizer["Employee"]' },
+            { Id: 1, name: '@SharedLocalizer["Entrepreneur"]' },
+            { Id: 2, name: '@SharedLocalizer["Organization"]' }
+        ];
+
+        $(function () {
+            let url = '/api/TariffAPI';
+            var returnUrl = '@Context.Request.Path@Context.Request.QueryString';
+            $("#gridContainer").dxDataGrid({
+                dataSource: DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: url,
+                    updateUrl: url,
+                    insertUrl: url,
+                    deleteUrl: url,
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),
+                selection: {
+                    mode: "multiple"
+                },
+                "export": {
+                    enabled: true,
+                    fileName: "Documents",
+                    allowExportSelectedData: true
+                },
+                filterPanel: {
+                    visible: false
+                },
+                filterRow: { visible: false },
+                remoteOperations: true,
+                onRowUpdating: function (e) {
+                    e.newData = Object.assign(e.oldData, e.newData)
+                },
+                scrolling: {
+                    mode: "virtual",
+                    rowRenderingMode: "virtual"
+                },
+                paging: {
+                    pageSize: 100
+                },
+                editing: {
+                    useIcons: true,
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    allowAdding: true
+                },
+                headerFilter: {
+                    visible: true
+                },
+                wordWrapEnabled: true,
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                searchPanel: {
+                    visible: true
+                },
+                stateStoring: {
+                    enabled: true,
+                    type: "localStorage",
+                    storageKey: "tariffsEmployee"
+                },
+                columns: [
+                    {
+                        caption: '@SharedLocalizer["Name"]',
+                        dataField: "name",
+                        allowHeaderFiltering: false
+                    },
+                    {
+                        dataField: "entreprenuerType",
+                        caption: '@SharedLocalizer["User"]',
+                        lookup: {
+                            dataSource: UserType,
+                            displayExpr: "name",
+                            valueExpr: "Id"
+                        }
+                    },
+                    {
+                        caption: '@SharedLocalizer["Amount"]',
+                        dataField: "amount",
+                        dataType: "number",
+                        allowHeaderFiltering: false
+                    },
+                    
+                    {
+                        caption: '@SharedLocalizer["Membership amount"]',
+                        dataField: "entryAmount",
+                        dataType: "number",
+                        allowHeaderFiltering: false
+                    },
+                ]
+
+            });
+
+        });
+    </script>
+}

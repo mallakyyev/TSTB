@@ -1,0 +1,138 @@
+﻿@using TSTB.Web.Areas.Admin.Utilities;
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Transactions"];
+
+}
+
+<h2 class="text-xl font-semibold"> @SharedLocalizer["Transactions"]</h2>
+<div class="mt-4">
+    <div id="gridContainer">
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var PaymentStatus = [
+            { id: 0, name: "@SharedLocalizer["Not paid! Order registered in the bank"]" },
+            { id: 1, name: "@SharedLocalizer["Not paid! Preauthorized amount frozen for 2 factor authorization"]" },
+            { id: 2, name: "@SharedLocalizer["Order payed successfully"]" },
+            { id: 3, name: "@SharedLocalizer["Not paid! Authorization cancelled"]" },
+            { id: 4, name: "@SharedLocalizer["Not paid! Amount refunded"]" },
+            { id: 5, name: "@SharedLocalizer["Not paid! Authorization initiated by issuing bank ACS"]" },
+            { id: 6, name: "@SharedLocalizer["Not paid! Authorization rejected"]" },
+            { id: 99, name: "@SharedLocalizer["Not paid!"]" }
+        ];
+
+        $(function () {
+            let url = '/api/PaymenAPI/GetAllTransactions';
+            var returnUrl = '@Context.Request.Path@Context.Request.QueryString';
+            $("#gridContainer").dxDataGrid({
+                dataSource: DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: url,
+                    updateUrl: url,
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),
+                selection: {
+                    mode: "multiple"
+                },
+                "export": {
+                    enabled: true,
+                    fileName: "Documents",
+                    allowExportSelectedData: true
+                },
+                filterPanel: {
+                    visible: false
+                },
+                filterRow: { visible: false },
+                remoteOperations: true,
+                onRowUpdating: function (e) {
+                    e.newData = Object.assign(e.oldData, e.newData)
+                },
+                scrolling: {
+                    mode: "virtual",
+                    rowRenderingMode: "virtual"
+                },
+                paging: {
+                    pageSize: 100
+                },
+                editing: {
+                    useIcons: true,
+                    allowUpdating: false,
+                    allowDeleting: false,
+                    allowAdding: false
+                },
+                headerFilter: {
+                    visible: true
+                },
+                wordWrapEnabled: true,
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                searchPanel: {
+                    visible: true
+                },
+                stateStoring: {
+                    enabled: true,
+                    type: "localStorage",
+                    storageKey: "transactionEmployee"
+                },
+                columns: [
+                {
+                    caption: '@SharedLocalizer["First name"]',
+                    dataField: "firstName",
+                    allowHeaderFiltering: false
+                },
+
+                {
+                    caption: '@SharedLocalizer["Last name"]',
+                    dataField: "lastName",
+                    allowHeaderFiltering: false
+                },
+
+                {
+                    caption: '@SharedLocalizer["Organization name"]',
+                    dataField: "nameOrganization",
+                    allowHeaderFiltering: false
+                },
+
+                {
+                    caption: '@SharedLocalizer["Payment year"]',
+                    dataField: "year",
+                    allowHeaderFiltering: true
+                },
+
+                {
+                    caption: '@SharedLocalizer["Tax code"]',
+                    dataField: "taxCode",
+                    allowHeaderFiltering: true
+                },
+
+                {
+                    caption: '@SharedLocalizer["Amount"]',
+                    dataField: "amount",
+                    allowHeaderFiltering: true
+                },
+                {
+                     dataField: "statusPayment",
+                     caption: '@SharedLocalizer["Status"]',
+                    lookup: {
+                        dataSource: PaymentStatus,
+                        displayExpr: "name",
+                        valueExpr: "id"
+                    }
+                }
+                ]
+            });
+
+        });
+    </script>
+}

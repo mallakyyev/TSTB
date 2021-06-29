@@ -1,0 +1,173 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using TSTB.Web
+@using System.Globalization;
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @SharedLocalizer["UIET"]</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+
+    <link rel="stylesheet" href="~/client/css/output.css" />
+    <link rel="stylesheet" href="~/client/css/pickmeup.css" />
+    <link rel="stylesheet" href="~/client/css/swiper.bundle.min.css" />
+    <link rel="stylesheet" href="~/client/css/Video.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    @RenderSection("Css", required: false)
+
+    <style>
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+    </style>
+
+</head>
+<body>
+    <div id="wrap">
+        <!-- HEADER -->
+        <header class="relative sm:block flex flex-col">
+            <div class="nav-header bg-primary z-30 relative order-2">
+                <div class="xl:container xl:px-0 px-4 flex sm:justify-end justify-between h-12">
+                    <div class="mr-10 cursor-pointer select-none flex items-center" id="search-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="search_24px">
+                                <path id="icon/action/search_24px" fill-rule="evenodd" clip-rule="evenodd" d="M15.1865 14.4716H15.9765L20.2165 18.7316C20.6266 19.1416 20.6266 19.8116 20.2165 20.2216C19.8065 20.6316 19.1366 20.6316 18.7265 20.2216L14.4765 15.9716V15.1816L14.2065 14.9016C12.8065 16.1016 10.8966 16.7216 8.86655 16.3816C6.08652 15.9116 3.86655 13.5916 3.52658 10.7916C3.00656 6.56158 6.5665 3.00158 10.7966 3.52157C13.5965 3.86157 15.9166 6.08157 16.3866 8.86157C16.7265 10.8916 16.1065 12.8016 14.9066 14.2016L15.1865 14.4716ZM5.47653 9.97155C5.47653 12.4615 7.48654 14.4716 9.97653 14.4716C12.4665 14.4716 14.4765 12.4615 14.4765 9.97155C14.4765 7.48156 12.4665 5.47155 9.97653 5.47155C7.48654 5.47155 5.47653 7.48156 5.47653 9.97155Z" fill="white" fill-opacity="0.54" />
+                            </g>
+                        </svg>
+
+                        <span class="block text-gray-200 hover:text-white"> @SharedLocalizer["Search"] </span>
+                    </div>
+
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                    @await Html.PartialAsync("_LoginPartial")
+
+                </div>
+            </div>
+
+            @await Component.InvokeAsync("HeaderMenu")
+
+            <!-- ******************** SEARCH ******************** -->
+            <div id="search-container"
+                 class="sm:h-screen h-full w-screen bg-gray-100 fixed z-20 top-0 left-0">
+                <div class="container flex items-center justify-center h-full">
+                    <div class="sm:w-8/12 sm:px-0 px-4 mx-auto w-full">
+                        <form asp-area="" asp-controller="Search" asp-action="Search" method="get">
+                            <div class="sm:search-box grid gap-y-8 relative sm:overflow-hidden sm:rounded">
+                                <input name="text" type="text"
+                                       class="h-12 w-full sm:w-10/12 outline-none px-4 sm:border-none border border-gray-200 rounded sm:rounded-none"
+                                       id="search-input"
+                                       placeholder="@SharedLocalizer["What do you want to find?"]" />
+                                <div class="sm:absolute right-0 top-0 h-12 z-10 flex items-center sm:w-2/12 box-border">
+                                    <button type="submit" class="bg-secondary text-white sm:rounded-none rounded w-full px-8 py-3 font-semibold text-center cursor-pointer select-none">
+                                        @SharedLocalizer["To find"]
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        @*<div class="content py-10 sm:block hidden">
+                                <h2 class="mb-8">Часто ищут:</h2>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-white hover:shadow-md flex flex-col p-4 rounded cursor-pointer">
+                                        <h3 class="text-3xl font-semibold">Устав</h3>
+                                        <span class="text-gray-200"> страница </span>
+                                    </div>
+                                    <div class="bg-white hover:shadow-md flex flex-col p-4 rounded cursor-pointer">
+                                        <h3 class="text-3xl font-semibold">Устав</h3>
+                                        <span class="text-gray-200"> страница </span>
+                                    </div>
+                                    <div class="bg-white hover:shadow-md flex flex-col p-4 rounded cursor-pointer">
+                                        <h3 class="text-3xl font-semibold">Устав</h3>
+                                        <span class="text-gray-200"> страница </span>
+                                    </div>
+                                    <div class="bg-white hover:shadow-md flex flex-col p-4 rounded cursor-pointer">
+                                        <h3 class="text-3xl font-semibold">Устав</h3>
+                                        <span class="text-gray-200"> страница </span>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+            <!-- ******************** SEARCH ******************** -->
+        </header>
+        <!-- HEADER -->
+
+
+        <main class="app-wrapper">
+            @RenderBody()
+        </main>
+
+        @await Component.InvokeAsync("FooterSettings")
+    </div>
+
+    <script src="~/js/vue.js"></script>
+    <script>
+        var wrapVue = new Vue({
+            el: '#wrap',
+            data: {
+                seen: false,
+                parent: '1'
+            },
+            methods: {
+                mouseOver: function (p) {
+                    this.parent = p;
+                },
+                linkAdvert: function (url) {
+                    console.log(url);
+                    if (!url.match(/^https?:\/\//i)) {
+                        url = 'http://' + url;
+                    }
+                    window.open(url, '_blank');
+                    //window.open(url, '_blank');
+                }
+            }
+        });
+    </script>
+
+    <script>
+        (function (w, d, u) {
+            var s = d.createElement('script'); s.async = true; s.src = u + '?' + (Date.now() / 60000 | 0);
+            var h = d.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
+        })(window, document, 'https://b24.tstb.gov.tm/upload/crm/site_button/loader_2_p1ulp5.js');
+    </script>
+
+    <script src="~/client/js/vendor/gsap/gsap.min.js" defer></script>
+    <script src="~/client/js/vendor/swiper.min.js"></script>
+    <script src="~/client/js/slider.js" defer></script>
+    <script src="~/client/js/header.js" defer></script>
+    <script src="~/client/js/Video.js" defer></script>
+
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

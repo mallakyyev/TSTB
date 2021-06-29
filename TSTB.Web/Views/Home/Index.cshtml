@@ -1,0 +1,355 @@
+﻿@model SearchModel
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.Web.Extensions
+
+@{
+    ViewData["Title"] = SharedLocalizer["Home"];
+
+}
+
+<!-- ******************** SLIDER ******************** -->
+<div class="swiper-container main-swiper-container bg-gray-100">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper relative">
+        <!-- Slides -->
+        @foreach (TSTB.BLL.DTOs.SayingsDTO.SayingsDTO sayingsDTO in ViewBag.Saying)
+        {
+            <div class="swiper-slide">
+                <div class="flex flex-col justify-center sm:py-10 py-10 p-2 container select-none">
+                    <div class="relative">
+                        @*<img src="~/client/assets/quote.png" alt="" class="quote" />*@
+                        <h3 class="lg:text-4xl md:text-3xl sm:text-2xl text-xl sm:ml-32 ml-6 font-bold">
+                            @sayingsDTO.SayingsText
+                        </h3>
+                    </div>
+                    <div class="flex justify-end mt-6 xl:text-xl">
+                        <span>- @sayingsDTO.AuthorPosition <br />@sayingsDTO.Author</span>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- Slides -->
+    </div>
+
+    <!-- Slider main container -->
+</div>
+<!-- ******************** SLIDER  ********************-->
+<!-- ******************** BLOG  ********************-->
+<div class="flex justify-between flex-col xl:flex-row py-10 h-full xl:mb-0 blog">
+    <!-- ******************** ADVERTISMENT LEFT  ********************-->
+    <div class="flex-grow xl:w-2/12 xl:mr-2 mb-10 xl:mb-0 relative adt-center overflow-hidden">
+        <div class="adv-slider-left adv-slider flex xl:w-full">
+            @foreach (TSTB.BLL.DTOs.AdvertisementDTO.AdvertisementDTO advertisementDTO in ViewBag.LeftAdverts)
+            {
+                /*<a asp-host="@advertisementDTO.Link" asp-controller="" asp-action="" target="_blank">
+
+                </a>*/
+
+                <img class="avdertisment-item advertisment-left img-center border-radius7 object-cover img-padding10"
+                     data-desk="../images/Advertisement/@advertisementDTO.ImageBig"
+                     data-mobile="../images/Advertisement/@advertisementDTO.ImageSmall" v-on:click="linkAdvert(`@advertisementDTO.Link`)" />
+            }
+        </div>
+    </div>
+    <!-- ******************** ADVERTISMENT LEFT  ********************-->
+    <!-- ******************** BLOG BODY  ********************-->
+    <div class="xl:w-8/12 xl:px-0 px-4 flex-grow">
+        <h2 class="md:text-4xl text-2xl font-semibold mb-10">@SharedLocalizer["UIET news and events"] </h2>
+        <div class="flex flex-wrap lg:flex-no-wrap">
+            @{
+                IEnumerable<TSTB.BLL.DTOs.NewsModelDTO.NewsDTO> newsDtos = ViewBag.FourLastNews;
+
+                if (newsDtos.Count() > 0)
+                {
+                    <!-- ******************** NEWS SHORT  ********************-->
+                    <div class="lg:w-3/12 sm:w-4/12 lg:pr-0 pr-6 flex flex-col">
+                        <div class="pr-2">
+                            @foreach (var news in newsDtos.TakeLast(3))
+                            {
+                                <div class="border-b border-gray-200 pb-4 mb-4">
+                                    <a asp-area="" asp-controller="News" asp-action="Details" asp-route-id="@news.Id" class="font-semibold select-none hover:text-secondary">
+                                        @news.Name
+                                    </a>
+                                    <span class="font-semibold mt-6 block opacity-75 text-sm"> @news.DatePublished.ToDateFormat() </span>
+                                </div>
+                            }
+                        </div>
+                        <div>
+                            <a asp-area="" asp-controller="News" asp-action="Index"
+                               class="btn border-2 inline-flex sm:mt-10 mt-4 text-secondary border-secondary rounded hover:bg-secondary hover:text-white">
+                                @SharedLocalizer["All news"]
+                            </a>
+                        </div>
+                    </div>
+                    <!-- ******************** NEWS SHORT  ********************-->
+                    <!-- ******************** NEWS WITH IMAGE  ********************-->
+                    <div class="lg:w-6/12 w-8/12 sm:block hidden">
+                        <img src="~/images/News/@newsDtos.Take(1).Select(s => s.Image).FirstOrDefault()"
+                             alt=""
+                             class="rounded w-full mb-4 object-cover lg:h-auto" />
+                        <a asp-area="" asp-controller="News" asp-action="Details" asp-route-id="@newsDtos.Take(1).Select(s => s.Id).FirstOrDefault()" class="lg:text-3xl text-2xl leading-6 font-semibold">
+                            @newsDtos.Take(1).Select(s => s.Name).FirstOrDefault()
+                        </a>
+                        <div class="pr-2 mt-4 ellipsis-text">
+                            @Html.Raw(newsDtos.Take(1).Select(s => s.Description.SkipImgTags()).FirstOrDefault())
+                        </div>
+                    </div>
+                    <!-- ******************** NEWS WITH IMAGE  ********************-->
+                }
+            }
+
+            <!-- ******************** SERVICE CARTS SECTION********************-->
+            <div class="lg:w-3/12 lg:pl-4 lg:justify-start lg:gap-0 lg:flex grid sm:grid-cols-3 sm:gap-5 gap-3 mt-8 lg:flex-col lg:-my-4">
+                @foreach (TSTB.BLL.DTOs.WidgetModelDTO.WidgetDTO widgetDTO in ViewBag.Widgets)
+                {
+                    if (widgetDTO.Link != null)
+                    {
+                        <a href="@widgetDTO.Link" class="relative flex flex-col justify-between overflow-hidden bg-secondary text-white p-4 rounded my-4 sm:h-48 h-full cursor-pointer">
+                            <span class="font-semibold">@widgetDTO.Name</span>
+                            <span class="font-semibold opacity-75">@widgetDTO.Footer </span>
+                            
+                                @Html.Raw(widgetDTO.Logo)
+                            
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="" asp-controller="Widget" asp-action="Index" asp-route-id="@widgetDTO.Id" class="relative flex flex-col justify-between overflow-hidden bg-secondary text-white p-4 rounded my-4 sm:h-48 h-full cursor-pointer">
+                            <span class="font-semibold">@widgetDTO.Name</span>
+                            <span class="font-semibold opacity-75">@widgetDTO.Footer </span>
+                            
+                                @Html.Raw(widgetDTO.Logo)
+                            
+                        </a>
+                    }
+                }
+
+                @*<div class="flex flex-col justify-between bg-blue-800 text-white p-4 rounded relative overflow-hidden my-4 sm:h-48 h-full cursor-pointer">
+                        <span class="z-20 font-semibold">
+                            Как попасть в список заведений, предоставляющих онлайн-услуги
+                        </span>
+                        <span class="z-20 font-semibold opacity-75">Членство </span>
+                        <svg class="blog-image"
+                             width="263.096"
+                             height="225.472"
+                             viewBox="0 0 263.096 225.472">
+                            <path id="path"
+                                  d="M898.02,1076.755V1046.41l40.46,40.46-40.46,40.46v-30.345c-22.253,0-41.471-8.092-56.644-24.276s-24.276-35.4-24.276-56.644c0-16.184,4.047-30.345,13.15-43.494l15.173,15.172c-5.058,8.092-7.081,18.208-7.081,28.322q0,25.794,18.207,42.483C868.686,1069.675,881.837,1076.755,898.02,1076.755Zm0-141.61c22.253,0,41.471,8.092,56.644,24.276s24.276,35.4,24.276,56.644c0,16.184-4.046,30.345-13.149,43.494l-15.173-15.173c5.058-8.092,7.081-18.207,7.081-28.322q0-25.794-18.207-42.483c-12.139-11.127-26.3-18.207-42.483-18.207V985.72l-40.46-40.46,40.46-40.459v30.345Z"
+                                  transform="matrix(0.326, 0.946, -0.946, 0.326, 799.89, -1067.157)"
+                                  fill="#22223c"
+                                  opacity="0.5"
+                                  style="mix-blend-mode: overlay; isolation: isolate" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col overflow-hidden justify-between bg-gray-200 text-primary p-4 rounded relative my-4 sm:h-48 h-full cursor-pointer">
+                        <span class="z-20 font-semibold">
+                            Как попасть в список заведений, предоставляющих онлайн-услуги
+                        </span>
+                        <span class="z-20 font-semibold opacity-75">Членство </span>
+                        <svg class="blog-image"
+                             width="175.231"
+                             height="166.469"
+                             viewBox="0 0 175.231 166.469">
+                            <path id="path"
+                                  d="M529.307,1254.046c5.257,0,8.761,1.752,12.266,5.257a17.3,17.3,0,0,1,5.257,12.266v96.377c0,5.257-1.753,8.761-5.257,12.267s-7.009,5.256-12.266,5.256H389.123c-5.257,0-8.761-1.752-12.266-5.256a17.3,17.3,0,0,1-5.257-12.267v-96.377c0-5.257,1.752-8.761,5.257-12.266s7.009-5.257,12.266-5.257h26.285v-17.523c0-5.257,1.752-8.761,5.257-12.266A17.3,17.3,0,0,1,432.931,1219H485.5c5.257,0,8.761,1.752,12.266,5.258s5.257,7.009,5.257,12.266v17.523Zm0,70.092v-52.569H503.023v17.523H485.5v-17.523H432.931v17.523H415.408v-17.523H389.123v52.569Zm0,43.807v-17.522H389.123v17.522Zm-96.377-131.422v17.523H485.5v-17.523Z"
+                                  transform="translate(-371.6 -1218.999)"
+                                  fill="#fff" />
+                        </svg>
+                    </div>*@
+            </div>
+            <!-- ******************** SERVICE CARTS SECTION********************-->
+        </div>
+    </div>
+    <!-- ******************** BLOG BODY  ********************-->
+    <!-- ******************** ADVERTISMENT RIGHT  ********************-->
+    <div class="flex-grow xl:w-2/12 w-full mt-16 xl:mt-0 xl:ml-2 relative adt-center overflow-hidden">
+        <div class="adv-slider-right adv-slider flex xl:w-full">
+            @foreach (TSTB.BLL.DTOs.AdvertisementDTO.AdvertisementDTO advertisementDTO in ViewBag.RightAdverts)
+            {
+                <img class="avdertisment-item advertisment-right img-center border-radius7 object-cover img-padding10"
+                     data-desk="../images/Advertisement/@advertisementDTO.ImageBig"
+                     data-mobile="../images/Advertisement/@advertisementDTO.ImageSmall" v-on:click="linkAdvert(`@advertisementDTO.Link`)" />
+            }
+        </div>
+    </div>
+    <!-- ******************** ADVERTISMENT RIGHT  ********************-->
+</div>
+<!-- ******************** BLOG  ********************-->
+<!-- ******************** PRODUCTS SECTION  ********************-->
+<div class="bg-gray-100 sm:py-16 py-10 md:py-20">
+    <div class="container relative">
+        <div class="prev">
+            <svg width="18" height="12" viewBox="0 0 18 12" class="transform rotate-180">
+                <path id="path"
+                      d="M353.6,392.8v2H339.4l3.6,3.6-1.4,1.4-6-6,6-6,1.4,1.4-3.6,3.6Z"
+                      transform="translate(353.6 399.8) rotate(180)"
+                      fill="#5e5e77" />
+            </svg>
+        </div>
+        <div class="next">
+            <svg width="18" height="12" viewBox="0 0 18 12">
+                <path id="path"
+                      d="M353.6,392.8v2H339.4l3.6,3.6-1.4,1.4-6-6,6-6,1.4,1.4-3.6,3.6Z"
+                      transform="translate(353.6 399.8) rotate(180)"
+                      fill="#5e5e77" />
+            </svg>
+        </div>
+        <div class="xl:container px-4 xl:px-0 relative overflow-hidden">
+            <h2 class="font-semibold md:mb-8 mb-6 text-2xl md:text-3xl">
+                @SharedLocalizer["New items of domestic production"]
+            </h2>
+            <div class="products-swiper-container swiper-container">
+                <div class="swiper-wrapper pb-16">
+                    @foreach (TSTB.BLL.DTOs.NativeProductionsDTO.NativeProdutionDTO nativeProdution in ViewBag.SevenNativeProduct)
+                    {
+                        <a asp-area="" asp-controller="NativeProduct" asp-action="Detail" asp-route-id="@nativeProdution.Id" class="swiper-slide">
+                            <div class="products-slider-card">
+                                <div class="absolute w-full top-0 left-0 right-0 py-1 px-2 sm:p-3 z-10"
+                                     style="background: rgba(0, 0, 0, 0.5)">
+                                    <span class="text-white sm:text-lg font-semibold text-base block w-full">
+                                        @nativeProdution.Name
+                                    </span>
+                                </div>
+                                <img src="~/images/NativeProduction/@nativeProdution.Image" alt="" class="object-cover w-full" />
+                            </div>
+                        </a>
+                    }
+                </div>
+
+                <!-- Slider main container -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ******************** PRODUCTS SECTION  ********************-->
+<!-- ******************** SERVICES ******************** -->
+<div class="w-full sm:pt-24 xl:pt-0">
+    <div class="h-full overlay" style="background-image:url('../Files/Images/esasy_bg.png')">
+        <div class="lg:container sm:px-6 px-4 xl:px-0 z-10 relative sm:py-20 py-8">
+            <h2 class="text-white font-semibold text-3xl">@SharedLocalizer["Our services"]</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-2 lg:gap-8 gap-4 mt-8">
+                @foreach (TSTB.BLL.DTOs.ServicesDTO.ServiceDTO serviceDTO in ViewBag.Services)
+                {
+                    <a asp-area="" asp-controller="Service" asp-action="Detail" asp-route-id="@serviceDTO.Id" class="service-card">
+                        <h4 class="service-card__title"> @serviceDTO.Name </h4>
+                        <div class="flex items-end justify-between mt-4">
+                            <span class="w-9/12 leading-tight text-gray-600">
+                                @*@serviceDTO.Description*@
+                            </span>
+                            @Html.Raw(serviceDTO.Logo)
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ******************** SERVICES ******************** -->
+<!-- ******************** BRANCHES SECTION  ********************-->
+<div class="bg-gray-100 sm:py-16 py-10 md:py-20">
+    <div class="xl:container px-4 xl:px-0 relative overflow-hidden">
+        <h2 class="font-semibold md:mb-8 mb-6 text-2xl md:text-3xl">@SharedLocalizer["Industries"]</h2>
+        <div class="branch-swiper-container swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper pb-16 xl:px-2">
+                <!-- Slides -->
+                @foreach (TSTB.BLL.DTOs.IndustryModelDTO.IndustryDTO industryDTO in ViewBag.Industies)
+                {
+                    <a asp-area="" asp-controller="Industry" asp-action="Detail" asp-route-id="@industryDTO.Id" class="swiper-slide">
+                        <div class="branch-card xl:p-8 sm:py-6 sm:px-4 p-4">
+                            <div class="col-span-3 flex sm:items-start items-center">
+                                <h2 class="font-semibold pr-2 sm:text-2xl text-xl max-w-xs text-primary">
+                                    @industryDTO.Name
+                                </h2>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                @Html.Raw(industryDTO.Logo)
+                            </div>
+                            @*<p class="col-span-4 text-gray-400 text-sm font-semibold">Статистка за последние годы в статье</p>*@
+                        </div>
+                    </a>
+                }
+                <!-- Slides -->
+            </div>
+            <div class="swiper-pagination"></div>
+            <!-- Slider main container -->
+        </div>
+    </div>
+</div>
+<!-- ******************** BRANCHES SECTION  ********************-->
+<!-- ******************** STATISTICS SECTION  ********************-->
+<div class="bg-white py-8">
+    <div class="xl:container xl:px-0 px-4">
+        <div class="grid lg:grid-cols-2 gap-y-8">
+            <div class="flex flex-col justify-evenly lg:h-auto lg:py-0 md:h-64 md:py-24">
+                <h2 class="font-semibold text-2xl lg:my-0 my-8">@SharedLocalizer["Our achievements"]</h2>
+                <div class="grid md:grid-cols-2 md:gap-y-10 gap-y-4 gap-x-6">
+                    <div>
+                        <div class="h-2 w-16 md:mb-2 mb-1 rounded-sm bg-secondary"></div>
+                        <span class="font-semibold text-lg">@ViewBag.Achivements.Entreprenuers+ @SharedLocalizer["Entrepreneurs"]</span>
+                    </div>
+                    <div>
+                        <div class="h-2 w-16 md:mb-2 mb-1 rounded-sm bg-secondary"></div>
+                        <span class="font-semibold text-lg">@ViewBag.Achivements.Years_with_you @SharedLocalizer["years with you"]</span>
+                    </div>
+                    <div>
+                        <div class="h-2 w-16 md:mb-2 mb-1 rounded-sm bg-secondary"></div>
+                        <span class="font-semibold text-lg">@ViewBag.Achivements.Completed_projects+  @SharedLocalizer["projects completed successfully"]</span>
+                    </div>
+                    <div>
+                        <div class="h-2 w-16 md:mb-2 mb-1 rounded-sm bg-secondary"></div>
+                        <span class="font-semibold text-lg">@ViewBag.Achivements.Trained_Entreprenuers - @SharedLocalizer["entrepreneurs trained"]</span>
+                    </div>
+                </div>
+                @*<div>
+                        <a asp-area="" asp-controller="Visitors" asp-action="Index"
+                           class="btn border-2 inline-flex sm:mt-10 md:mt-4 mt-8 text-secondary border-secondary rounded hover:bg-secondary hover:text-white">
+                            @SharedLocalizer["More details"]
+                        </a>
+                    </div>*@
+            </div>
+            <img src="~/Files/Images/statistics.jpg"
+                 alt=""
+                 class="object-cover w-full rounded row-start-1 lg:col-start-2 h-64 lg:h-auto" />
+        </div>
+    </div>
+</div>
+<!-- ******************** STATISTICS SECTION  ********************-->
+<!-- ******************** MAILING SECTION  ********************-->
+<div class="bg-gray-100 lg:py-0 sm:py-4">
+    <div class="xl:container sm:px-4 xl:p-40 lg:p-24">
+        <div class="bg-white shadow-md md:p-16 px-4 py-10 rounded">
+            <h2 class="font-bold text-2xl md:text-3xl text-center text-primary font-roboto">
+                @SharedLocalizer["Subscribe to the newsletter and events"]
+            </h2>
+            @*<h3 class="text-center text-lg mt-2 font-roboto sm:block hidden">
+                    и будьте в курсе всех новостей и событий Союза промышленников и предпринимателей
+                    Туркменистана. Все релизы будут своевременно отправляться на адрес указанный Вами.
+                </h3>*@
+            <form asp-area="" asp-controller="Home" asp-action="Subscribe">
+                <div class="relative px-4 mt-10 sm:bg-gray-100 rounded-sm overflow-hidden grid sm:block gap-y-2">
+                    <input type="email"
+                           name="email"
+                           placeholder="@SharedLocalizer["Enter your email address"]"
+                           class="sm:w-9/12 w-full bg-transparent p-4 outline-none sm:border-none border border-gray-200 rounded sm:rounded-none" required />
+                    <button type="submit"
+                            class="button sm:absolute flex items-center justify-center uppercase rounded sm:rounded-none right-0 top-0 btn w-full sm:w-auto bg-secondary h-full text-white">
+                        <span>@SharedLocalizer["Subscribe"]</span>
+                    </button>
+
+
+                </div>
+
+            </form>
+            <hr />
+        </div>
+    </div>
+</div>
+<!-- ******************** MAILING SECTION  ********************-->
+
+@section Scripts{
+    <script src="~/client/js/advertisment.js" defer></script>
+}

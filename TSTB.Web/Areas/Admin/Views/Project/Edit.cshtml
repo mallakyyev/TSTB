@@ -1,0 +1,284 @@
+﻿@model TSTB.BLL.DTOs.ProjectsModelDTO.EditProjectsDTO
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+
+@{
+    ViewData["Title"] = SharedLocalizer["Edit project"];
+    int lngIndex = 0;
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Edit project"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Edit" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            @foreach (LanguageDTO languageDTO in ViewBag.Languages)
+                            {
+                                var prdT = Model.ProjectTranslates.FirstOrDefault(p => p.LanguageCulture == languageDTO.Culture);
+
+                                <h3>@languageDTO.Name</h3>
+                                <hr />
+                                if (prdT != null)
+                                {
+                                    <input type="hidden" name="ProjectTranslates[@lngIndex].Id" value="@prdT.Id" />
+                                    <input type="hidden" class="form-control" name="ProjectTranslates[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Name"] *</label>
+                                        <div id="project-name-@lngIndex"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Short description"] *</label>
+                                        <div id="project-shortDesc-@lngIndex"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Description"] *</label>
+                                        <div id="description-editor-@lngIndex"></div>
+                                    </div>
+                                    <script>
+                                    $(function () {
+                                        $("#project-name-@lngIndex").dxTextBox({
+                                            name: "ProjectTranslates[@lngIndex].Name",
+                                            value: @Json.Serialize(prdT.Name),
+                                        }).dxValidator({
+                                            validationRules: [{
+                                                type: "required",
+                                                message: '@SharedLocalizer["Enter name"]'
+                                            }]
+                                        }).dxTextBox("instance");
+
+                                        $("#project-shortDesc-@lngIndex").dxTextBox({
+                                            name: "ProjectTranslates[@lngIndex].ShortDescription",
+                                            value: @Json.Serialize(prdT.ShortDescription),
+                                        }).dxTextBox("instance");
+
+                                        $("#description-editor-@lngIndex").dxHtmlEditor({
+                                            height: 300,
+                                            toolbar: {
+                                                items: [
+                                                    "undo", "redo", "separator",
+                                                    {
+                                                        formatName: "header",
+                                                        formatValues: [false, 1, 2, 3, 4, 5]
+                                                    },
+                                                        "bold", "italic", "strike", "underline", "separator",
+                                                             "alignLeft", "alignCenter", "alignRight", "alignJustify", "separator",
+                                                              "orderedList", "bulletList", "separator",
+                                                              "color", "background", "separator",
+                                                               "link", "image", "separator",
+                                                               "clear", "codeBlock", "blockquote",
+                                                    {
+                                                        widget: "dxButton",
+                                                        options: {
+                                                            text: "Show markup",
+                                                            stylingMode: "text",
+                                                            onClick: function () {
+                                                                popupInstance.show();
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            name: "ProjectTranslates[@lngIndex].Description",
+                                            value: "@Html.Raw(prdT.Description)"
+                                        }).dxHtmlEditor("instance");
+                                    });
+                                    </script>
+
+                                }
+                                else
+                                {
+
+                                }
+
+
+                                lngIndex++;
+                            }
+
+                        </div>
+                        <div class="col-md-6">
+                            <h2>@SharedLocalizer["Data"]</h2>
+                            <hr />
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Picture"]</label>
+
+                                <div id="file"></div>
+                            </div>
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+                            <div class="form-group" style="overflow: hidden;">
+                                <div class="col-md-6">
+                                    <label>@SharedLocalizer["Project start date"]</label>
+                                    @if (Model.StartDate != null)
+                                    {
+                                        <div id="newStartDate"></div>
+                                    }
+                                    else
+                                    {
+                                        <div id="newStartDate1"></div>
+                                    }
+
+                                </div>
+                                <div class="col-md-6">
+                                    <label>@SharedLocalizer["Project end date"]</label>
+                                    @if (Model.EndDate != null)
+                                    {
+                                        <div id="endStartDate"></div>
+                                    }
+                                    else
+                                    {
+                                        <div id="endStartDate1"></div>
+                                    }
+                                </div>
+                                <div class="col-md-6">
+                                    <label>@SharedLocalizer["Project completed date"]</label>
+                                    @if (Model.CompleteDate != null)
+                                    {
+                                        <div id="completeDate"></div>
+                                    }
+                                    else
+                                    {
+                                        <div id="completeDate1"></div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <br />
+
+                            @if (Model.PictureName != null)
+                            {
+                                <img src="~/images/Projects/@Model.PictureName" />
+                                <div class="form-group">
+                                    <div id="deleteImage"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <h6 class="col-6 alert-danger">@SharedLocalizer["No photo"]</h6>
+                            }
+
+                            <input type="hidden" name="PictureName" value="@Model.PictureName" />
+                            <div id="gridContainerPicture"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/CustomStore.js"></script>
+    <script>
+        $(function () {
+            let file = @Json.Serialize(Model.FormFile);
+
+            $("#file").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: '@SharedLocalizer["or drag"]',
+                multiple: false
+            });
+
+            let published = '@Model.IsPublish';
+            $("#published").dxCheckBox({
+                text: '@SharedLocalizer["Active"]',
+                name: 'IsPublish',
+                value: (published.toLowerCase() == 'true'),
+            });
+
+            let deleteI = '@Model.DeleteImage';
+            $("#deleteImage").dxCheckBox({
+                text: '@SharedLocalizer["Delete previous picture"]',
+                name: 'DeleteImage',
+                value: false,
+            });
+
+            $("#newStartDate").dxDateBox({
+                type: "date",
+                name: "StartDate",
+                value: @Json.Serialize(Model.StartDate),
+
+                visible: true,
+                 width: 150,
+            }).data("dxDateBox");
+
+            $("#newStartDate1").dxDateBox({
+                type: "date",
+                name: "StartDate",
+                placeholder: '@SharedLocalizer["Not set"]',
+                visible: true,
+                width: 150,
+            }).data("dxDateBox");
+
+            $("#endStartDate").dxDateBox({
+                type: "date",
+                name: "EndDate",
+                value: @Json.Serialize(Model.EndDate),
+                visible: true,
+                width: 150,
+            }).data("dxDateBox");
+
+            $("#endStartDate1").dxDateBox({
+                type: "date",
+                name: "EndDate",
+                placeholder: '@SharedLocalizer["Not set"]',
+                visible: true,
+                width: 150,
+            }).data("dxDateBox");
+
+             $("#completeDate").dxDateBox({
+                type: "date",
+                name: "CompleteDate",
+                value: @Json.Serialize(Model.CompleteDate),
+                visible: true,
+                 width: 150,
+            }).data("dxDateBox");
+
+             $("#completeDate1").dxDateBox({
+                type: "date",
+                name: "CompleteDate",
+                placeholder: '@SharedLocalizer["Not set"]',
+                visible: true,
+                 width: 150,
+            }).data("dxDateBox");
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Edit"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+
+
+        });
+
+    </script>
+
+}

@@ -1,0 +1,299 @@
+﻿@model TSTB.BLL.DTOs.CallBackModelDTO.EditCallBackDTO
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+@using TSTB.DAL.Models.Enums
+
+@{
+    ViewData["Title"] = SharedLocalizer["Edit call backs"];
+    int lngIndex = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Edit call backs"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Edit" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <input type="hidden" name="PictureName" value="@Model.PictureName" />
+
+                    <div class="row">
+                       
+                          
+                      
+
+                        <div class="col-md-6">
+                            @foreach (LanguageDTO languageDTO in ViewBag.Languages)
+                            {
+                                <h2>@languageDTO.Name</h2>
+                                <hr />
+                                {
+                                    var servC = Model.CallBackTranslates.FirstOrDefault(p => p.LanguageCulture == languageDTO.Culture);
+
+                                    if (servC != null)
+                                    {
+                                        <input type="hidden" name="CallBackTranslates[@lngIndex].Id" value="@servC.Id" />
+                                        <input type="hidden" class="form-control" name="CallBackTranslates[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+                                        <div class="form-group">
+                                            <label>@SharedLocalizer["Address"]</label>
+                                            <input type="text" class="form-control" name="CallBackTranslates[@lngIndex].Address" value="@servC.Address" />
+                                        </div>
+
+
+                                    }
+                                    else
+                                    {
+                                        <input type="hidden" class="form-control" name="CallBackTranslates[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+                                        <div class="form-group">
+                                            <label>@SharedLocalizer["Address"]</label>
+                                            <input type="text" class="form-control" name="CallBackTranslates[@lngIndex].Address" />
+                                        </div>
+
+
+                                    }
+                                }
+
+                                lngIndex++;
+                            }
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Select city"] *</label>
+                                <div id="citySelection"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Phone number"] *</label>
+                                <div id="phone"></div>
+                            </div>
+                       
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Fax"] </label>
+                                <div id="fax"></div>
+                            </div>
+                       
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Email"] *</label>
+                                <div id="email"></div>
+                            </div>
+                       
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Start of the working week"] *</label>
+                                <div id="startweekday"></div>
+                            </div>
+                      
+                            <div class="form-group">
+                                <label>@SharedLocalizer["End of the working week"] *</label>
+                                <div id="endweekday"></div>
+                            </div>
+                      
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Work starts at"] *</label>
+                                <div id="starttime"></div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Work ends at"] *</label>
+                                <div id="endtime"></div>
+                            </div>
+                       
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Picture"] *</label>
+                                <div id="photo"></div>
+                            </div>
+                       
+                            <div class="form-group">
+                                @if (Model.PictureName != null)
+                                {
+                                    <img src="~/images/CallBacks/@Model.PictureName" style="width: 30%;" />
+                                    <div class="form-group">
+                                        <div id="deleteImage"></div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <h6 class="col-6 alert-danger">@SharedLocalizer["No photo"]</h6>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/CustomStore.js"></script>
+    <script>
+        var weekDays = [
+            { Id: 1, name: '@SharedLocalizer["Monday"]' },
+            { Id: 2, name: '@SharedLocalizer["Tuesday"]' },
+            { Id: 3, name: '@SharedLocalizer["Wednesday"]' },
+            { Id: 4, name: '@SharedLocalizer["Thursday"]' },
+            { Id: 5, name: '@SharedLocalizer["Friday"]' },
+            { Id: 6, name: '@SharedLocalizer["Saturday"]' },
+            { Id: 7, name: '@SharedLocalizer["Sunday"]' }
+        ];
+
+        var getAllCities = new DevExpress.data.AspNet.createStore({
+            key: "id",
+            loadUrl: "/api/CallBacksAPI/GetAllCities",
+            onBeforeSend: function (method, ajaxOptions) {
+                ajaxOptions.xhrFields = { withCredentials: true };
+            }
+        });
+
+        $(function () {
+            $("#citySelection").dxSelectBox({
+                dataSource: getAllCities,
+                displayExpr: "name",
+                valueExpr: "id",
+                value: @Html.Raw(Json.Serialize(Model.CityId)),
+                name: 'CityId',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select city"]'
+                }]
+            });
+
+           
+
+            $("#phone").dxTextBox({
+                name: "Phone",
+                value: @Json.Serialize(Model.Phone)
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please enter phone number"]'
+                }]
+            });
+
+            $("#fax").dxTextBox({
+                name: "Facks",
+                value: @Json.Serialize(Model.Facks)
+            });
+
+
+            $("#email").dxTextBox({
+                name: "Email",
+                value: @Json.Serialize(Model.Email),
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Email fiels is empty or invalid"]'
+                }]
+            });
+
+            $("#startweekday").dxSelectBox({
+                dataSource: weekDays,
+                displayExpr: "name",
+                value: @Json.Serialize(Model.StartWeekDate),
+                valueExpr: "Id",
+                name: 'StartWeekDate',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select a day of the week"]'
+                }]
+            });
+
+            $("#endweekday").dxSelectBox({
+                dataSource: weekDays,
+                value: @Json.Serialize(Model.EndWeekDate),
+                displayExpr: "name",
+                valueExpr: "Id",
+                name: 'EndWeekDate',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select a day of the week"]'
+                }]
+            });
+
+            $("#starttime").dxDateBox({
+                type: "time",
+                displayFormat: "HH:mm",
+                value: @Json.Serialize(Model.StartTime),
+                name: "StartTime",
+                width: 150,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select start time"]'
+                }]
+            });
+
+            $("#endtime").dxDateBox({
+                type: "time",
+                displayFormat: "HH:mm",
+                value: @Json.Serialize(Model.EndTime),
+                name: "EndTime",
+                width: 150
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select start time"]'
+                }]
+            });
+
+            $("#photo").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: '@SharedLocalizer["or drag"]',
+                multiple: false
+            });
+
+            let published = '@Model.IsPublish';
+            $("#published").dxCheckBox({
+                text: '@SharedLocalizer["Active"]',
+                name: 'IsPublish',
+                value: (published.toLowerCase() == 'true'),
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Edit"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+
+            $("#summary").dxValidationSummary({});
+
+        });
+
+
+    </script>
+
+}

@@ -1,0 +1,154 @@
+﻿@model IEnumerable<TSTB.BLL.DTOs.CallBackModelDTO.CallBackDTO>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["To contact us"];
+    bool active = true;
+    int i = 0;
+    int j = 0;
+}
+
+<div class="h-full xl:container xl:px-0 px-4 flex flex-col justify-center">
+    <div class="bg-white sm:pt-12 pt-4 relative">
+        <h1 class="font-bold text-2xl sm:text-3xl lg:max-w-3xl lg:text-3xl text-primary">
+            @SharedLocalizer["Contact us"]
+        </h1>
+        @*<h3 class="mt-4 max-w-3xl">
+                Время работы всех отделений СППТ: Понедельник - Пятница - 9:00-18:00, Суббота-Воскресенье
+                - Выходной Чтобы узнать контакты отделения в нужно велаяте, просто кликните на него на
+                карте слева.
+            </h3>*@
+    </div>
+    <div class="md:mt-16 mt-8">
+
+        <!-- DESKTOP AND TABLET -->
+        <div id="tabs-bar" class="sm:flex -m-2  hidden">
+            @foreach (var call in Model)
+            {
+                if (active)
+                {
+                    active = false;
+                    <span class="contact-tab contact-tab--active" data-id="@i">@call.City</span>
+                }
+                else
+                {
+                    <span class="contact-tab " data-id="@i">@call.City</span>
+                }
+
+                i++;
+            }
+        </div>
+        <div class="relative sm:block hidden" id="tabs-content">
+            @foreach (var call in Model)
+            {
+                <div class="mt-4 grid  lg:grid-cols-2 grid-cols-3 absolute" data-id="@j">
+                    <img src="~/images/CallBacks/@call.Image" alt="" class="rounded object-cover w-full h-full  max-w-screen-sm lg:col-span-1 col-span-2 ">
+                    <div class="lg:pl-16 md:pl-6 pl-3">
+                        <h3 class="font-semibold text-xl mb-4">@call.City</h3>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Address"]:
+                            </span>
+                            <br />
+                            @call.Address
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Phone"]:
+                            </span>
+                            <br />
+                            @call.Phone
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Fax"]:
+                            </span>
+                            <br />
+                            @call.Facks
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Email"]:
+                            </span>
+                            <br />
+                            @call.Email
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Working hours"]:
+                            </span>
+                            <br />
+                            @SharedLocalizer[call.StartWeekDate.ToString()] - @SharedLocalizer[call.EndWeekDate.ToString()] - @call.StartTime.ToString("HH:mm") - @call.EndTime.ToString("HH:mm")
+                        </p>
+                    </div>
+                </div>
+                j++;
+            }
+        </div>
+        <!-- DESKTOP AND TABLET -->
+        <!-- MOBILE VIEW -->
+        <div class="sm:hidden">
+            <h2 class="font-semibold text-xl"> @SharedLocalizer["Our contacts"]: </h2>
+            <div class="mt-4">
+                @foreach (var call in Model)
+                {
+                    <div class="tab mb-2">
+                        <input type="checkbox" name="tab-1" id="tab-@call.Id" class="hidden label-input" />
+                        <label for="tab-@call.Id"
+                               class="relative block label max-w-sm border-b border-gray-400 pb-2 cursor-pointer">
+                            @call.City
+                        </label>
+
+                        <div class="tab-content mt-2">
+
+                            <p class="my-2">
+                                <span class="font-semibold select-none">
+                                    @SharedLocalizer["Address"]:
+                                </span>
+                                <br />
+                                @call.Address
+                            </p>
+                            <p class="my-2">
+                                <span class="font-semibold select-none">
+                                    @SharedLocalizer["Phone"]:
+                                </span>
+                                <br />
+                                @call.Phone
+                            </p>
+                            <p class="my-2">
+                                <span class="font-semibold select-none">
+                                    @SharedLocalizer["Fax"]:
+                                </span>
+                                <br />
+                                @call.Facks
+                            </p>
+                            <p class="my-2">
+                                <span class="font-semibold select-none">
+                                    @SharedLocalizer["Email"]:
+                                </span>
+                                <br />
+                                @call.Email
+                            </p>
+                            <p class="my-2">
+                                <span class="font-semibold select-none">
+                                    @SharedLocalizer["Working hours"]:
+                                </span>
+                                <br />
+                                @SharedLocalizer[call.StartWeekDate.ToString()] - @SharedLocalizer[call.EndWeekDate.ToString()] - @call.StartTime - @call.EndTime
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- MOBILE VIEW -->
+    </div>
+
+
+</div>
+
+@section Scripts{
+    <script src="~/client/js/contact.js" defer></script>
+}

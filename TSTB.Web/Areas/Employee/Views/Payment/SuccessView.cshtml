@@ -1,0 +1,29 @@
+﻿
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@model SuccessOrder
+@{
+    ViewData["Title"] = "SuccessView";
+}
+    <h2 id="status"></h2>
+
+    <a asp-action="Index" asp-controller="Payment" asp-area="Employee">@SharedLocalizer["Return"]</a>
+
+@section Scripts{
+    <script>
+        var PaymentStatus = [
+            { id: 0, name: "@SharedLocalizer["Not paid! Order registered in the bank"]" },
+            { id: 1, name: "@SharedLocalizer["Not paid! Preauthorized amount frozen for 2 factor authorization"]" },
+            { id: 2, name: "@SharedLocalizer["Order payed successfully"]" },
+            { id: 3, name: "@SharedLocalizer["Not paid! Authorization cancelled"]" },
+            { id: 4, name: "@SharedLocalizer["Not paid! Amount refunded"]" },
+            { id: 5, name: "@SharedLocalizer["Not paid! Authorization initiated by issuing Bank ACS"]" },
+            { id: 6, name: "@SharedLocalizer["Not paid! Authorization rejected"]" },
+            { id: 99, name: "@SharedLocalizer["Not paid!"]" }
+        ];
+        document.getElementById("status").innerText = PaymentStatus[@Model.orderStatus].name;
+    </script>
+}
+

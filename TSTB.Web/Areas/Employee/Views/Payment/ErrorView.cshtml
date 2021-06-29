@@ -1,0 +1,11 @@
+﻿@model TSTB.Web.Areas.Employee.Models.ErrorViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = "ErrorView";
+}
+
+<h2>@Model.ErrorMessage</h2>
+<a asp-action="Index" asp-controller="Payment" asp-area="Employee">@SharedLocalizer["Return"]</a>

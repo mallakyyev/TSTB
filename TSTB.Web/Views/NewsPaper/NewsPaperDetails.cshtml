@@ -1,0 +1,26 @@
+﻿@model TSTB.DAL.Models.NewsPapers.NewsPaperData
+@using TSTB.DAL.Models.NewsPapers
+@using Syncfusion.EJ2
+
+@{
+    IEnumerable<NewsPaperFiles> t = Model.NewsPaperFiles;
+     ViewData["Title"] = Model.NewsPaper.NewsPapersTranslates.SingleOrDefault(p=>p.LanguageCulture == ViewBag.Culture).Name;
+}
+<div class="h-full xl:container xl:px-0 px-4">
+    <div class="mt-8 mb-16">
+        @foreach (TSTB.DAL.Models.NewsPapers.NewsPaperFiles f in t.OrderByDescending(o => o.Id))
+        {
+            bool isPdf = (f.Image.Substring(f.Image.Length - 3, 3).ToLower() == "pdf");
+            @if (isPdf)
+            {
+                <embed class="col-sm-4 col-md-12 " src="~/images/NewsPapers/NewsPaperFiles/@f.Image" style="height:1000px">
+            }
+            else
+            {
+                <div class="raw col-md-12">
+                    <img src="~/images/NewsPapers/NewsPaperFiles/@f.Image" style="width:inherit; height:inherit; object-fit:contain;" />
+                </div>
+            }
+        }
+    </div>
+</div>

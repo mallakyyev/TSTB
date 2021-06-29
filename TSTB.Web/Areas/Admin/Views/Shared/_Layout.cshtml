@@ -1,0 +1,285 @@
+﻿@using TSTB.Web
+@using System.Globalization;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title - TSTB</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/admin/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="~/admin/css/plugins/morris.css" rel="stylesheet">
+
+    <link href="~/css/mystyle.css" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    <link href="~/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="~/devextreme/css/dx.common.css" rel="stylesheet" />
+    <link href="~/devextreme/css/dx.light.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="~/admin/js/jquery.js"></script>
+    @*  <script src="~/js/quill.min.js"></script>*@
+    @*<script src="~/devextreme/js/jquery.min.js"></script>*@
+    <script src="~/devextreme/js/dx-quill.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/theme.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="~/lib/elfinder/css/elfinder.full.css" />
+    <link rel="stylesheet" href="~/lib/elfinder/css/theme.css" /> @* <-- NOTE: This file is new and some of the themes may not look quite right if this is used. *@
+    <link rel="stylesheet" href="~/css/elfinder/themes/material/css/theme-gray.css" id="elfinder-theme" />
+
+    <style>
+        .elfinder-cwd table td {
+            /* fix conflict with Bootstrap CSS. See: https://github.com/Studio-42/elFinder/commit/4f858d5ffc9a8f41b4cc07a063782abe2e722bdf */
+            box-sizing: content-box;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TSTB</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li>
+                    <!--await Html.PartialAsync("_SelectLanguagePartial")-->
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.Name <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fa fa-fw fa-user"></i> @SharedLocalizer["Profile"]</a>
+                        </li>
+                        @*<li>
+                                <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            </li>*@
+                        <li class="divider"></li>
+                        <li>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="logout-admin"><i class="fa fa-fw fa-power-off"></i> @SharedLocalizer["Log out"]</button>
+                            </form>
+                            @*<a href="#"></a>*@
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav side-nav">
+                        <li class="active">
+                            <a asp-area="Admin" asp-controller="Admin" asp-action="Index"><i class="fa fa-fw fa-dashboard"></i> @SharedLocalizer["Panel"]</a>
+                        </li>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Content-Manager"))
+                        {
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#content"><i class="fa fa-fw fa-arrows-v"></i> @SharedLocalizer["Content"] <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="content" class="collapse">
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Banner" asp-action="Index"> @SharedLocalizer["Banners"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Advertisement" asp-action="Index"> @SharedLocalizer["Advertisement"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Department" asp-action="Index"> @SharedLocalizer["Departments"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Project" asp-action="Index"> @SharedLocalizer["Projects"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Industry" asp-action="Index"> @SharedLocalizer["Industries"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Partner" asp-action="Index"> @SharedLocalizer["Partners"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Representative" asp-action="Index"> @SharedLocalizer["Representatives"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="TradingHouse" asp-action="Index"> @SharedLocalizer["Trading houses"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="NativeProduction" asp-action="Index"> @SharedLocalizer["Native productions"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Widget" asp-action="Index"> @SharedLocalizer["Widgets"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Sayings" asp-action="Index"> @SharedLocalizer["Sayings"]</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#tr"><i class="fa fa-fw fa-arrows-v"></i> @SharedLocalizer["Online tradings"] <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="tr" class="collapse">
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="OnlineTrading" asp-action="Index"> @SharedLocalizer["Online tradings"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="OnlineTrading" asp-action="Activities"> @SharedLocalizer["Activity types"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="OnlineTrading" asp-action="Categories"> @SharedLocalizer["Online trading category"]</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#menu"><i class="fa fa-fw fa-arrows-v"></i> @SharedLocalizer["Menu"] <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="menu" class="collapse">
+
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Menu" asp-action="Index"> @SharedLocalizer["Menu"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Pages" asp-action="Index"> @SharedLocalizer["Pages"]</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#newsCategory"><i class="fa fa-fw fa-arrows-v"></i> @SharedLocalizer["News"] <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="newsCategory" class="collapse">
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="NewsCategory" asp-action="Index"> @SharedLocalizer["News category"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="News" asp-action="Index"> @SharedLocalizer["News"]</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#newsPaper"><i class="fa fa-fw fa-arrows-v"></i> @SharedLocalizer["Newspapers"] <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="newsPaper" class="collapse">
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="NewsPaper" asp-action="Index"> @SharedLocalizer["Newspapers"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="NewsPaperData" asp-action="Index"> @SharedLocalizer["Newspaper data"]</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#services"><i class="fa fa-fw fa-arrows-v"></i> @SharedLocalizer["Services"] <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="services" class="collapse">
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="Services" asp-action="Index"> @SharedLocalizer["Services"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="ServiceType" asp-action="Index"> @SharedLocalizer["Service types"]</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#callback"><i class="fa fa-fw fa-arrows-v"></i> @SharedLocalizer["Call backs"] <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="callback" class="collapse">
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="City" asp-action="Index"> @SharedLocalizer["Cities"]</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Admin" asp-controller="CallBack" asp-action="Index"> @SharedLocalizer["Call backs"]</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Registration-Manager"))
+                        {
+                            <li>
+                                <a asp-area="Admin" asp-controller="ApplicationUser" asp-action="Index"> @SharedLocalizer["Users"]</a>
+                                <a asp-area="Admin" asp-controller="Membership" asp-action="Index"> @SharedLocalizer["Membership requests"]</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Content-Manager"))
+                        {
+                            <li>
+                                <a asp-area="Admin" asp-controller="FileManager" asp-action="Index"> @SharedLocalizer["File management"]</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-area="Admin" asp-controller="Charity" asp-action="Index"> @SharedLocalizer["Charity"]</a>
+                            </li>
+                            <li>
+                                <a asp-area="Admin" asp-controller="Email" asp-action="Index"> @SharedLocalizer["Email"]</a>
+                            </li>
+                            <li>
+                                <a asp-area="Admin" asp-controller="Settings" asp-action="Index"> @SharedLocalizer["Settings"]</a>
+                            </li>
+                        }
+                    </ul>
+                }
+
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/admin/js/bootstrap.min.js"></script>
+    @*<script src="~/js/axios.min.js"></script>*@
+    <!-- Morris Charts JavaScript -->
+    @*<script src="~/admin/js/plugins/morris/raphael.min.js"></script>
+        <script src="~/admin/js/plugins/morris/morris.min.js"></script>
+        <script src="~/admin/js/plugins/morris/morris-data.js"></script>*@
+
+    <!-- DevExtreme library -->
+    <script src="~/devextreme/js/dx.all.js"></script>
+    <script src="~/devextreme/js/localization/dx.messages.ru.js"></script>
+    <script src="~/devextreme/js/dx.aspnet.data.js"></script>
+    @*<script>
+        console.log(`@CultureInfo.CurrentCulture.Name`);
+        DevExpress.localization.locale(`tr-TR` || navigator.browserLanguage);</script>*@
+
+
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/lib/elfinder/js/elfinder.full.js"></script>
+
+    <script type="text/javascript">
+        $('link#elfinder-theme').attr('href', '/css/elfinder/themes/bootstrap-LibreICONS/css/theme-bootstrap-libreicons-svg.css');
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

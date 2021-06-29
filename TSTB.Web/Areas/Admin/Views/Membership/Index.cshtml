@@ -1,0 +1,140 @@
+﻿@using TSTB.Web.Areas.Admin.Utilities;
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Membership requests"];
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Membership requests"] (/MembershipRequest/Index)
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+             var Type = [         
+            { Id: 1, name: '@SharedLocalizer["Entrepreneur"]' },
+            { Id: 2, name: '@SharedLocalizer["Legal person"]' }
+        ];
+
+               var Status = [         
+            { Id: 1, name: '@SharedLocalizer["Reviewed"]' },
+            { Id: 2, name: '@SharedLocalizer["Under review"]' }
+        ];
+
+        $(function () {
+            let url = `@API.GetAllMembershipRequests`;
+            var returnUrl = '@Context.Request.Path@Context.Request.QueryString';
+            $("#gridContainer").dxDataGrid({
+                dataSource: DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: url,
+                    insertUrl: url,
+                    updateUrl: url,
+                    deleteUrl: url,
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),                
+                filterPanel: {
+                    visible: false
+                },
+                filterRow: { visible: false },
+                remoteOperations: true,
+                onRowUpdating: function (e) {
+                    e.newData = Object.assign(e.oldData, e.newData)
+                },
+                scrolling: {
+                    mode: "virtual",
+                    rowRenderingMode: "virtual"
+                },
+                paging: {
+                    pageSize: 100
+                },
+                editing: {
+                    useIcons: true,
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    allowAdding: false
+                },
+                headerFilter: {
+                    visible: true
+                },
+                wordWrapEnabled: true,
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                searchPanel: {
+                    visible: true
+                },
+
+                stateStoring: {
+                    enabled: true,
+                    type: "localStorage",
+                    storageKey: "membershipRequestAdmin"
+                },
+
+                columns: [
+                    {
+                        caption: '@SharedLocalizer["Phone number"]',
+                        dataField: "phoneNumber",
+                        allowHeaderFiltering: false
+                    },
+                    {
+                          dataField: "membershipRequestStatus",
+                          caption: '@SharedLocalizer["Status"]',
+                          lookup: {
+                               dataSource: Status,
+                               displayExpr: "name",
+                               valueExpr: "Id"
+                                }
+                     },
+                    {
+                          dataField: "membershipType",
+                          caption: '@SharedLocalizer["User type"]',
+                          lookup: {
+                               dataSource: Type,
+                               displayExpr: "name",
+                               valueExpr: "Id"
+                           }
+                     },
+                   
+                    {
+                        type: "buttons",
+                        width: 110,
+                        buttons: [
+                            {
+                                hint: '@SharedLocalizer["Edit"]',
+                                icon: "edit",
+                                onClick: function (e) {
+                                    var idString = e.row.data.id;
+                                    var type = e.row.data.membershipType;
+                                    var url = `@Url.Action("Edit", "Membership", new { Area = "Admin" })`;
+                                    window.location = url + '?id=' + idString ;
+                                }
+                            },
+                            "delete"
+                        ]
+                    }
+                ]
+            });
+
+        });
+    </script>
+}

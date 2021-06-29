@@ -1,0 +1,230 @@
+﻿@model TSTB.BLL.DTOs.BannerModelDTO.EditBannerDTO
+@using TSTB.Web
+@using TSTB.BLL.DTOs.LanguageDTO
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Edit banner"];
+
+    int lngIndex = 0;
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Edit banner"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Edit" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            
+                            @foreach (LanguageDTO languageDTO in ViewBag.Languages)
+                            {
+                                var catT = Model.BannerTranslate.FirstOrDefault(p => p.LanguageCulture == languageDTO.Culture);
+                                if (catT != null)
+                                {
+                                    <h2>@languageDTO.Name</h2>
+                                    <hr />
+                                    <input type="hidden" class="form-control" name="BannerTranslate[@lngIndex].Id" value="@catT.Id" />
+                                    <input type="hidden" class="form-control" name="BannerTranslate[@lngIndex].Image" value="@catT.Image" />
+                                    <input type="hidden" class="form-control" name="BannerTranslate[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Title"] *</label>
+                                        <div id="banner-name-@lngIndex"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Short description"] *</label>
+                                        <div id="description-editor-@lngIndex"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('.showbtn_@lngIndex').click(function () {
+                                                    $('.myimgdivshowhide_@lngIndex').show();
+                                                });
+                                                $('.hidebtn_@lngIndex').click(function () {
+                                                    $('.myimgdivshowhide_@lngIndex').hide();
+                                                });
+                                            });
+                                        </script>
+                                        <style>
+                                            .myimgdivshowhide_@lngIndex {
+                                                display: none;
+                                            }
+                                        </style>
+                                        <button type="button" class="btn-info showbtn_@lngIndex">Show Image</button>
+                                        <button type="button" class="hidebtn_@lngIndex">Hide Image</button>
+                                        <div class="myimgdivshowhide_@lngIndex">
+                                            <img src="~/images/Banner/@Model.BannerTranslate.ToArray()[lngIndex].Image" alt="display image on button click" class="img-responsive img-thumbnail" />
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Picture"]</label>
+                                        <div id="files-@lngIndex"></div>
+                                    </div>
+                                    <br />
+                                }
+                                <script>
+                                    $(function () {
+                                        $("#banner-name-@lngIndex").dxTextBox({
+                                            name: "BannerTranslate[@lngIndex].Title",
+                                            value: @Json.Serialize(catT.Title)
+                                            }).dxValidator({
+                                                validationRules: [{
+                                                    type: "required",
+                                                    message: '@SharedLocalizer["Enter title"]'
+                                                }]
+                                            });
+
+                                        $("#description-editor-@lngIndex").dxTextArea({
+                                            name: "BannerTranslate[@lngIndex].ShortDescription",
+                                            value: @Json.Serialize(catT.ShortDescription),
+                                            height: 90
+                                            }).dxValidator({
+                                                validationRules: [{
+                                                    type: "required",
+                                                    message: '@SharedLocalizer["Enter short description"]'
+                                                }]
+                                            });
+
+                                        $("#files-@lngIndex").dxFileUploader({
+                                            selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                                            name: "BannerTranslate[@lngIndex].FormFile",
+                                            labelText: '@SharedLocalizer["or drag picture"]',
+                                            accept: "image/*",
+                                            uploadMode: '@SharedLocalizer["or drag"]',
+                                            multiple: false,
+                                        });
+                                    });
+                                </script>
+
+                                lngIndex++;
+                            }
+
+                        </div>
+                        <div class="col-md-6">
+                            <h2>@SharedLocalizer["Data"]</h2>
+                            <hr />
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Start date"] *</label>
+                                <div id="startdate"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["End date"] *</label>
+                                <div id="enddate"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Link"]</label>
+                                <div id="link"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Position"]</label>
+                                <div id="position"></div>
+                            </div>
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts 
+{
+<script>
+     var position = [
+            { Id: 0, name: '@SharedLocalizer["On the left"]' },
+            { Id: 1, name: '@SharedLocalizer["On the right"]' },
+            { Id: 2, name: '@SharedLocalizer["On the middle"]' }
+        
+    ];
+
+    $(function () {
+        let published = '@Model.IsPublish';
+        $("#published").dxCheckBox({
+            value: (published.toLowerCase() == 'true'),
+            text: '@SharedLocalizer["Active"]',
+            name: 'isPublish',
+        });
+
+        $("#startdate").dxDateBox({
+            type: "date",
+            name: "StartDate",
+            value: @Json.Serialize(Model.StartDate),
+            width: 150,
+        }).dxValidator({
+            validationRules: [{
+                type: "required",
+                message: '@SharedLocalizer["Please select start date"]'
+            }]
+        });
+
+        $("#enddate").dxDateBox({
+            type: "date",
+            name: "EndDate",
+            value: @Json.Serialize(Model.EndDate),
+            width: 150,
+        }).dxValidator({
+            validationRules: [{
+                type: "required",
+                message: '@SharedLocalizer["Please select end date"]'
+            }]
+        });
+
+        $("#link").dxTextBox({
+            name: "Link",
+            value: @Json.Serialize(Model.Link),
+        });
+
+
+          $("#position").dxSelectBox({
+                dataSource: position,
+                displayExpr: "name",
+                value: @Json.Serialize(Model.BannerPosition),
+                valueExpr: "Id",
+                name: 'BannerPosition',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select position"]'
+                }]
+            });
+
+
+        $("#button").dxButton({
+            text: '@SharedLocalizer["Edit"]',
+            type: "default",
+            useSubmitBehavior: true,
+        });
+
+        $("#summary").dxValidationSummary({});
+    });
+    </script>
+}

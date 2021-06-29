@@ -1,0 +1,180 @@
+﻿@model TSTB.BLL.DTOs.ServicesDTO.EditServiceTypeDTO
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+
+@{
+    ViewData["Title"] = SharedLocalizer["Edit service type"];
+    int lngIndex = 0;
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Edit service type"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Edit" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            @foreach (LanguageDTO languageDTO in ViewBag.Languages)
+                            {
+                                var servT = Model.ServiceTypeTranslates.FirstOrDefault(p => p.LanguageCulture == languageDTO.Culture);
+
+                                <h3>@languageDTO.Name</h3>
+                                <hr />
+                                if (servT != null)
+                                {
+                                    <input type="hidden" name="ServiceTypeTranslates[@lngIndex].Id" value="@servT.Id" />
+                                    <input type="hidden" class="form-control" name="ServiceTypeTranslates[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Name"] *</label>
+                                        <div id="news-name-@lngIndex"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Description"] *</label>
+                                        <div id="description-editor-@lngIndex"></div>
+                                    </div>
+                                    <script>
+                                    $(function () {
+                                        $("#news-name-@lngIndex").dxTextBox({
+                                            name: "ServiceTypeTranslates[@lngIndex].Name",
+                                            value: @Json.Serialize(servT.Name),
+                                        }).dxValidator({
+                                            validationRules: [{
+                                                type: "required",
+                                                message: '@SharedLocalizer["Enter name"]'
+                                            }]
+                                        }).dxTextBox("instance");
+
+                                        $("#description-editor-@lngIndex").dxHtmlEditor({
+                                            height: 300,
+                                            toolbar: {
+                                                items: [
+                                                    "undo", "redo", "separator",
+                                                    {
+                                                        formatName: "header",
+                                                        formatValues: [false, 1, 2, 3, 4, 5]
+                                                    },
+                                                          "bold", "italic", "strike", "underline", "separator",
+                                                             "alignLeft", "alignCenter", "alignRight", "alignJustify", "separator",
+                                                              "orderedList", "bulletList", "separator",
+                                                              "color", "background", "separator",
+                                                               "link", "image", "separator",
+                                                               "clear", "codeBlock", "blockquote",
+                                                    {
+                                                        widget: "dxButton",
+                                                        options: {
+                                                            text: "Show markup",
+                                                            stylingMode: "text",
+                                                            onClick: function () {
+                                                                popupInstance.show();
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            name: "ServiceTypeTranslates[@lngIndex].Description",
+                                            value: `@Html.Raw(servT.Description)`
+                                        }).dxHtmlEditor("instance");
+                                    });
+                                    </script>
+
+                                }
+                                else
+                                {
+
+                                }
+
+
+                                lngIndex++;
+                            }
+
+                        </div>
+                        <div class="col-md-6">
+                            <h2>@SharedLocalizer["Data"]</h2>
+                            <hr />
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Select service"] *</label>
+                                <div id="serviceSelection"></div>
+                            </div>
+                
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+
+                            <br />
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/CustomStore.js"></script>
+    <script>
+        var getServices = new DevExpress.data.AspNet.createStore({
+            key: "id",
+            loadUrl: "/api/ServicesAPI",
+            onBeforeSend: function (method, ajaxOptions) {
+                ajaxOptions.xhrFields = { withCredentials: true };
+            }
+        });
+
+        $(function () {
+             $("#serviceSelection").dxSelectBox({
+                 dataSource: getServices,
+                displayExpr: "name",
+                valueExpr: "id",
+                value: @Html.Raw(Json.Serialize(Model.ServiceId)),
+                name: 'ServiceId',
+                searchEnabled: true
+            }).dxValidator({
+                 validationRules: [{
+                 type: "required",
+                 message: '@SharedLocalizer["Select service"]'
+                                   }]
+                         });
+
+            let published = '@Model.IsPublish';
+            $("#published").dxCheckBox({
+                text: '@SharedLocalizer["Active"]',
+                name: 'IsPublish',
+                value: (published.toLowerCase() == 'true'),
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Edit"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+
+        });
+
+    </script>
+
+}

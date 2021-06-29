@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using TSTB.Web
+@using System.Globalization;
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="h-full xl:container xl:px-0 px-4 flex flex-col justify-center">
+    <div class="sm:pt-12 pt-4 relative sm:flex">
+        <aside class="sm:w-3/12 shadow-sm sm:mr-4 p-4 rounded">
+            <div class="grid gap-y-4 gap-x-2 justify-start w-full">
+                <a id="Index" asp-area="" asp-controller="Visitors" asp-action="Index" class="aside-link  "> @SharedLocalizer["By Country"]</a>
+                <a id="Monthly" asp-area="" asp-controller="Visitors" asp-action="Monthly" class="aside-link"> @SharedLocalizer["By Month"]</a>
+                <a id="Yearly" asp-area="" asp-controller="Visitors" asp-action="Yearly" class="aside-link"> @SharedLocalizer["By Year"]</a>
+                <a id="General" asp-area="" asp-controller="Visitors" asp-action="General" class="aside-link"> @SharedLocalizer["General"]</a>
+            </div>
+        </aside>
+
+        <main class="flex-grow-1 sm:w-9/12 p-4 shadow-sm rounded sm:mt-0 mt-4">
+            @*<h2 class="text-xl font-semibold"> Statistics </h2>
+                <div class="mt-4">
+
+                        <div class="mt-4">
+                            <canvas id="bar-chart" width="10"></canvas>
+                        </div>
+                        <div class="mt-4">
+                            <canvas id="pie-chart"></canvas>
+                        </div>
+
+                </div>*@
+            @RenderBody()
+        </main>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/client/Chart/Chart.js"></script>
+    <script src="~/client/Chart/Chart.min.js"></script>
+    <script src="~/client/Chart/Chart.bundle.js"></script>
+    <script src="~/client/Chart/Chart.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+}

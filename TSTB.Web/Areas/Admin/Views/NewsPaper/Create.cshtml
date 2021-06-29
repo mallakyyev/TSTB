@@ -1,0 +1,79 @@
+﻿@model TSTB.BLL.DTOs.NewsPaperModelDTO.CreateNewsPaperDTO
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+
+@{
+    ViewData["Title"] = SharedLocalizer["Create news paper"];
+
+
+    int lngIndex = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Create news paper"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Create" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            @foreach (LanguageDTO languageDTO in ViewBag.Languages)
+                            {
+
+                                <h2>@languageDTO.Name</h2>
+                                <hr />
+                                <input type="hidden" class="form-control" name="NewsPapersTranslates[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+                                <div class="form-group">
+                                    <label>@SharedLocalizer["Name"]</label>
+                                    <input type="text" class="form-control" name="NewsPapersTranslates[@lngIndex].Name" />
+                                </div>
+                                <br />
+                                lngIndex++;
+                            }
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+          $("#published").dxCheckBox({
+                text: '@SharedLocalizer["Active"]',
+                name: 'IsPublish',
+                value: true
+            });
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Add"]',
+                type: "default",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+        });
+    </script>
+}

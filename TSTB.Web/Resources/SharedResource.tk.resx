@@ -1,0 +1,1359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Access denied" xml:space="preserve">
+    <value>Elýeterlik gadagan</value>
+  </data>
+  <data name="Accountant" xml:space="preserve">
+    <value>Hasapçy</value>
+  </data>
+  <data name="Accountant's office" xml:space="preserve">
+    <value>Hasapçynyň iş otagy</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Işjeň</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Iş</value>
+  </data>
+  <data name="Activity types" xml:space="preserve">
+    <value>Iş görnüşleri</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Goşmaly</value>
+  </data>
+  <data name="Add charity" xml:space="preserve">
+    <value>Haýyr-sahawaty goşmak</value>
+  </data>
+  <data name="Add city" xml:space="preserve">
+    <value>Şäheri goşmaly</value>
+  </data>
+  <data name="Add phone number" xml:space="preserve">
+    <value>Telefon belgisini goşuň</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Salgy</value>
+  </data>
+  <data name="AddressSPPT" xml:space="preserve">
+    <value>Salgy</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="Admin email is invalid" xml:space="preserve">
+    <value>Administratoryň elektron poçta salgysy hakyky däl</value>
+  </data>
+  <data name="Admin email is required" xml:space="preserve">
+    <value>Administratoryň elektron poçta salgysy talap edilýär</value>
+  </data>
+  <data name="Admin panel" xml:space="preserve">
+    <value>Administratoryň paneli</value>
+  </data>
+  <data name="Administrator's office" xml:space="preserve">
+    <value>Administratoryň iş otagy</value>
+  </data>
+  <data name="Advertisement" xml:space="preserve">
+    <value>Mahabat bildirişi</value>
+  </data>
+  <data name="All news" xml:space="preserve">
+    <value>Ähli täzelikler</value>
+  </data>
+  <data name="All rights reserved" xml:space="preserve">
+    <value>Ähli hukuklar goralandyr</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Pul möçberi</value>
+  </data>
+  <data name="Annual membership fee" xml:space="preserve">
+    <value>Ýyllyk agza gatanjy</value>
+  </data>
+  <data name="Assigned to menu" xml:space="preserve">
+    <value>Menýu bellendi</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Awtor</value>
+  </data>
+  <data name="Author position" xml:space="preserve">
+    <value>Awtoryň wezipesi</value>
+  </data>
+  <data name="Back to home page" xml:space="preserve">
+    <value>Baş sahyp dolanyp barmak</value>
+  </data>
+  <data name="Banners" xml:space="preserve">
+    <value>Bannerler</value>
+  </data>
+  <data name="Birth place" xml:space="preserve">
+    <value>Doglan ýeri</value>
+  </data>
+  <data name="Birth Place including region name" xml:space="preserve">
+    <value>Doglan ýeri, şol sanda welaýatyň ady</value>
+  </data>
+  <data name="Brief statistics" xml:space="preserve">
+    <value>Gysgaça statistika</value>
+  </data>
+  <data name="Call backs" xml:space="preserve">
+    <value>Jemgyýetçilik gatnaşyklary</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Ýatyryldy</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Topary</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Üýtgetmek</value>
+  </data>
+  <data name="Change password" xml:space="preserve">
+    <value>Açarsözi üýtgetmek</value>
+  </data>
+  <data name="Change user password" xml:space="preserve">
+    <value>Ulanyjynyň açarsözüni üýtgetmek</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Haýyr-sahawat</value>
+  </data>
+  <data name="Choose a logo" xml:space="preserve">
+    <value>Logotipi saýlaň</value>
+  </data>
+  <data name="Choose a picture" xml:space="preserve">
+    <value>Şekili saýlaň</value>
+  </data>
+  <data name="Choose a pictures" xml:space="preserve">
+    <value>Şekilleri saýlaň</value>
+  </data>
+  <data name="Choose newspaper" xml:space="preserve">
+    <value>Gazeti saýlaň</value>
+  </data>
+  <data name="Choose year" xml:space="preserve">
+    <value>Ýyly saýlaň</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Şäherler</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Şäher</value>
+  </data>
+  <data name="Collected" xml:space="preserve">
+    <value>Toplandy</value>
+  </data>
+  <data name="Completed date" xml:space="preserve">
+    <value>Tamamlanýan senesi</value>
+  </data>
+  <data name="Completed projects" xml:space="preserve">
+    <value>Tamamlanan taslamalar</value>
+  </data>
+  <data name="Confirm password" xml:space="preserve">
+    <value>Açarsözi tassyklamak</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>Tassyklandy</value>
+  </data>
+  <data name="Contact person" xml:space="preserve">
+    <value>Habarlaşmak üçin adam</value>
+  </data>
+  <data name="Contact person name" xml:space="preserve">
+    <value>Habarlaşmak üçin adamyň ady</value>
+  </data>
+  <data name="Contact us" xml:space="preserve">
+    <value>Habarlaşmak üçin</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Kontent</value>
+  </data>
+  <data name="Content-Manager" xml:space="preserve">
+    <value>Kontent-menejer</value>
+  </data>
+  <data name="Copy of registration certificate or USREO" xml:space="preserve">
+    <value>Bellige alnandygy barada şahadatnamanyň nusgasy ýa-da                                        KGÝTDS-den göçürme</value>
+  </data>
+  <data name="Copy of the declaration or certificate" xml:space="preserve">
+    <value>Beýannamanyň ýa-da kepilnamanyň nusgasy</value>
+  </data>
+  <data name="Copy of the final income statement (last year)" xml:space="preserve">
+    <value>Girdejiler ýa-da çykdajylar barada gutarnykly hasabatyň  nusgasy (geçen ýyl üçin)</value>
+  </data>
+  <data name="Copy of the passport" xml:space="preserve">
+    <value>Pasportyň nusgasy</value>
+  </data>
+  <data name="Copy of the patent or statutes" xml:space="preserve">
+    <value>Patentiň ýa-da Tertipnamanyň nusgasy</value>
+  </data>
+  <data name="Copy of the precept" xml:space="preserve">
+    <value>Buýrugyň nusgasy</value>
+  </data>
+  <data name="Create activity type" xml:space="preserve">
+    <value>Iş görnüşini döretmek</value>
+  </data>
+  <data name="Create advert" xml:space="preserve">
+    <value>Mahabaty goşmak</value>
+  </data>
+  <data name="Create banner" xml:space="preserve">
+    <value>Banneri goşmak</value>
+  </data>
+  <data name="Create call backs" xml:space="preserve">
+    <value>Jemgyýetçilik gatnaşyklaryny goşmak</value>
+  </data>
+  <data name="Create city" xml:space="preserve">
+    <value>Şäheri goşmak</value>
+  </data>
+  <data name="Create department" xml:space="preserve">
+    <value>Bölümi goşmak</value>
+  </data>
+  <data name="Create industry" xml:space="preserve">
+    <value>Pudagy goşmak</value>
+  </data>
+  <data name="Create menu" xml:space="preserve">
+    <value>Menýuny goşmak</value>
+  </data>
+  <data name="Create news" xml:space="preserve">
+    <value>Täzelikleri goşmak</value>
+  </data>
+  <data name="Create news category" xml:space="preserve">
+    <value>Täzelikler toparyny goşmak</value>
+  </data>
+  <data name="Create news paper" xml:space="preserve">
+    <value>Gazeti goşmak</value>
+  </data>
+  <data name="Create newspaper data" xml:space="preserve">
+    <value>Gazet maglumatlaryny goşmak</value>
+  </data>
+  <data name="Create online trading" xml:space="preserve">
+    <value>Onlaýn söwdany goşmak</value>
+  </data>
+  <data name="Create page" xml:space="preserve">
+    <value>Sahypany goşmak</value>
+  </data>
+  <data name="Create partner" xml:space="preserve">
+    <value>Hyzmatdaşy goşmak</value>
+  </data>
+  <data name="Create project" xml:space="preserve">
+    <value>Taslamany goşmak</value>
+  </data>
+  <data name="Create representative" xml:space="preserve">
+    <value>Wekili goşmak</value>
+  </data>
+  <data name="Create saying" xml:space="preserve">
+    <value>Sitatany goşmak</value>
+  </data>
+  <data name="Create service type" xml:space="preserve">
+    <value>Hyzmat görnüşini goşmak</value>
+  </data>
+  <data name="Create services" xml:space="preserve">
+    <value>Hyzmaty goşmak</value>
+  </data>
+  <data name="Create trading house" xml:space="preserve">
+    <value>Söwda öýüni goşmak</value>
+  </data>
+  <data name="Create user account" xml:space="preserve">
+    <value>ULanyjynyň akkauntyny döretmek</value>
+  </data>
+  <data name="Create widget" xml:space="preserve">
+    <value>Wijeti goşmak</value>
+  </data>
+  <data name="Create yearly payment request and send declaration for amount confirmation" xml:space="preserve">
+    <value>Ýyllyk töleg tabşyrygyny döretmek we pul möçberini tassyklamak üçin beýannamany ibermek</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Döredildi</value>
+  </data>
+  <data name="Created date" xml:space="preserve">
+    <value>Goşulan senesi</value>
+  </data>
+  <data name="Currency rate" xml:space="preserve">
+    <value>Walýuta kursy</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Maglumatlar</value>
+  </data>
+  <data name="Date created" xml:space="preserve">
+    <value>Döredilen senesi</value>
+  </data>
+  <data name="Date of birth" xml:space="preserve">
+    <value>Doglan senesi</value>
+  </data>
+  <data name="Date publish" xml:space="preserve">
+    <value>Çap edilen senesi</value>
+  </data>
+  <data name="Date search" xml:space="preserve">
+    <value>Senesi boýunça gözleg</value>
+  </data>
+  <data name="Declaration images" xml:space="preserve">
+    <value>Beýannamanyň şekili</value>
+  </data>
+  <data name="Declaration management" xml:space="preserve">
+    <value>Beýannamalary dolandyrmak</value>
+  </data>
+  <data name="Declaration scans" xml:space="preserve">
+    <value>Beýannamalaryň skanlary</value>
+  </data>
+  <data name="Declarations" xml:space="preserve">
+    <value>Beýannamalar</value>
+  </data>
+  <data name="Delete previous picture" xml:space="preserve">
+    <value>Öňki şekili pozmaly</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>Bölümler</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Sözde beýany</value>
+  </data>
+  <data name="Detailed statistics" xml:space="preserve">
+    <value>Jikme-jik statistika</value>
+  </data>
+  <data name="Direction of activity" xml:space="preserve">
+    <value>Iş ugry</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Ýüklemek</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Üýtgetmek</value>
+  </data>
+  <data name="Edit activity type" xml:space="preserve">
+    <value>Iş görnüşine düzediş girizmek</value>
+  </data>
+  <data name="Edit advert" xml:space="preserve">
+    <value>Mahabatda düzediş girizmek</value>
+  </data>
+  <data name="Edit banner" xml:space="preserve">
+    <value>Bannere düzediş girizmek</value>
+  </data>
+  <data name="Edit call backs" xml:space="preserve">
+    <value>Jemgyýetçilik gatnaşyklaryna düzediş girizmek</value>
+  </data>
+  <data name="Edit charity" xml:space="preserve">
+    <value>Haýyr-sahawata düzedişleri girizmek</value>
+  </data>
+  <data name="Edit department" xml:space="preserve">
+    <value>Bölüme düzedişleri girizmek</value>
+  </data>
+  <data name="Edit industry" xml:space="preserve">
+    <value>Pudaga düzedişleri girizmek</value>
+  </data>
+  <data name="Edit menu" xml:space="preserve">
+    <value>Menýu düzedişleri girizmek</value>
+  </data>
+  <data name="Edit news" xml:space="preserve">
+    <value>Täzelikleri düzedişleri girizmek</value>
+  </data>
+  <data name="Edit news category" xml:space="preserve">
+    <value>Täzelikler toparyny üýtgetmek</value>
+  </data>
+  <data name="Edit news paper" xml:space="preserve">
+    <value>Gazete düzedişleri girizmek</value>
+  </data>
+  <data name="Edit newspaper data" xml:space="preserve">
+    <value>Gazetiň maglumatlaryna düzedişleri girizmek</value>
+  </data>
+  <data name="Edit online trading" xml:space="preserve">
+    <value>Onlaýn söwda düzedişleri girizmek</value>
+  </data>
+  <data name="Edit page" xml:space="preserve">
+    <value>Sahypa düzedişleri girizmek</value>
+  </data>
+  <data name="Edit partner" xml:space="preserve">
+    <value>Hyzmatdaşa düzedişleri girizmek</value>
+  </data>
+  <data name="Edit project" xml:space="preserve">
+    <value>Taslama düzedişleri girizmek</value>
+  </data>
+  <data name="Edit Representative" xml:space="preserve">
+    <value>Wekile düzedişleri girizmek</value>
+  </data>
+  <data name="Edit saying" xml:space="preserve">
+    <value>Sitata düzedişleri girizmek</value>
+  </data>
+  <data name="Edit service type" xml:space="preserve">
+    <value>Hyzmatlar görnüşine düzedişleri girizmek</value>
+  </data>
+  <data name="Edit services" xml:space="preserve">
+    <value>Hyzmatlara düzedişleri girizmek</value>
+  </data>
+  <data name="Edit trading house" xml:space="preserve">
+    <value>Sözda öýüne düzedişleri girizmek</value>
+  </data>
+  <data name="Edit user account" xml:space="preserve">
+    <value>Ulanyjynyň akkauntyna düzedişleri girizmek</value>
+  </data>
+  <data name="Edit widget" xml:space="preserve">
+    <value>Wijete düzedişleri girizmek</value>
+  </data>
+  <data name="Edit yearly payment request" xml:space="preserve">
+    <value>Ýyllyk töleg tabşyrygyna düzedişleri girizmek</value>
+  </data>
+  <data name="Edit yearly payment request and send declaration for amount confirmation" xml:space="preserve">
+    <value>Ýyllyk töleg tabşyrygyna düzedişleri giriziň we pul möçberini tassyklamak üçin beýannamany iberiň</value>
+  </data>
+  <data name="Edit сity" xml:space="preserve">
+    <value>Şähere düzedişleri girizmek</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Poçta</value>
+  </data>
+  <data name="Email fiels is empty or invalid" xml:space="preserve">
+    <value>Elektron poçtanyň sahypa ýeri boş ýa-da hakyky däl</value>
+  </data>
+  <data name="Email header" xml:space="preserve">
+    <value>Elektron hatyň sözbaşysy</value>
+  </data>
+  <data name="Email is empty" xml:space="preserve">
+    <value>Elektron poçta boş</value>
+  </data>
+  <data name="Email is invalid" xml:space="preserve">
+    <value>Elektron poçta hakyky däl</value>
+  </data>
+  <data name="EmailSPPT" xml:space="preserve">
+    <value>Elektron poçta</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Işgär</value>
+  </data>
+  <data name="End date" xml:space="preserve">
+    <value>Tamamlanýan senesi</value>
+  </data>
+  <data name="End of the working week" xml:space="preserve">
+    <value>Iş hepdesiniň soňy</value>
+  </data>
+  <data name="Enter activity" xml:space="preserve">
+    <value>Iş görnüşini giriziň</value>
+  </data>
+  <data name="Enter address" xml:space="preserve">
+    <value>Salgysyny giriziň</value>
+  </data>
+  <data name="Enter author name" xml:space="preserve">
+    <value>Awtoryň adyny giriziň</value>
+  </data>
+  <data name="Enter author position" xml:space="preserve">
+    <value>Awtoryň wezipesini giriziň</value>
+  </data>
+  <data name="Enter contact person name" xml:space="preserve">
+    <value>Habarlaşmak üçin işgäriň adyny giriziň</value>
+  </data>
+  <data name="Enter date of birth" xml:space="preserve">
+    <value>Doglan senesini giriziň</value>
+  </data>
+  <data name="Enter department name" xml:space="preserve">
+    <value>Bölümiň adyny giriziň</value>
+  </data>
+  <data name="Enter description" xml:space="preserve">
+    <value>Ýazgyly beýanyny giriziň</value>
+  </data>
+  <data name="Enter email header" xml:space="preserve">
+    <value>Elektron hatyň sözbaşysyny giriziň</value>
+  </data>
+  <data name="Enter footer" xml:space="preserve">
+    <value>Gatyny giriziň</value>
+  </data>
+  <data name="Enter industry name" xml:space="preserve">
+    <value>Pudagyň adyny giriziň</value>
+  </data>
+  <data name="Enter membership date" xml:space="preserve">
+    <value>Agzalyga giren senesini giriziň</value>
+  </data>
+  <data name="Enter message" xml:space="preserve">
+    <value>Habary giriziň</value>
+  </data>
+  <data name="Enter name" xml:space="preserve">
+    <value>Adyny giriziň</value>
+  </data>
+  <data name="Enter organization address" xml:space="preserve">
+    <value>Guramanyň salgysyny giriziň</value>
+  </data>
+  <data name="Enter organization name" xml:space="preserve">
+    <value>Guramanyň adyny giriziň</value>
+  </data>
+  <data name="Enter passport issue date" xml:space="preserve">
+    <value>Pasportyň berlen senesini giriziň</value>
+  </data>
+  <data name="Enter passport issued organization" xml:space="preserve">
+    <value>Pasportyň kim tarapyndan berilendigini giriziň</value>
+  </data>
+  <data name="Enter passport serial number" xml:space="preserve">
+    <value>Pasportyň seriýa belgisini giriziň</value>
+  </data>
+  <data name="Enter password" xml:space="preserve">
+    <value>Açarsözi giriziň</value>
+  </data>
+  <data name="Enter phone number" xml:space="preserve">
+    <value>Telefon belgisini giriziň</value>
+  </data>
+  <data name="Enter registration place (permanent address by passport)" xml:space="preserve">
+    <value>Bellige alnan ýerini giriziň (pasport boýunça  ýazga goýlan salgysyny)</value>
+  </data>
+  <data name="Enter saying" xml:space="preserve">
+    <value>Sitatany giriziň</value>
+  </data>
+  <data name="Enter short description" xml:space="preserve">
+    <value>Gysgaça adyny giriziň</value>
+  </data>
+  <data name="Enter subject" xml:space="preserve">
+    <value>Temany giriziň</value>
+  </data>
+  <data name="Enter title" xml:space="preserve">
+    <value>Adyny giriziň</value>
+  </data>
+  <data name="Enter your email address" xml:space="preserve">
+    <value>Öz email-salgyňyzy giriziň</value>
+  </data>
+  <data name="Entrance fee" xml:space="preserve">
+    <value>Giriş gatanjy</value>
+  </data>
+  <data name="Entrepreneur" xml:space="preserve">
+    <value>Telekeçi</value>
+  </data>
+  <data name="Entrepreneur membership" xml:space="preserve">
+    <value>Telekeçiniň agzalykda durýan ýeri</value>
+  </data>
+  <data name="Entrepreneur's office" xml:space="preserve">
+    <value>Telekeçiniň iş otagy</value>
+  </data>
+  <data name="Entrepreneurs" xml:space="preserve">
+    <value>Telekeçiler</value>
+  </data>
+  <data name="entrepreneurs trained" xml:space="preserve">
+    <value>telekeçiler taýýarlandy</value>
+  </data>
+  <data name="ENTREPRENEURS WITH ANNUAL PROFIT MORE THAN 200 000 MANAT" xml:space="preserve">
+    <value>TELEKEÇINIŇ ÝYLLYK GIRDEJISI 200 000 MANATDAN GEÇSE</value>
+  </data>
+  <data name="ENTREPRENEURS WITH ANNUAL PROFIT UP TO 200 000 MANATS" xml:space="preserve">
+    <value>TELEKEÇINIŇ ÝYLLYK UMUMY GIRDEJISI 200 000 MANADA ÇENLI BOLSA</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Faks</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Aýallar</value>
+  </data>
+  <data name="Field of activity" xml:space="preserve">
+    <value>Iş  görnüşi</value>
+  </data>
+  <data name="Field of activity (Trading, Manufacturing, etc.)" xml:space="preserve">
+    <value>Iş görnüşi (Söwda, önümçilik we beýlekiler)</value>
+  </data>
+  <data name="File management" xml:space="preserve">
+    <value>Faýllary dolandyryş</value>
+  </data>
+  <data name="First name" xml:space="preserve">
+    <value>Ady</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Gaty</value>
+  </data>
+  <data name="Forgot your password?" xml:space="preserve">
+    <value>Parolyňyzy ýatdan çykardyňyzmy?</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Anna</value>
+  </data>
+  <data name="Full name" xml:space="preserve">
+    <value>F.A.A.a</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Baş sahypa</value>
+  </data>
+  <data name="I-AS 000000 or A0000000" xml:space="preserve">
+    <value>I-AS 000000 ýa-da A0000000</value>
+  </data>
+  <data name="i/n" xml:space="preserve">
+    <value>p/n</value>
+  </data>
+  <data name="Industries" xml:space="preserve">
+    <value>Pudaklar</value>
+  </data>
+  <data name="Invalid email address" xml:space="preserve">
+    <value>Elektron poçtanyň salgysy nädogry</value>
+  </data>
+  <data name="Last name" xml:space="preserve">
+    <value>Familiýa</value>
+  </data>
+  <data name="Legal person" xml:space="preserve">
+    <value>Ýuridik şahs</value>
+  </data>
+  <data name="Legal person membership" xml:space="preserve">
+    <value>Ýuridik şahsyň agzalykda durýan ýeri</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Salgylanma</value>
+  </data>
+  <data name="Log in" xml:space="preserve">
+    <value>Girmek</value>
+  </data>
+  <data name="Log out" xml:space="preserve">
+    <value>Çykmak</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login account" xml:space="preserve">
+    <value>Akkaunta girmek</value>
+  </data>
+  <data name="Login to your account" xml:space="preserve">
+    <value>Hasabyňyza giriň</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logotip</value>
+  </data>
+  <data name="Main image" xml:space="preserve">
+    <value>Baş şekil</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Erkek</value>
+  </data>
+  <data name="manat" xml:space="preserve">
+    <value>manat</value>
+  </data>
+  <data name="Membership amount" xml:space="preserve">
+    <value>Agzalyk möhleti</value>
+  </data>
+  <data name="Membership date" xml:space="preserve">
+    <value>Agzalyga giren senesi</value>
+  </data>
+  <data name="Membership fee" xml:space="preserve">
+    <value>Agzalyk gatanjy</value>
+  </data>
+  <data name="Membership request status" xml:space="preserve">
+    <value>Agzalyk üçin arzanyň ýagdaýy</value>
+  </data>
+  <data name="Membership requests" xml:space="preserve">
+    <value>Agzalyk üçin arzalar</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menýu</value>
+  </data>
+  <data name="Menu to assign" xml:space="preserve">
+    <value>Bellemek üçin menýu</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Habar</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Duşenbe</value>
+  </data>
+  <data name="More details" xml:space="preserve">
+    <value>Has giňişleýin maglumat</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Ady</value>
+  </data>
+  <data name="Native productions" xml:space="preserve">
+    <value>Ýurdumyzda öndürildi</value>
+  </data>
+  <data name="New items of domestic production" xml:space="preserve">
+    <value>Ýurdumyzyň önümçilik täzelikleri</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>Täze açarsöz</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>Täzelikler</value>
+  </data>
+  <data name="News categories" xml:space="preserve">
+    <value>Täzelikleriň toparlary</value>
+  </data>
+  <data name="News category" xml:space="preserve">
+    <value>Täzelikler topary</value>
+  </data>
+  <data name="News paper" xml:space="preserve">
+    <value>Gazet</value>
+  </data>
+  <data name="News papers" xml:space="preserve">
+    <value>Gazetler</value>
+  </data>
+  <data name="Newspaper data" xml:space="preserve">
+    <value>Gazetleriň maglumatlary</value>
+  </data>
+  <data name="Newspaper pictures" xml:space="preserve">
+    <value>Gazetiň şekili</value>
+  </data>
+  <data name="Newspapers" xml:space="preserve">
+    <value>Gazetler</value>
+  </data>
+  <data name="No photo" xml:space="preserve">
+    <value>Fotosurat ýok</value>
+  </data>
+  <data name="Not paid!" xml:space="preserve">
+    <value>Tölenmedi!</value>
+  </data>
+  <data name="Not paid! Amount refunded" xml:space="preserve">
+    <value>Töleg geçmedi! Pul möçberi yzyna gaýtaryldy</value>
+  </data>
+  <data name="Not paid! Authorization cancelled" xml:space="preserve">
+    <value>Töleg geçmedi! Awtorizasiýa ýatyryldy</value>
+  </data>
+  <data name="Not paid! Authorization initiated by issuing bank ACS" xml:space="preserve">
+    <value>Töleg geçmedi! Awtorizasiýa ACS-niň emitent banky  tarapyndan başladyldy</value>
+  </data>
+  <data name="Not paid! Authorization rejected" xml:space="preserve">
+    <value>Töleg geçmedi! Awtorizasiýa kabul edilmedi</value>
+  </data>
+  <data name="Not paid! Order registered in the bank" xml:space="preserve">
+    <value>Töleg geçmedi! Sargyt bankda bellige alyndy</value>
+  </data>
+  <data name="Not paid! Preauthorized amount frozen for 2 factor authorization" xml:space="preserve">
+    <value>Töleg geçmedi! Öňünden ygtyýarlandyrylan pul möçberi iki faktorly awtorizasiýa üçin doňduryldy</value>
+  </data>
+  <data name="Not set" xml:space="preserve">
+    <value>Parametrler berilmedi</value>
+  </data>
+  <data name="Number of results found" xml:space="preserve">
+    <value>Tapylan netijeleriň mukdary</value>
+  </data>
+  <data name="On the lef" xml:space="preserve">
+    <value>Çepden</value>
+  </data>
+  <data name="On the middle" xml:space="preserve">
+    <value>Merkezi boýunça</value>
+  </data>
+  <data name="On the right" xml:space="preserve">
+    <value>Sagdan</value>
+  </data>
+  <data name="Online trading" xml:space="preserve">
+    <value>Onlaýn-söwda</value>
+  </data>
+  <data name="Online trading category" xml:space="preserve">
+    <value>Onlaýn-söwdanyň topary</value>
+  </data>
+  <data name="Online tradings" xml:space="preserve">
+    <value>Internet-söwda</value>
+  </data>
+  <data name="or drag" xml:space="preserve">
+    <value>ýa-da çekip geçiriň</value>
+  </data>
+  <data name="or drag picture" xml:space="preserve">
+    <value>ýa-da şekili çekip geçiriň</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Tertibi</value>
+  </data>
+  <data name="Order payed successfully" xml:space="preserve">
+    <value>Sargyt üstünlikli tölendi</value>
+  </data>
+  <data name="Organization" xml:space="preserve">
+    <value>Gurama</value>
+  </data>
+  <data name="Organization address(with out city name)" xml:space="preserve">
+    <value>Guramanyňa ady (şäheriň adyny görkezmezden)</value>
+  </data>
+  <data name="Organization data" xml:space="preserve">
+    <value>Guramanyň maglumatlary</value>
+  </data>
+  <data name="Organization name" xml:space="preserve">
+    <value>Guramanyň ady</value>
+  </data>
+  <data name="Organizations" xml:space="preserve">
+    <value>Guramalar</value>
+  </data>
+  <data name="Our achievements" xml:space="preserve">
+    <value>Gazananlarymyz</value>
+  </data>
+  <data name="Our contacts" xml:space="preserve">
+    <value>Biziň habarlaşmak üçin maglumatlarymyz</value>
+  </data>
+  <data name="Our services" xml:space="preserve">
+    <value>Biziň hyzmatlarymyz</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Sahypalar</value>
+  </data>
+  <data name="Panel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="Parent menu" xml:space="preserve">
+    <value>Hossarlyk menýusy</value>
+  </data>
+  <data name="Partners" xml:space="preserve">
+    <value>Hyzmatdaşlar</value>
+  </data>
+  <data name="Passport issue date" xml:space="preserve">
+    <value>Pasportyň berlen senesi</value>
+  </data>
+  <data name="Passport issued by" xml:space="preserve">
+    <value>Pasport kim tarapyndan berildi</value>
+  </data>
+  <data name="Passport serial number" xml:space="preserve">
+    <value>Pasportyň seriýa belgisi</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Açarsöz</value>
+  </data>
+  <data name="Password and confirm password does not match" xml:space="preserve">
+    <value>Açarsöz we tassyklanan açarsöz gabat gelmeýärler</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Tölemek</value>
+  </data>
+  <data name="Payment request has been confirmed" xml:space="preserve">
+    <value>Tölemek üçin ýüztutma tassyklandy</value>
+  </data>
+  <data name="Payment request management" xml:space="preserve">
+    <value>Tölemek üçin ýüztutmalary dolandyrmak</value>
+  </data>
+  <data name="Payment request pending" xml:space="preserve">
+    <value>Tölemek üçin ýüztutma seredilýär</value>
+  </data>
+  <data name="Payment requests for a year" xml:space="preserve">
+    <value>Bir ýylda tölemek üçin ýüztutmalar</value>
+  </data>
+  <data name="Payment year" xml:space="preserve">
+    <value>Töleg ýyly</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Tölegler</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Garaşylýar</value>
+  </data>
+  <data name="Personal area" xml:space="preserve">
+    <value>Şahsy otag</value>
+  </data>
+  <data name="Personal card in a specific form" xml:space="preserve">
+    <value>Belli bir görnüşdäki şahsy kart</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Phone number" xml:space="preserve">
+    <value>Telefon belgisi</value>
+  </data>
+  <data name="PhoneSPPT" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Şekil</value>
+  </data>
+  <data name="Picture for mobile versions" xml:space="preserve">
+    <value>Mobil wersiýa üçin şekil</value>
+  </data>
+  <data name="Picture(*.svg format)" xml:space="preserve">
+    <value>Şekil (*.svg format)</value>
+  </data>
+  <data name="Pictures" xml:space="preserve">
+    <value>Şekiller</value>
+  </data>
+  <data name="Please choose a picture" xml:space="preserve">
+    <value>Şekili seçmegiňizi soraýarys</value>
+  </data>
+  <data name="Please choose year" xml:space="preserve">
+    <value>Ýyly seçmegiňizi soraýarys</value>
+  </data>
+  <data name="Please enter email" xml:space="preserve">
+    <value>Elektron salgyny girizmegiňizi soraýarys</value>
+  </data>
+  <data name="Please enter phone number" xml:space="preserve">
+    <value>Telefon belgisini girizmegiňizi soraýarys</value>
+  </data>
+  <data name="Please enter valid fax number" xml:space="preserve">
+    <value>Hereket edýän faks belgisini girizmegiňizi soraýarys</value>
+  </data>
+  <data name="Please enter valid phone number" xml:space="preserve">
+    <value>Dogry telefon belgisini girizmegiňizi soraýarys</value>
+  </data>
+  <data name="Please select a day of the week" xml:space="preserve">
+    <value>Hepdäniň gününi saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select city" xml:space="preserve">
+    <value>Şäheri saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select created date" xml:space="preserve">
+    <value>Döredilen senesini saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select end date" xml:space="preserve">
+    <value>Tamamlanýan senesini saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select menu to assign" xml:space="preserve">
+    <value>Menýuny saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select newspaper publish date" xml:space="preserve">
+    <value>Gazetiň çap edilen senesini saýlaň</value>
+  </data>
+  <data name="Please select position" xml:space="preserve">
+    <value>Ýerleşýän ýerini saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select publish date" xml:space="preserve">
+    <value>Çap edilen senesini saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select start date" xml:space="preserve">
+    <value>Başlanýan senesini saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select start time" xml:space="preserve">
+    <value>Başlanýan wagtyny saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please select user type" xml:space="preserve">
+    <value>Ulanyjynyň tipini saýlamagyňyzy soraýarys</value>
+  </data>
+  <data name="Please upload logo" xml:space="preserve">
+    <value>Logotipi ýüklemegiňizi soraýarys</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Ýerleşýän ýeri</value>
+  </data>
+  <data name="Press releases" xml:space="preserve">
+    <value>Pres-relizler</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profili</value>
+  </data>
+  <data name="Project completed date" xml:space="preserve">
+    <value>Taslamanyň tamamlanan senesi</value>
+  </data>
+  <data name="Project end date" xml:space="preserve">
+    <value>Taslamanyň tamamlanýan sensi</value>
+  </data>
+  <data name="Project start date" xml:space="preserve">
+    <value>Taslamanyň başlanýan senesi</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Taslamalar</value>
+  </data>
+  <data name="projects completed successfully" xml:space="preserve">
+    <value>taslamalary üstünlikli tamamlandy</value>
+  </data>
+  <data name="Registration place" xml:space="preserve">
+    <value>Bellige alnan ýeri</value>
+  </data>
+  <data name="Registration place or permanent address" xml:space="preserve">
+    <value>Bellige alnan ýeri ýa-da hemişelik salgysy</value>
+  </data>
+  <data name="Registration-Manager" xml:space="preserve">
+    <value>Bellige almak boýunça menejer</value>
+  </data>
+  <data name="Rejected because" xml:space="preserve">
+    <value>Sebäpli ýüz öwrüldi</value>
+  </data>
+  <data name="Remember me?" xml:space="preserve">
+    <value>Meni ýatlamak üçin?</value>
+  </data>
+  <data name="Representatives" xml:space="preserve">
+    <value>Wekiller</value>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>Ýüztutma</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Yzyna dolanmak</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Barlandy</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rol</value>
+  </data>
+  <data name="sample of the enquery form, print it, fill it out, sign it, scan it and upload" xml:space="preserve">
+    <value>Ýüztutma görnüşiniň nusgasy, çap ediň, dolduryň, gol çekiň, skanirläň we ýükläň</value>
+  </data>
+  <data name="sample of the private form, print it, fill it out, sign it, scan it and upload" xml:space="preserve">
+    <value>hususy görnüşiň nusgasy,çap ediň, dolduryň, gol çekiň, skanirläň we ýükläň</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Şenbe</value>
+  </data>
+  <data name="Saying" xml:space="preserve">
+    <value>Sitata</value>
+  </data>
+  <data name="Sayings" xml:space="preserve">
+    <value>Sitatalar</value>
+  </data>
+  <data name="Scanned copy of declaration" xml:space="preserve">
+    <value>Beýannamanyň skanirlenen nusgasy</value>
+  </data>
+  <data name="Scanned copy of enquery form" xml:space="preserve">
+    <value>Ýüztutma görnüşiniň skanirlenen nusgasy</value>
+  </data>
+  <data name="Scanned copy of income report (for last year)" xml:space="preserve">
+    <value>Girdejiler barada hasabatyň (soňky ýyl üçin) skanirlenen görnüşi</value>
+  </data>
+  <data name="Scanned copy of patent" xml:space="preserve">
+    <value>Patentiň skanirlenen nusgasy</value>
+  </data>
+  <data name="Scanned copy of precept" xml:space="preserve">
+    <value>Buýrugyň skanirlenen nusgasy</value>
+  </data>
+  <data name="Scanned copy of private form" xml:space="preserve">
+    <value>Hususy görnüşiň skanirlenen nusgasy</value>
+  </data>
+  <data name="Scanned copy of registration licence" xml:space="preserve">
+    <value>Bellige alyş ygtyýarnamanyň skanirlenen nusgasy</value>
+  </data>
+  <data name="Scanned copy of school certificate" xml:space="preserve">
+    <value>Mekdep şahadatnamasynyň skanirlenen nusgasy</value>
+  </data>
+  <data name="Scanned copy of your passport" xml:space="preserve">
+    <value>Siziň pasportyňyzyň skanirlenen nusgasy</value>
+  </data>
+  <data name="School certificate copy" xml:space="preserve">
+    <value>Mekdep şahadatnamasynyň nusgasy</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Gözleg</value>
+  </data>
+  <data name="Second name" xml:space="preserve">
+    <value>Atasynyň ady</value>
+  </data>
+  <data name="Select activity type" xml:space="preserve">
+    <value>Iş görnüşini saýlaň</value>
+  </data>
+  <data name="Select category" xml:space="preserve">
+    <value>Toparyny saýlaň</value>
+  </data>
+  <data name="Select city" xml:space="preserve">
+    <value>Şäheri saýlaň</value>
+  </data>
+  <data name="Select membership status" xml:space="preserve">
+    <value>Agzalyk derejesini saýlaň</value>
+  </data>
+  <data name="Select news category" xml:space="preserve">
+    <value>Täzelikler toparyny saýlaň</value>
+  </data>
+  <data name="Select newspaper" xml:space="preserve">
+    <value>Gazeti saýlaň</value>
+  </data>
+  <data name="Select photo" xml:space="preserve">
+    <value>Fotosuraty saýlaň</value>
+  </data>
+  <data name="Select service" xml:space="preserve">
+    <value>Hyzmaty saýlaň</value>
+  </data>
+  <data name="Select sex" xml:space="preserve">
+    <value>Jynsyny saýlaň</value>
+  </data>
+  <data name="Select user type" xml:space="preserve">
+    <value>Ulanyjynyň tipini saýlaň</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Ibermek</value>
+  </data>
+  <data name="Send email" xml:space="preserve">
+    <value>Poçtany ibermek</value>
+  </data>
+  <data name="Send request" xml:space="preserve">
+    <value>Ýüztutmany ibermek</value>
+  </data>
+  <data name="Send to" xml:space="preserve">
+    <value>Ibermek</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Hyzmat</value>
+  </data>
+  <data name="Service type" xml:space="preserve">
+    <value>Hyzmatlaryň görnüşi</value>
+  </data>
+  <data name="Service types" xml:space="preserve">
+    <value>Hyzmatlaryň görnüşleri</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Hyzmatlar</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Sazlamalar</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Jynsy</value>
+  </data>
+  <data name="Short description" xml:space="preserve">
+    <value>Gysgaça beýany</value>
+  </data>
+  <data name="Show more" xml:space="preserve">
+    <value>Has giňişleýin görkeziň</value>
+  </data>
+  <data name="Slider" xml:space="preserve">
+    <value>Slaýder</value>
+  </data>
+  <data name="Something went wrong please try again" xml:space="preserve">
+    <value>Nämedir bir zat ugruna däl. Gaýtadan synanyşmagyňyzy soraýarys</value>
+  </data>
+  <data name="Start date" xml:space="preserve">
+    <value>Başlanýan senesi</value>
+  </data>
+  <data name="Start of the working week" xml:space="preserve">
+    <value>Iş hepdesiniň başlanmagy</value>
+  </data>
+  <data name="Statement in a specific form" xml:space="preserve">
+    <value>Belli bir görnüşdäki arza</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Derejesi</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Abuna ýazylmak</value>
+  </data>
+  <data name="Subscribe to the newsletter and events" xml:space="preserve">
+    <value>Täzelikler we wakalar abunasyna ýazylyň</value>
+  </data>
+  <data name="Subsrcibers" xml:space="preserve">
+    <value>Abunaçylar</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Üstünlikli</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Ýekşenbe</value>
+  </data>
+  <data name="Tariff management" xml:space="preserve">
+    <value>Nyrhnamalary dolandyrmak</value>
+  </data>
+  <data name="Tariffs" xml:space="preserve">
+    <value>Nyrhnamalar</value>
+  </data>
+  <data name="Tax code" xml:space="preserve">
+    <value>Salgyt belgisi</value>
+  </data>
+  <data name="This order have been paid" xml:space="preserve">
+    <value>Bu sargyt tölendi</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Penşenbe</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Ady</value>
+  </data>
+  <data name="To contact us" xml:space="preserve">
+    <value>Biziň bilen baglanyşyň</value>
+  </data>
+  <data name="To find" xml:space="preserve">
+    <value>Tapmaly</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Jemi</value>
+  </data>
+  <data name="Trading houses" xml:space="preserve">
+    <value>Söwda öýleri</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Tranzaksiýalar</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Sişenbe</value>
+  </data>
+  <data name="UIET" xml:space="preserve">
+    <value>TSTB</value>
+  </data>
+  <data name="UIET departments and their contacts" xml:space="preserve">
+    <value>TSTB bölümleri we habarlaşmak üçin belgileri</value>
+  </data>
+  <data name="UIET news and events" xml:space="preserve">
+    <value>TSTB täzelikleri we wakalary</value>
+  </data>
+  <data name="Under review" xml:space="preserve">
+    <value>Seredilýär</value>
+  </data>
+  <data name="Union of industrialists and entrepreneurs of turkmenistan" xml:space="preserve">
+    <value>Türkmenistanyň Senagatçylar we telekeçiler birleşmesi</value>
+  </data>
+  <data name="Union of industrialists and entrepreneurs of turkmenistan with br" xml:space="preserve">
+    <value>Türkmenistanyň Senagatçylar we &lt;br /&gt; telekeçiler birleşmesi</value>
+  </data>
+  <data name="Unsublink" xml:space="preserve">
+    <value>Abuna ýazylmagy ýatyrmak</value>
+  </data>
+  <data name="Unsubscribe" xml:space="preserve">
+    <value>Abunadan çykmak</value>
+  </data>
+  <data name="Unsubscribe from UIET web newsletter and events" xml:space="preserve">
+    <value>TSTB-niň täzelikler abunasyna we çärelerine ýazylmakdan ýüz öwürmek</value>
+  </data>
+  <data name="Unsubscribed" xml:space="preserve">
+    <value>Abunadan çykdy</value>
+  </data>
+  <data name="Upload declaration obtained from tax office" xml:space="preserve">
+    <value>Salgyt bölüminde alnan beýannamany ýükläň</value>
+  </data>
+  <data name="Upload main picture" xml:space="preserve">
+    <value>Baş şekili ýükläň</value>
+  </data>
+  <data name="Upload picture" xml:space="preserve">
+    <value>Şekili ýükläň</value>
+  </data>
+  <data name="Upload picture (*.svg)" xml:space="preserve">
+    <value>Şekili (*.svg) ýükläň</value>
+  </data>
+  <data name="Upload pictures" xml:space="preserve">
+    <value>Şekilleri ýükläň</value>
+  </data>
+  <data name="Upload your data" xml:space="preserve">
+    <value>Öz maglumatlaryňyzy ýükläň</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Ulanyjy</value>
+  </data>
+  <data name="User name" xml:space="preserve">
+    <value>Ulanyjynyň ady</value>
+  </data>
+  <data name="User type" xml:space="preserve">
+    <value>Ulanyjynyň görnüşi</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Ulanyjylar</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Ähmiýeti</value>
+  </data>
+  <data name="Web site" xml:space="preserve">
+    <value>Web-saýt</value>
+  </data>
+  <data name="Web URL" xml:space="preserve">
+    <value>Web-salgy</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Çarşenbe</value>
+  </data>
+  <data name="What do you want to find?" xml:space="preserve">
+    <value>Siz näme tapmak isleýärsiňiz?</value>
+  </data>
+  <data name="Widgets" xml:space="preserve">
+    <value>Widjetler</value>
+  </data>
+  <data name="Work ends at" xml:space="preserve">
+    <value>Iş    -de tamamlanýar</value>
+  </data>
+  <data name="Work starts at" xml:space="preserve">
+    <value>Iş   -de başlanýar</value>
+  </data>
+  <data name="Working day ends on" xml:space="preserve">
+    <value>Iş güni tamamlanýar</value>
+  </data>
+  <data name="Working day starts on" xml:space="preserve">
+    <value>Iş güni başlanýar</value>
+  </data>
+  <data name="Working hours" xml:space="preserve">
+    <value>Iş wagty</value>
+  </data>
+  <data name="Year for payment" xml:space="preserve">
+    <value>Töleg ýyly</value>
+  </data>
+  <data name="Yearly payment for year" xml:space="preserve">
+    <value>Ýyl üçin ýyllyk töleg</value>
+  </data>
+  <data name="Yearly payment request" xml:space="preserve">
+    <value>Ýyl boýunça töleg ýüztutmasy</value>
+  </data>
+  <data name="years with you" xml:space="preserve">
+    <value>ýyl siziň bilen</value>
+  </data>
+  <data name="You do not have access to this resource" xml:space="preserve">
+    <value>Siziň bu gora elýeterligiňiz ýok</value>
+  </data>
+  <data name="You have successfully applied for Membership! We will reach you soon" xml:space="preserve">
+    <value>Siz agzalyk üçin ýüztutmany üstünlikli berdiňiz! Biz tizden siziň bilen baglanyşarys</value>
+  </data>
+</root>

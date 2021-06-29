@@ -1,0 +1,124 @@
+﻿@model TSTB.BLL.DTOs.OnlineTradeDTO.EditOnlineTradingActivityTypeDTO
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+
+@{
+    ViewData["Title"] = SharedLocalizer["Edit activity type"];
+    int lngIndex = 0;
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Edit activity type"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="EditActivity" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            @foreach (LanguageDTO languageDTO in ViewBag.Languages)
+                            {
+                                var prdT = Model.OnlineTradingActivityTypeTranslates.FirstOrDefault(p => p.LanguageCulture == languageDTO.Culture);
+
+                                <h3>@languageDTO.Name</h3>
+                                <hr />
+                                if (prdT != null)
+                                {
+                                    <input type="hidden" name="OnlineTradingActivityTypeTranslates[@lngIndex].Id" value="@prdT.Id" />
+                                    <input type="hidden" class="form-control" name="OnlineTradingActivityTypeTranslates[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+                                    <div class="form-group">
+                                        <label>@SharedLocalizer["Name"] *</label>
+                                        <div id="news-name-@lngIndex"></div>
+                                    </div>
+
+                                    <script>
+                                    $(function () {
+                                        $("#news-name-@lngIndex").dxTextBox({
+                                            name: "OnlineTradingActivityTypeTranslates[@lngIndex].Name",
+                                            value: @Json.Serialize(prdT.Name),
+                                        }).dxValidator({
+                                            validationRules: [{
+                                                type: "required",
+                                                message: '@SharedLocalizer["Enter name"]'
+                                            }]
+                                        }).dxTextBox("instance");
+                                    });
+                                    </script>
+
+                                }
+                                else
+                                {
+
+                                }
+                                lngIndex++;
+                            }
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Category"] *</label>
+                                <div id="catSelection"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/CustomStore.js"></script>
+    <script>
+        var getCategories = new DevExpress.data.AspNet.createStore({
+            key: "id",
+            loadUrl: "/api/OnlineTradingAPI/Categories",
+            onBeforeSend: function (method, ajaxOptions) {
+                ajaxOptions.xhrFields = { withCredentials: true };
+            }
+        });
+
+        $(function () {
+            $("#catSelection").dxSelectBox({
+                dataSource: getCategories,
+                displayExpr: "name",
+                valueExpr: "id",
+                value: @Html.Raw(Json.Serialize(Model.OnlineTradingCategoryId)),
+                name: 'OnlineTradingCategoryId',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Select category"]'
+                }]
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Edit"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+
+        });
+
+    </script>
+
+}

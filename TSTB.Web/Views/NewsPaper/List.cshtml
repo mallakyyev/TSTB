@@ -1,0 +1,27 @@
+﻿@model List<TSTB.BLL.DTOs.NewsPaperModelDTO.NewsPaperDataDTO>
+
+<div class="container">
+    @foreach(TSTB.BLL.DTOs.NewsPaperModelDTO.NewsPaperDataDTO t in Model)
+    { 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="media">
+                    <div class="media-left">
+                        <a asp-controller="NewsPaper" asp-action="NewsPaperDetails" asp-route-id="@t.Id">
+                            <img class="media-object" style="height:100px;width:100px;" src="~/images/NewsPapers/NewsPaperDataImage/@t.Image" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <a asp-controller="NewsPaper" asp-action="NewsPaperDetails" asp-route-id="@t.Id">
+                            <h4 class="media-heading">@t.NewsPaperName</h4>
+                        </a>
+                        @t.DataOfPublish 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr/>
+        <br/>
+    }
+</div>

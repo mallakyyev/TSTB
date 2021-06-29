@@ -1,0 +1,97 @@
+﻿
+@model TSTB.Web.Areas.Employee.Models.CharityPaymentModel
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.DAL.Models.Enums
+
+@{
+    ViewData["Title"] = SharedLocalizer["Make a Donation"];
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="page-header">
+                @SharedLocalizer["Make a Donation "]
+            </h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Create" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <input type="hidden" asp-for="Id" />
+
+                    <input type="hidden" name="Name" value="@Model.Name" />
+                    <input type="hidden" name="Description" value="@Model.Description" />
+                    <input type="hidden" name="ApplicationUserId" value="@Model.ApplicationUserId" />
+                    <input type="hidden" name="CharityId" value="@Model.CharityId" />
+                    <div asp-validation-summary="All" class="text-danger">
+                    </div>
+                    <style type="text/css">
+                        p {
+                            font-family: "Myriad Pro", "sans-serif";
+                            font-size: 30pt;
+                            color: chocolate; 
+                        }
+                    </style>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p>@SharedLocalizer["Donate For :"] @Model.Name </p>
+                            </div>
+                            <div class="form-group">
+                                <p>@Model.Description </p>
+                            </div>
+
+                            @if (Model.Image != null)
+                            {
+                                <img style='height: 700px; width: 100%; object-fit: contain' src="~/images/Charities/@Model.Image" />
+                            }
+
+                            <div class="form-group">
+                                <label style="font-size: 20pt;">@SharedLocalizer["Amount in TMT"]</label>
+                                <input type="number" style="font-size: 20pt; color: #006400;" asp-for="Amount" min="1">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size: 20pt;">@SharedLocalizer["Comments"] </label>
+                                <textarea style="font-size: 20pt; color: #006400;" class="form-control" asp-for="PaymentDescription" cols="40" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $(function () {
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["  Donate  "]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+
+        });
+
+    </script>
+
+}

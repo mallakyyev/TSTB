@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using TSTB.Web
+@using System.Globalization;
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/devextreme/css/dx.common.css" rel="stylesheet" />
+    <link href="~/devextreme/css/dx.light.css" rel="stylesheet" />
+}
+
+
+<div class="h-full xl:container xl:px-0 px-4 flex flex-col justify-center">
+    <div class="sm:pt-12 pt-4 relative sm:flex">
+        <aside class="sm:w-3/12 shadow-sm sm:mr-4 p-4 rounded">
+            <div class="grid gap-y-4 gap-x-2 justify-start w-full">
+                <a id="Entre" asp-area="" asp-controller="MembershipRequest" asp-action="CreateEntreprenuer" class="aside-link  "> @SharedLocalizer["Entrepreneur membership"]</a>
+                <a id="Person" asp-area="" asp-controller="MembershipRequest" asp-action="CreateLegalPerson" class="aside-link"> @SharedLocalizer["Legal person membership"]</a>
+
+            </div>
+        </aside>
+
+        <main class="flex-grow-1 sm:w-9/12 p-4 shadow-sm rounded sm:mt-0 mt-4">
+            @*<h2 class="text-xl font-semibold"> Statistics </h2>
+                <div class="mt-4">
+
+                        <div class="mt-4">
+                            <canvas id="bar-chart" width="10"></canvas>
+                        </div>
+                        <div class="mt-4">
+                            <canvas id="pie-chart"></canvas>
+                        </div>
+
+                </div>*@
+            @RenderBody()
+        </main>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/devextreme/js/jquery.min.js"></script>
+    <script src="~/devextreme/js/dx.all.js"></script>
+    <script src="~/devextreme/js/localization/dx.messages.ru.js"></script>
+    <script src="~/devextreme/js/dx.aspnet.data.js"></script>
+    @RenderSection("Scripts", required: true)
+}

@@ -1,0 +1,1360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Access denied" xml:space="preserve">
+    <value>Доступ запрещен</value>
+  </data>
+  <data name="Accountant" xml:space="preserve">
+    <value>Бухгалтер</value>
+  </data>
+  <data name="Accountant's office" xml:space="preserve">
+    <value>Кабинет бухгалтера</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Активный</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Деятельность</value>
+  </data>
+  <data name="Activity types" xml:space="preserve">
+    <value>Виды деятельности</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Add charity" xml:space="preserve">
+    <value>Добавление благотворительности</value>
+  </data>
+  <data name="Add city" xml:space="preserve">
+    <value>Добавить город</value>
+  </data>
+  <data name="Add phone number" xml:space="preserve">
+    <value>Добавить номер телефона</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="AddressSPPT" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Администратор</value>
+  </data>
+  <data name="Admin email is invalid" xml:space="preserve">
+    <value>Адрес электронной почты администратора недействителен</value>
+  </data>
+  <data name="Admin email is required" xml:space="preserve">
+    <value>Требуется адрес электронной почты администратора</value>
+  </data>
+  <data name="Admin panel" xml:space="preserve">
+    <value>Панель администратора</value>
+  </data>
+  <data name="Administrator's office" xml:space="preserve">
+    <value>Кабинет администратора</value>
+  </data>
+  <data name="Advertisement" xml:space="preserve">
+    <value>Рекламное объявление</value>
+  </data>
+  <data name="All news" xml:space="preserve">
+    <value>Все новости</value>
+  </data>
+  <data name="All rights reserved" xml:space="preserve">
+    <value>Все права защищены</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="Annual membership fee" xml:space="preserve">
+    <value>Годовой членский взнос</value>
+  </data>
+  <data name="Assigned to menu" xml:space="preserve">
+    <value>Назначено меню</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="Author position" xml:space="preserve">
+    <value>Должность автора</value>
+  </data>
+  <data name="Back to home page" xml:space="preserve">
+    <value>Вернуться на главную страницу</value>
+  </data>
+  <data name="Banners" xml:space="preserve">
+    <value>Баннеры</value>
+  </data>
+  <data name="Birth place" xml:space="preserve">
+    <value>Место рождения</value>
+  </data>
+  <data name="Birth Place including region name" xml:space="preserve">
+    <value>Место рождения, включая название региона</value>
+  </data>
+  <data name="Brief statistics" xml:space="preserve">
+    <value>Краткая статистика</value>
+  </data>
+  <data name="Call backs" xml:space="preserve">
+    <value>Обратная связь</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Отменено</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="Change password" xml:space="preserve">
+    <value>Изменение пароля</value>
+  </data>
+  <data name="Change user password" xml:space="preserve">
+    <value>Изменить пароль пользователя</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Благотворительность</value>
+  </data>
+  <data name="Choose a logo" xml:space="preserve">
+    <value>Выберите логотип</value>
+  </data>
+  <data name="Choose a picture" xml:space="preserve">
+    <value>Выбрать картинку</value>
+  </data>
+  <data name="Choose a pictures" xml:space="preserve">
+    <value>Выбрать картинки</value>
+  </data>
+  <data name="Choose newspaper" xml:space="preserve">
+    <value>Выберите газету</value>
+  </data>
+  <data name="Choose year" xml:space="preserve">
+    <value>Выберите год</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Города</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="Collected" xml:space="preserve">
+    <value>Собрано</value>
+  </data>
+  <data name="Completed date" xml:space="preserve">
+    <value>Дата завершения</value>
+  </data>
+  <data name="Completed projects" xml:space="preserve">
+    <value>Завершенные проекты</value>
+  </data>
+  <data name="Confirm password" xml:space="preserve">
+    <value>Подтверждение пароля</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>Подтвержденно</value>
+  </data>
+  <data name="Contact person" xml:space="preserve">
+    <value>Контактное лицо</value>
+  </data>
+  <data name="Contact person name" xml:space="preserve">
+    <value>Имя контактного лица</value>
+  </data>
+  <data name="Contact us" xml:space="preserve">
+    <value>Связаться с нами</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Контент</value>
+  </data>
+  <data name="Content-Manager" xml:space="preserve">
+    <value>Контент менеджер</value>
+  </data>
+  <data name="Copy of registration certificate or USREO" xml:space="preserve">
+    <value>Копия свидетельства о регистрации или ЕГРПО</value>
+  </data>
+  <data name="Copy of the declaration or certificate" xml:space="preserve">
+    <value>Копия декларации или справки</value>
+  </data>
+  <data name="Copy of the final income statement (last year)" xml:space="preserve">
+    <value>Копия окончательного отчета о прибылях и убытках (за прошлый год)</value>
+  </data>
+  <data name="Copy of the passport" xml:space="preserve">
+    <value>Копия паспорта</value>
+  </data>
+  <data name="Copy of the patent or statutes" xml:space="preserve">
+    <value>Копия патента или устава</value>
+  </data>
+  <data name="Copy of the precept" xml:space="preserve">
+    <value>Копия приказа</value>
+  </data>
+  <data name="Create activity type" xml:space="preserve">
+    <value>Создание вид деятельности</value>
+  </data>
+  <data name="Create advert" xml:space="preserve">
+    <value>Добавление рекламы</value>
+  </data>
+  <data name="Create banner" xml:space="preserve">
+    <value>Добавление баннера</value>
+  </data>
+  <data name="Create call backs" xml:space="preserve">
+    <value>Добавление обратной связи</value>
+  </data>
+  <data name="Create city" xml:space="preserve">
+    <value>Добавление города</value>
+  </data>
+  <data name="Create department" xml:space="preserve">
+    <value>Добавление отдела</value>
+  </data>
+  <data name="Create industry" xml:space="preserve">
+    <value>Добавление отрасли</value>
+  </data>
+  <data name="Create menu" xml:space="preserve">
+    <value>Добавление меню</value>
+  </data>
+  <data name="Create news" xml:space="preserve">
+    <value>Добавление новости</value>
+  </data>
+  <data name="Create news category" xml:space="preserve">
+    <value>Добавление категории новостей</value>
+  </data>
+  <data name="Create news paper" xml:space="preserve">
+    <value>Добавление газеты</value>
+  </data>
+  <data name="Create newspaper data" xml:space="preserve">
+    <value>Добавление данные газеты</value>
+  </data>
+  <data name="Create online trading" xml:space="preserve">
+    <value>Добавление онлайн торговли</value>
+  </data>
+  <data name="Create page" xml:space="preserve">
+    <value>Добавление страницы</value>
+  </data>
+  <data name="Create partner" xml:space="preserve">
+    <value>Добавление партнера</value>
+  </data>
+  <data name="Create project" xml:space="preserve">
+    <value>Добавление проекта</value>
+  </data>
+  <data name="Create representative" xml:space="preserve">
+    <value>Добавление представителя</value>
+  </data>
+  <data name="Create saying" xml:space="preserve">
+    <value>Добавление цитаты</value>
+  </data>
+  <data name="Create service type" xml:space="preserve">
+    <value>Добавление тип услуги</value>
+  </data>
+  <data name="Create services" xml:space="preserve">
+    <value>Добавление услуги</value>
+  </data>
+  <data name="Create trading house" xml:space="preserve">
+    <value>Добавление торгового дома</value>
+  </data>
+  <data name="Create user account" xml:space="preserve">
+    <value>Создание учетной записи пользователя</value>
+  </data>
+  <data name="Create widget" xml:space="preserve">
+    <value>Добавление виджета</value>
+  </data>
+  <data name="Create yearly payment request and send declaration for amount confirmation" xml:space="preserve">
+    <value>Create yearly payment request and send declaration for amount confirmation</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Создано</value>
+  </data>
+  <data name="Created date" xml:space="preserve">
+    <value>Дата добавления</value>
+  </data>
+  <data name="Currency rate" xml:space="preserve">
+    <value>Курс валюты</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Данные</value>
+  </data>
+  <data name="Date created" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="Date of birth" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
+  <data name="Date publish" xml:space="preserve">
+    <value>Дата публикации</value>
+  </data>
+  <data name="Date search" xml:space="preserve">
+    <value>Поиск по дате</value>
+  </data>
+  <data name="Declaration images" xml:space="preserve">
+    <value>Изображение деклорации</value>
+  </data>
+  <data name="Declaration management" xml:space="preserve">
+    <value>Управление декларациями</value>
+  </data>
+  <data name="Declaration scans" xml:space="preserve">
+    <value>Сканы декларации</value>
+  </data>
+  <data name="Declarations" xml:space="preserve">
+    <value>Декларации</value>
+  </data>
+  <data name="Delete previous picture" xml:space="preserve">
+    <value>Удалить предыдущее изображение</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>Отделы</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Detailed statistics" xml:space="preserve">
+    <value>Подробная статистика</value>
+  </data>
+  <data name="Direction of activity" xml:space="preserve">
+    <value>Направление деятельности</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="Edit activity type" xml:space="preserve">
+    <value>Редактирование вид деятельности</value>
+  </data>
+  <data name="Edit advert" xml:space="preserve">
+    <value>Редактировать рекламу</value>
+  </data>
+  <data name="Edit banner" xml:space="preserve">
+    <value>Редактирование баннера</value>
+  </data>
+  <data name="Edit call backs" xml:space="preserve">
+    <value>Изменение обратной связи</value>
+  </data>
+  <data name="Edit charity" xml:space="preserve">
+    <value>Редактирование благотворительности</value>
+  </data>
+  <data name="Edit department" xml:space="preserve">
+    <value>Изменение отдела</value>
+  </data>
+  <data name="Edit industry" xml:space="preserve">
+    <value>Редактирование отрасли</value>
+  </data>
+  <data name="Edit menu" xml:space="preserve">
+    <value>Редактирование меню</value>
+  </data>
+  <data name="Edit news" xml:space="preserve">
+    <value>Редактировать новость</value>
+  </data>
+  <data name="Edit news category" xml:space="preserve">
+    <value>Изменение категории новостей</value>
+  </data>
+  <data name="Edit news paper" xml:space="preserve">
+    <value>Редактирование газеты</value>
+  </data>
+  <data name="Edit newspaper data" xml:space="preserve">
+    <value>Изменение данные газеты</value>
+  </data>
+  <data name="Edit online trading" xml:space="preserve">
+    <value>Редактирование онлайн торговли</value>
+  </data>
+  <data name="Edit page" xml:space="preserve">
+    <value>Редактирование страницы</value>
+  </data>
+  <data name="Edit partner" xml:space="preserve">
+    <value>Редактирование партнера</value>
+  </data>
+  <data name="Edit project" xml:space="preserve">
+    <value>Редактирование проекта</value>
+  </data>
+  <data name="Edit Representative" xml:space="preserve">
+    <value>Редактирование представителя</value>
+  </data>
+  <data name="Edit saying" xml:space="preserve">
+    <value>Редактирование цитаты</value>
+  </data>
+  <data name="Edit service type" xml:space="preserve">
+    <value>Редактирование тип услуг</value>
+  </data>
+  <data name="Edit services" xml:space="preserve">
+    <value>Редактирование услуги</value>
+  </data>
+  <data name="Edit trading house" xml:space="preserve">
+    <value>Редактирование торгового дома</value>
+  </data>
+  <data name="Edit user account" xml:space="preserve">
+    <value>Редактирование учетной записи пользователя</value>
+  </data>
+  <data name="Edit widget" xml:space="preserve">
+    <value>Редактирование виджета</value>
+  </data>
+  <data name="Edit yearly payment request" xml:space="preserve">
+    <value>Изменение запроса на ежегодный платеж</value>
+  </data>
+  <data name="Edit yearly payment request and send declaration for amount confirmation" xml:space="preserve">
+    <value>Отредактируйте ежегодный платежный запрос и отправьте декларацию для подтверждения суммы</value>
+  </data>
+  <data name="Edit сity" xml:space="preserve">
+    <value>Редактирование города</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Почта</value>
+  </data>
+  <data name="Email fiels is empty or invalid" xml:space="preserve">
+    <value>Поле электронной почты пустое или недействительное</value>
+  </data>
+  <data name="Email header" xml:space="preserve">
+    <value>Заголовок электронного письма</value>
+  </data>
+  <data name="Email is empty" xml:space="preserve">
+    <value>Электронная почта пуста</value>
+  </data>
+  <data name="Email is invalid" xml:space="preserve">
+    <value>Электронная почта не действительна</value>
+  </data>
+  <data name="EmailSPPT" xml:space="preserve">
+    <value>Электронная почта</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Сотрудник</value>
+  </data>
+  <data name="End date" xml:space="preserve">
+    <value>Дата конца</value>
+  </data>
+  <data name="End of the working week" xml:space="preserve">
+    <value>Конец рабочей недели</value>
+  </data>
+  <data name="Enter activity" xml:space="preserve">
+    <value>Введите сферу деятельности</value>
+  </data>
+  <data name="Enter address" xml:space="preserve">
+    <value>Введите адрес</value>
+  </data>
+  <data name="Enter author name" xml:space="preserve">
+    <value>Введите имя автора</value>
+  </data>
+  <data name="Enter author position" xml:space="preserve">
+    <value>Введите должность автора</value>
+  </data>
+  <data name="Enter contact person name" xml:space="preserve">
+    <value>Введите имя контактного лица</value>
+  </data>
+  <data name="Enter date of birth" xml:space="preserve">
+    <value>Введите дату рождения</value>
+  </data>
+  <data name="Enter department name" xml:space="preserve">
+    <value>Введите наименование отдела</value>
+  </data>
+  <data name="Enter description" xml:space="preserve">
+    <value>Введите описание</value>
+  </data>
+  <data name="Enter email header" xml:space="preserve">
+    <value>Введите заголовок электронного письма</value>
+  </data>
+  <data name="Enter footer" xml:space="preserve">
+    <value>Введите низ</value>
+  </data>
+  <data name="Enter industry name" xml:space="preserve">
+    <value>Введите наименование отрасли</value>
+  </data>
+  <data name="Enter membership date" xml:space="preserve">
+    <value>Введите дату вступления в членство</value>
+  </data>
+  <data name="Enter message" xml:space="preserve">
+    <value>Введите сообщение</value>
+  </data>
+  <data name="Enter name" xml:space="preserve">
+    <value>Введите наименование</value>
+  </data>
+  <data name="Enter organization address" xml:space="preserve">
+    <value>Введите адрес организации</value>
+  </data>
+  <data name="Enter organization name" xml:space="preserve">
+    <value>Введите наименование организации</value>
+  </data>
+  <data name="Enter passport issue date" xml:space="preserve">
+    <value>Введите дату выдачи паспорта</value>
+  </data>
+  <data name="Enter passport issued organization" xml:space="preserve">
+    <value>Введите кем выдан паспорт</value>
+  </data>
+  <data name="Enter passport serial number" xml:space="preserve">
+    <value>Введите серийный номер паспорта</value>
+  </data>
+  <data name="Enter password" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="Enter phone number" xml:space="preserve">
+    <value>Введите номер телефона</value>
+  </data>
+  <data name="Enter registration place (permanent address by passport)" xml:space="preserve">
+    <value>Укажите место регистрации (адрес прописки по паспорту)</value>
+  </data>
+  <data name="Enter saying" xml:space="preserve">
+    <value>Введите цитату</value>
+  </data>
+  <data name="Enter short description" xml:space="preserve">
+    <value>Введите краткое наименование</value>
+  </data>
+  <data name="Enter subject" xml:space="preserve">
+    <value>Введите тему</value>
+  </data>
+  <data name="Enter title" xml:space="preserve">
+    <value>Введите наименование</value>
+  </data>
+  <data name="Enter your email address" xml:space="preserve">
+    <value>Введите ваш email-адрес</value>
+  </data>
+  <data name="Entrance fee" xml:space="preserve">
+    <value>Вступительный взнос</value>
+  </data>
+  <data name="Entrepreneur" xml:space="preserve">
+    <value>Предприниматель</value>
+  </data>
+  <data name="Entrepreneur membership" xml:space="preserve">
+    <value>Членство предпринимателя</value>
+  </data>
+  <data name="Entrepreneur's office" xml:space="preserve">
+    <value>Кабинет предпринимателя</value>
+  </data>
+  <data name="Entrepreneurs" xml:space="preserve">
+    <value>Предприниматели</value>
+  </data>
+  <data name="entrepreneurs trained" xml:space="preserve">
+    <value>обучено предпринимателей</value>
+  </data>
+  <data name="ENTREPRENEURS WITH ANNUAL PROFIT MORE THAN 200 000 MANAT" xml:space="preserve">
+    <value>ПРИ ОБЩЕЙ ГОДОВОЙ ПРИБЫЛИ ПРЕДПРИНИМАТЕЛЯ БОЛЕЕ 200 000 МАНАТ</value>
+  </data>
+  <data name="ENTREPRENEURS WITH ANNUAL PROFIT UP TO 200 000 MANATS" xml:space="preserve">
+    <value>ПРИ ОБЩЕЙ ГОДОВОЙ ПРИБЫЛИ ПРЕДПРИНИМАТЕЛЯ ДО 200 000 МАНАТ</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Факс</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Женский</value>
+  </data>
+  <data name="Field of activity" xml:space="preserve">
+    <value>Сфера деятельности</value>
+  </data>
+  <data name="Field of activity (Trading, Manufacturing, etc.)" xml:space="preserve">
+    <value>Сфера деятельности (Торговля, Производство и др.)</value>
+  </data>
+  <data name="File management" xml:space="preserve">
+    <value>Управление файлами</value>
+  </data>
+  <data name="First name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Низ</value>
+  </data>
+  <data name="Forgot your password?" xml:space="preserve">
+    <value>Забыли свой пароль?</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Пятница</value>
+  </data>
+  <data name="Full name" xml:space="preserve">
+    <value>Ф.И.О</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="I-AS 000000 or A0000000" xml:space="preserve">
+    <value>I-AS 000000 или A0000000</value>
+  </data>
+  <data name="i/n" xml:space="preserve">
+    <value>п/н</value>
+  </data>
+  <data name="Industries" xml:space="preserve">
+    <value>Отрасли</value>
+  </data>
+  <data name="Invalid email address" xml:space="preserve">
+    <value>Неверный адрес электронной почты</value>
+  </data>
+  <data name="Last name" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="Legal person" xml:space="preserve">
+    <value>Юридическое лицо</value>
+  </data>
+  <data name="Legal person membership" xml:space="preserve">
+    <value>Членство юридического лица</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="Log in" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="Log out" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="Login account" xml:space="preserve">
+    <value>Войти в аккаунт</value>
+  </data>
+  <data name="Login to your account" xml:space="preserve">
+    <value>Вход в учетную запись</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Логотип</value>
+  </data>
+  <data name="Main image" xml:space="preserve">
+    <value>Главное изображение</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Мужской</value>
+  </data>
+  <data name="manat" xml:space="preserve">
+    <value>манат</value>
+  </data>
+  <data name="Membership amount" xml:space="preserve">
+    <value>Сумма членства</value>
+  </data>
+  <data name="Membership date" xml:space="preserve">
+    <value>Дата вступление в членство</value>
+  </data>
+  <data name="Membership fee" xml:space="preserve">
+    <value>Членский взнос</value>
+  </data>
+  <data name="Membership request status" xml:space="preserve">
+    <value>Статус запроса на членство</value>
+  </data>
+  <data name="Membership requests" xml:space="preserve">
+    <value>Запросы на членство</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Меню</value>
+  </data>
+  <data name="Menu to assign" xml:space="preserve">
+    <value>Меню для назначения</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Понедельник</value>
+  </data>
+  <data name="More details" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
+  <data name="Native productions" xml:space="preserve">
+    <value>Отечественное производство</value>
+  </data>
+  <data name="New items of domestic production" xml:space="preserve">
+    <value>Новинки отечественного производства</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>Новости</value>
+  </data>
+  <data name="News categories" xml:space="preserve">
+    <value>Категории новостей</value>
+  </data>
+  <data name="News category" xml:space="preserve">
+    <value>Категория новостей</value>
+  </data>
+  <data name="News paper" xml:space="preserve">
+    <value>Газета</value>
+  </data>
+  <data name="News papers" xml:space="preserve">
+    <value>Газеты</value>
+  </data>
+  <data name="Newspaper data" xml:space="preserve">
+    <value>Данные газет</value>
+  </data>
+  <data name="Newspaper pictures" xml:space="preserve">
+    <value>Изображения газеты</value>
+  </data>
+  <data name="Newspapers" xml:space="preserve">
+    <value>Газеты</value>
+  </data>
+  <data name="No photo" xml:space="preserve">
+    <value>Нет фотографии</value>
+  </data>
+  <data name="Not paid!" xml:space="preserve">
+    <value>Не оплачено!</value>
+  </data>
+  <data name="Not paid! Amount refunded" xml:space="preserve">
+    <value>Не оплачено! Сумма возвращена</value>
+  </data>
+  <data name="Not paid! Authorization cancelled" xml:space="preserve">
+    <value>Не оплачено! Авторизация отменена</value>
+  </data>
+  <data name="Not paid! Authorization initiated by issuing bank ACS" xml:space="preserve">
+    <value>Не оплачено! Авторизация инициирована банком-эмитентом ACS</value>
+  </data>
+  <data name="Not paid! Authorization rejected" xml:space="preserve">
+    <value>Не оплачено! Авторизация отклонена</value>
+  </data>
+  <data name="Not paid! Order registered in the bank" xml:space="preserve">
+    <value>Не оплачено! Заказ зарегистрирован в банке</value>
+  </data>
+  <data name="Not paid! Preauthorized amount frozen for 2 factor authorization" xml:space="preserve">
+    <value>Не оплачено! Предварительно авторизованная сумма заморожена для двухфакторной авторизации</value>
+  </data>
+  <data name="Not set" xml:space="preserve">
+    <value>Не задано</value>
+  </data>
+  <data name="Number of results found" xml:space="preserve">
+    <value>Количество найденных результатов</value>
+  </data>
+  <data name="On the left" xml:space="preserve">
+    <value>Слева</value>
+  </data>
+  <data name="On the middle" xml:space="preserve">
+    <value>По центру</value>
+  </data>
+  <data name="On the right" xml:space="preserve">
+    <value>Справа</value>
+  </data>
+  <data name="Online trading" xml:space="preserve">
+    <value>Онлайн торговля</value>
+  </data>
+  <data name="Online trading category" xml:space="preserve">
+    <value>Категории онлайн-торговли</value>
+  </data>
+  <data name="Online tradings" xml:space="preserve">
+    <value>Интернет-торговля</value>
+  </data>
+  <data name="or drag" xml:space="preserve">
+    <value>или перетащите</value>
+  </data>
+  <data name="or drag picture" xml:space="preserve">
+    <value>или перетащите картинку</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Порядок</value>
+  </data>
+  <data name="Order payed successfully" xml:space="preserve">
+    <value>Заказ успешно оплачен</value>
+  </data>
+  <data name="Organization" xml:space="preserve">
+    <value>Организация</value>
+  </data>
+  <data name="Organization address(with out city name)" xml:space="preserve">
+    <value>Адрес организации (без названия города)</value>
+  </data>
+  <data name="Organization data" xml:space="preserve">
+    <value>Данные организации</value>
+  </data>
+  <data name="Organization name" xml:space="preserve">
+    <value>Название организации</value>
+  </data>
+  <data name="Organizations" xml:space="preserve">
+    <value>Организации</value>
+  </data>
+  <data name="Our achievements" xml:space="preserve">
+    <value>Наши достижения</value>
+  </data>
+  <data name="Our contacts" xml:space="preserve">
+    <value>Наши контакты</value>
+  </data>
+  <data name="Our services" xml:space="preserve">
+    <value>Наши услуги</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Страницы</value>
+  </data>
+  <data name="Panel" xml:space="preserve">
+    <value>Панель</value>
+  </data>
+  <data name="Parent menu" xml:space="preserve">
+    <value>Родительское меню</value>
+  </data>
+  <data name="Partners" xml:space="preserve">
+    <value>Партнеры</value>
+  </data>
+  <data name="Passport issue date" xml:space="preserve">
+    <value>Дата выдачи паспорта</value>
+  </data>
+  <data name="Passport issued by" xml:space="preserve">
+    <value>Кем выдан паспорт</value>
+  </data>
+  <data name="Passport serial number" xml:space="preserve">
+    <value>Серийный номер паспорта</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Password and confirm password does not match" xml:space="preserve">
+    <value>Пароль и пароль подтверждения не совпадают</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Оплатить</value>
+  </data>
+  <data name="Payment request has been confirmed" xml:space="preserve">
+    <value>Запрос на оплату подтверджен</value>
+  </data>
+  <data name="Payment request management" xml:space="preserve">
+    <value>Управление запросами на оплату</value>
+  </data>
+  <data name="Payment request pending" xml:space="preserve">
+    <value>Запрос на платеж находится на рассмотрении</value>
+  </data>
+  <data name="Payment requests for a year" xml:space="preserve">
+    <value>Запросы на оплату за год</value>
+  </data>
+  <data name="Payment year" xml:space="preserve">
+    <value>Год оплаты</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Платежы</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>В ожидании</value>
+  </data>
+  <data name="Personal area" xml:space="preserve">
+    <value>Личный кабинет</value>
+  </data>
+  <data name="Personal card in a specific form" xml:space="preserve">
+    <value>Персональная карта определенной формы</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Phone number" xml:space="preserve">
+    <value>Номер телефона</value>
+  </data>
+  <data name="PhoneSPPT" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Картинка</value>
+  </data>
+  <data name="Picture for mobile versions" xml:space="preserve">
+    <value>Картинка для мобильной версию</value>
+  </data>
+  <data name="Picture(*.svg format)" xml:space="preserve">
+    <value>Картинка (*.svg формат)</value>
+  </data>
+  <data name="Pictures" xml:space="preserve">
+    <value>Изображения</value>
+  </data>
+  <data name="Please choose a picture" xml:space="preserve">
+    <value>Пожалуйста, выберите картинку</value>
+  </data>
+  <data name="Please choose year" xml:space="preserve">
+    <value>Пожалуйста выберите год</value>
+  </data>
+  <data name="Please enter email" xml:space="preserve">
+    <value>Пожалуйста, введите электронный адрес</value>
+  </data>
+  <data name="Please enter phone number" xml:space="preserve">
+    <value>Пожалуйста введите номер телефона</value>
+  </data>
+  <data name="Please enter valid fax number" xml:space="preserve">
+    <value>Пожалуйста, введите действующий номер факса</value>
+  </data>
+  <data name="Please enter valid phone number" xml:space="preserve">
+    <value>Пожалуйста введите правильный номер телефона</value>
+  </data>
+  <data name="Please select a day of the week" xml:space="preserve">
+    <value>Пожалуйста, выберите день недели</value>
+  </data>
+  <data name="Please select city" xml:space="preserve">
+    <value>Пожалуйста выберите город</value>
+  </data>
+  <data name="Please select created date" xml:space="preserve">
+    <value>Пожалуйста, выберите дату создания</value>
+  </data>
+  <data name="Please select end date" xml:space="preserve">
+    <value>Пожалуйста выберите дату конца</value>
+  </data>
+  <data name="Please select menu to assign" xml:space="preserve">
+    <value>Пожалуйста выберите меню</value>
+  </data>
+  <data name="Please select newspaper publish date" xml:space="preserve">
+    <value>Выберите дату публикации газеты</value>
+  </data>
+  <data name="Please select position" xml:space="preserve">
+    <value>Пожалуйста выберите расположение</value>
+  </data>
+  <data name="Please select publish date" xml:space="preserve">
+    <value>Пожалуйста, выберите дату публикации</value>
+  </data>
+  <data name="Please select start date" xml:space="preserve">
+    <value>Пожалуйста выберите дату начала</value>
+  </data>
+  <data name="Please select start time" xml:space="preserve">
+    <value>Пожалуйста, выберите время начала</value>
+  </data>
+  <data name="Please select user type" xml:space="preserve">
+    <value>Пожалуйста, выберите тип пользователя</value>
+  </data>
+  <data name="Please upload logo" xml:space="preserve">
+    <value>Пожалуйста загрузите логотип</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Расположение</value>
+  </data>
+  <data name="Press releases" xml:space="preserve">
+    <value>Пресс-релизы</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+  <data name="Project completed date" xml:space="preserve">
+    <value>Дата завершения проекта</value>
+  </data>
+  <data name="Project end date" xml:space="preserve">
+    <value>Дата конца проекта</value>
+  </data>
+  <data name="Project start date" xml:space="preserve">
+    <value>Дата начало проекта</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
+  <data name="projects completed successfully" xml:space="preserve">
+    <value>проектов успешно завершено</value>
+  </data>
+  <data name="Registration place" xml:space="preserve">
+    <value>Место регистрации</value>
+  </data>
+  <data name="Registration place or permanent address" xml:space="preserve">
+    <value>Место регистрации или постоянный адрес</value>
+  </data>
+  <data name="Registration-Manager" xml:space="preserve">
+    <value>Менеджер по регистрации</value>
+  </data>
+  <data name="Rejected because" xml:space="preserve">
+    <value>Отклонено, потому что</value>
+  </data>
+  <data name="Remember me?" xml:space="preserve">
+    <value>Запомнить меня?</value>
+  </data>
+  <data name="Representatives" xml:space="preserve">
+    <value>Представители</value>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>Запрос</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Вернутся обратно</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Проверено</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Роль</value>
+  </data>
+  <data name="sample of the enquery form, print it, fill it out, sign it, scan it and upload" xml:space="preserve">
+    <value>образец формы запроса, распечатайте, заполните, подпишите, отсканируйте и загрузите</value>
+  </data>
+  <data name="sample of the private form, print it, fill it out, sign it, scan it and upload" xml:space="preserve">
+    <value>образец частной формы, распечатайте, заполните, подпишите, отсканируйте и загрузите</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Суббота</value>
+  </data>
+  <data name="Saying" xml:space="preserve">
+    <value>Цитата</value>
+  </data>
+  <data name="Sayings" xml:space="preserve">
+    <value>Цитаты</value>
+  </data>
+  <data name="Scanned copy of declaration" xml:space="preserve">
+    <value>Отсканированная копия декларации</value>
+  </data>
+  <data name="Scanned copy of enquery form" xml:space="preserve">
+    <value>Отсканированная копия формы запроса</value>
+  </data>
+  <data name="Scanned copy of income report (for last year)" xml:space="preserve">
+    <value>Отсканированная копия отчета о доходах (за последний год)</value>
+  </data>
+  <data name="Scanned copy of patent" xml:space="preserve">
+    <value>Отсканированная копия патента</value>
+  </data>
+  <data name="Scanned copy of precept" xml:space="preserve">
+    <value>Отсканированная копия приказа</value>
+  </data>
+  <data name="Scanned copy of private form" xml:space="preserve">
+    <value>Отсканированная копия частной формы</value>
+  </data>
+  <data name="Scanned copy of registration licence" xml:space="preserve">
+    <value>Отсканированная копия регистрационной лицензии</value>
+  </data>
+  <data name="Scanned copy of school certificate" xml:space="preserve">
+    <value>Отсканированная копия школьного аттестата</value>
+  </data>
+  <data name="Scanned copy of your passport" xml:space="preserve">
+    <value>Отсканированная копия вашего паспорта</value>
+  </data>
+  <data name="School certificate copy" xml:space="preserve">
+    <value>Копия школьного аттестата</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="Second name" xml:space="preserve">
+    <value>Отчество</value>
+  </data>
+  <data name="Select activity type" xml:space="preserve">
+    <value>Выберите тип деятельности</value>
+  </data>
+  <data name="Select category" xml:space="preserve">
+    <value>Выберите категорию</value>
+  </data>
+  <data name="Select city" xml:space="preserve">
+    <value>Выберите город</value>
+  </data>
+  <data name="Select membership status" xml:space="preserve">
+    <value>Выберите статус членства</value>
+  </data>
+  <data name="Select news category" xml:space="preserve">
+    <value>Выберите категорию новостей</value>
+  </data>
+  <data name="Select newspaper" xml:space="preserve">
+    <value>Выбрать газету</value>
+  </data>
+  <data name="Select photo" xml:space="preserve">
+    <value>Выбрать фотографию</value>
+  </data>
+  <data name="Select service" xml:space="preserve">
+    <value>Выберите услугу</value>
+  </data>
+  <data name="Select sex" xml:space="preserve">
+    <value>Выберите пол</value>
+  </data>
+  <data name="Select user type" xml:space="preserve">
+    <value>Выберите тип пользователя</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Send email" xml:space="preserve">
+    <value>Отправка почты</value>
+  </data>
+  <data name="Send request" xml:space="preserve">
+    <value>Отправить запрос</value>
+  </data>
+  <data name="Send to" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Услуга</value>
+  </data>
+  <data name="Service type" xml:space="preserve">
+    <value>Тип услуг</value>
+  </data>
+  <data name="Service types" xml:space="preserve">
+    <value>Типы услуг</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Услуги</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Пол</value>
+  </data>
+  <data name="Short description" xml:space="preserve">
+    <value>Краткое описание</value>
+  </data>
+  <data name="Show more" xml:space="preserve">
+    <value>Показать еще</value>
+  </data>
+  <data name="Slider" xml:space="preserve">
+    <value>Слайдер</value>
+  </data>
+  <data name="Something went wrong please try again" xml:space="preserve">
+    <value>Что-то пошло не так. Пожалуйста, попытайтесь еще раз</value>
+  </data>
+  <data name="Start date" xml:space="preserve">
+    <value>Дата начало</value>
+  </data>
+  <data name="Start of the working week" xml:space="preserve">
+    <value>Начало рабочей недели</value>
+  </data>
+  <data name="Statement in a specific form" xml:space="preserve">
+    <value>Заявление в определенной форме</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Подписаться</value>
+  </data>
+  <data name="Subscribe to the newsletter and events" xml:space="preserve">
+    <value>Подпишитесь на рассылку новостей и событий</value>
+  </data>
+  <data name="Subsrcibers" xml:space="preserve">
+    <value>Подписчики</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успешно</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Воскресенье</value>
+  </data>
+  <data name="Tariff management" xml:space="preserve">
+    <value>Управление тарифами</value>
+  </data>
+  <data name="Tariffs" xml:space="preserve">
+    <value>Тарифы</value>
+  </data>
+  <data name="Tax code" xml:space="preserve">
+    <value>Налоговый код</value>
+  </data>
+  <data name="This order have been paid" xml:space="preserve">
+    <value>25/5000
+Этот заказ был оплачен</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Четверг</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
+  <data name="To contact us" xml:space="preserve">
+    <value>Связаться с нами</value>
+  </data>
+  <data name="To find" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Итого</value>
+  </data>
+  <data name="Trading houses" xml:space="preserve">
+    <value>Торговые дома</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Транзакции</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Вторник</value>
+  </data>
+  <data name="UIET" xml:space="preserve">
+    <value>СППТ</value>
+  </data>
+  <data name="UIET departments and their contacts" xml:space="preserve">
+    <value>Отделы СППТ и их контакты</value>
+  </data>
+  <data name="UIET news and events" xml:space="preserve">
+    <value>Новости и события СППТ</value>
+  </data>
+  <data name="Under review" xml:space="preserve">
+    <value>На рассмотрении</value>
+  </data>
+  <data name="Union of industrialists and entrepreneurs of turkmenistan" xml:space="preserve">
+    <value>Союз промышленников и предпринимателей Туркменистана</value>
+  </data>
+  <data name="Union of industrialists and entrepreneurs of turkmenistan with br" xml:space="preserve">
+    <value>Союз промышленников и &lt;br /&gt; предпринимателей Туркменистана</value>
+  </data>
+  <data name="Unsublink" xml:space="preserve">
+    <value>Отменить подписку</value>
+  </data>
+  <data name="Unsubscribe" xml:space="preserve">
+    <value>Отписаться</value>
+  </data>
+  <data name="Unsubscribe from UIET web newsletter and events" xml:space="preserve">
+    <value>Отказаться от подписки на новостную рассылку и мероприятия СППТ</value>
+  </data>
+  <data name="Unsubscribed" xml:space="preserve">
+    <value>Отписался</value>
+  </data>
+  <data name="Upload declaration obtained from tax office" xml:space="preserve">
+    <value>Загрузите декларацию, полученную в налоговой инспекции</value>
+  </data>
+  <data name="Upload main picture" xml:space="preserve">
+    <value>Загрузите главное изображение</value>
+  </data>
+  <data name="Upload picture" xml:space="preserve">
+    <value>Загрузите изображение</value>
+  </data>
+  <data name="Upload picture (*.svg)" xml:space="preserve">
+    <value>Загрузите изображение (*.svg)</value>
+  </data>
+  <data name="Upload pictures" xml:space="preserve">
+    <value>Загрузите изображения</value>
+  </data>
+  <data name="Upload your data" xml:space="preserve">
+    <value>Загрузите свои данные</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="User name" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="User type" xml:space="preserve">
+    <value>Тип пользователя</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователи</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+  <data name="Web site" xml:space="preserve">
+    <value>Веб-сайт</value>
+  </data>
+  <data name="Web URL" xml:space="preserve">
+    <value>Веб-адрес</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Среда</value>
+  </data>
+  <data name="What do you want to find?" xml:space="preserve">
+    <value>Что вы хотите найти?</value>
+  </data>
+  <data name="Widgets" xml:space="preserve">
+    <value>Виджеты</value>
+  </data>
+  <data name="Work ends at" xml:space="preserve">
+    <value>Работа заканчивается в</value>
+  </data>
+  <data name="Work starts at" xml:space="preserve">
+    <value>Работа начинается в</value>
+  </data>
+  <data name="Working day ends on" xml:space="preserve">
+    <value>Рабочий день заканчивается</value>
+  </data>
+  <data name="Working day starts on" xml:space="preserve">
+    <value>Рабочий день начинается</value>
+  </data>
+  <data name="Working hours" xml:space="preserve">
+    <value>Время работы</value>
+  </data>
+  <data name="Year for payment" xml:space="preserve">
+    <value>Год оплаты</value>
+  </data>
+  <data name="Yearly payment for year" xml:space="preserve">
+    <value>Годовая оплата за год</value>
+  </data>
+  <data name="Yearly payment request" xml:space="preserve">
+    <value>Ежегодный платежный запрос</value>
+  </data>
+  <data name="years with you" xml:space="preserve">
+    <value>лет с Вами</value>
+  </data>
+  <data name="You do not have access to this resource" xml:space="preserve">
+    <value>У вас нет доступа к этому ресурсу</value>
+  </data>
+  <data name="You have successfully applied for Membership! We will reach you soon" xml:space="preserve">
+    <value>Вы успешно подали заявку на членство! Мы скоро свяжемся с вами</value>
+  </data>
+</root>

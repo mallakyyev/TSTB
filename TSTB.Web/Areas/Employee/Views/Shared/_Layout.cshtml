@@ -1,0 +1,159 @@
+﻿@using System.Globalization;
+@using TSTB.Web
+@using Microsoft.AspNetCore.Identity
+@using TSTB.DAL.Models.User
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@*    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - TSTB.Web</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+
+        <link href="~/node_modules/devextreme/dist/css/dx.common.css" rel="stylesheet" />
+        <link href="~/node_modules/devextreme/dist/css/dx.light.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TSTB.Web</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                @if (User.IsInRole("Entrepreneur"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Employee" asp-controller="Declaration" asp-action="Index">@SharedLocalizer["Declarations"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Employee" asp-controller="Payment" asp-action="Index">@SharedLocalizer["Payments"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Employee" asp-controller="Charity" asp-action="Index">@SharedLocalizer["Charity"]</a>
+                                    </li>
+                                }
+                                else if (User.IsInRole("Accountant"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Employee" asp-controller="Accountant" asp-action="List">@SharedLocalizer["Payment request management"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Employee" asp-controller="Accountant" asp-action="Transactions">@SharedLocalizer["Transactions"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Employee" asp-controller="Accountant" asp-action="Tariff">@SharedLocalizer["Tariff management"]</a>
+                                    </li>
+                                }
+                                else if (User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Admin" asp-action="Index">@SharedLocalizer["Admin panel"]</a>
+                                    </li>
+                                }
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2020 - TSTB.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script src="~/node_modules/devextreme/dist/js/dx.all.js"></script>
+        <script src="~/node_modules/devextreme/dist/js/localization/dx.messages.en.js"></script>
+        <script src="~/node_modules/devextreme/dist/js/dx.aspnet.data.js"></script>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>*@
+
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/devextreme/css/dx.common.css" rel="stylesheet" />
+    <link href="~/devextreme/css/dx.light.css" rel="stylesheet" />
+}
+
+<div class="h-full xl:container xl:px-0 px-4 flex flex-col justify-center">
+    <div class="sm:pt-12 pt-4 relative sm:flex">
+        <aside class="sm:w-3/12 shadow-sm sm:mr-4 p-4 rounded">
+            <div class="grid gap-y-4 gap-x-2 justify-start w-full">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (User.IsInRole("Entrepreneur"))
+                    {
+                        <a asp-area="Employee" asp-controller="Declaration" asp-action="Index" class="aside-link"> @SharedLocalizer["Declarations"]</a>
+                        <a asp-area="Employee" asp-controller="Payment" asp-action="Index" class="aside-link"> @SharedLocalizer["Payments"]</a>
+                        <a asp-area="Employee" asp-controller="Charity" asp-action="Index" class="aside-link"> @SharedLocalizer["Charity"]</a>
+                    }
+                    else if (User.IsInRole("Accountant"))
+                    {
+                        <a asp-area="Employee" asp-controller="Accountant" asp-action="List" class="aside-link"> @SharedLocalizer["Payment request management"]</a>
+                        <a asp-area="Employee" asp-controller="Accountant" asp-action="Transactions" class="aside-link"> @SharedLocalizer["Transactions"]</a>
+                        <a asp-area="Employee" asp-controller="Accountant" asp-action="Tariff" class="aside-link"> @SharedLocalizer["Tariff management"]</a>
+                    }
+                    else if (User.IsInRole("Admin"))
+                    {
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="aside-link"> @SharedLocalizer["Admin panel"]</a>
+                    }
+                    else if (User.IsInRole("Registration-Manager"))
+                    {
+                        <a asp-area="Employee" asp-controller="Membership" asp-action="Index" class="aside-link"> @SharedLocalizer["Membership Requests"]</a>
+                    }
+                }
+                @*<a href="#" class="aside-link aside-link-active"> link1</a>
+        <a href="#" class="aside-link"> link2</a>*@
+            </div>
+        </aside>
+
+        <main class="flex-grow-1 sm:w-9/12 p-4 shadow-sm rounded sm:mt-0 mt-4">
+            @RenderBody()
+        </main>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/devextreme/js/jquery.min.js"></script>
+    <script src="~/devextreme/js/dx.all.js"></script>
+    <script src="~/devextreme/js/localization/dx.messages.ru.js"></script>
+    <script src="~/devextreme/js/dx.aspnet.data.js"></script>
+
+    @RenderSection("Scripts", required: false)
+}

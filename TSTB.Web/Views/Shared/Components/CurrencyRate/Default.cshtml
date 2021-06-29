@@ -1,0 +1,23 @@
+﻿@model List<TSTB.DAL.Models.CurrencyRate.CurrencyRate>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+<div style="width: 220px">
+    <h2 class="leading-tight text-gray-400 select-none font-roboto mb-2">
+        @SharedLocalizer["Currency rate"]
+    </h2>
+    <a href="https://www.cbt.tm/kurs/kurs_today_ru.html" target="_blank" class="sm:flex flex-col grid bg-white bg-opacity-75 rounded overflow-hidden relative border border-gray-500 select-none">
+        <div class="grid grid-cols-2 text-center border-b border-gray-500">
+            <div class="border-r pr-2 border-gray-500">USD / TMT</div>
+            <div class="font-semibold"> @(Model[0] != null ? Model[0].rate_tmt : 3.15) </div>
+        </div>
+        <div class="grid grid-cols-2 text-center border-b border-gray-500">
+            <div class="border-r pr-2 border-gray-500">EUR / TMT</div>
+            <div class="font-semibold"> @(Model[1] != null ? Model[1].rate_tmt : 4.15) </div>
+        </div>
+        <div class="grid grid-cols-2 text-center">
+            <div class="border-r pr-2 border-gray-500">GBP / TMT</div>
+            <div class="font-semibold"> @(Model[2] != null ? Model[2].rate_tmt : 5.15)</div>
+        </div>
+    </a>
+</div>

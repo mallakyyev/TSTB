@@ -1,0 +1,465 @@
+﻿@model TSTB.Web.Areas.Admin.Models.CreateUserAndOrganizationModel
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+@using TSTB.DAL.Models.Enums
+
+@{
+    ViewData["Title"] = SharedLocalizer["Create user account"];
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="col-lg-12">
+        <div class="row">
+            <h1 class="page-header">
+                @SharedLocalizer["Create user account"]
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Create" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger">
+                        @if (ViewBag.ErrorList != null)
+                        {
+                            foreach (var err in ViewBag.ErrorList)
+                            {
+                                <p>@err.Description</p>
+                            }
+                        }
+                        @if (ViewBag.ErrorList1 != null)
+                        {
+                            foreach (var err in ViewBag.ErrorList1)
+                            {
+                                <p>@err</p>
+                            }
+                        }
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <h1 class="page-header">
+                                @SharedLocalizer["Data"]
+                            </h1>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["First name"] *</label>
+                                <input type="text" class="form-control" asp-for="CraeteApplicationUserDTO.FirstName" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Last name"] *</label>
+                                <input type="text" class="form-control" asp-for="CraeteApplicationUserDTO.LastName" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Second name"] </label>
+                                <input type="text" class="form-control" asp-for="CraeteApplicationUserDTO.SecondName" />
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Password"] *</label>
+                                <input type="password" class="form-control" id="password" asp-for="CraeteApplicationUserDTO.Password" required min="7" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Confirm password"] *</label>
+                                <input type="password" class="form-control" id="confirm_password" asp-for="CraeteApplicationUserDTO.ConfirmPassword" onfocusout="check()" required />
+                                <span id='message'></span>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Login"] *</label>
+                                <input type="text" class="form-control" asp-for="CraeteApplicationUserDTO.UserName" id="username" required />
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Email"] *</label>
+                                <div id="email"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Phone number"] *</label>
+                                <div id="phone"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Date of birth"] *</label>
+                                <div id="dataB"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Select photo"]</label>
+                                <div id="photo"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Select user type"] *</label>
+                                <div id="selectType"></div>
+                            </div>
+
+                            <div class="form-group" id="roleList">
+                                <label asp-for="CraeteApplicationUserDTO.Role">@SharedLocalizer["Role"] *</label>
+                                <select asp-for="CraeteApplicationUserDTO.Role" asp-items="@ViewBag.RolesList" class="form-control" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="OrgData" style="visibility: hidden;">
+                            <h1 class="page-header">
+                                @SharedLocalizer["Organization data"]
+                            </h1>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Organization name"] *</label>
+                                <div id="NameOrganization"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Tax code"] *</label>
+                                <div id="TaxCode"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Field of activity"] *</label>
+                                <div id="Activity"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Address"] *</label>
+                                <div id="AddressOrganization"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Phone number"] *</label>
+                                <div id="PhoneOrganization"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Membership date"] *</label>
+                                <div id="MembershipDate"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Sex"] *</label>
+                                <div id="Sex"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["City"] *</label>
+                                <div id="CityId"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Birth place"] *</label>
+                                <div id="BirthPlace"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Passport serial number"] *</label>
+                                <div id="PassportSN"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Passport issued by"] *</label>
+                                <div id="IssuedBy"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Passport issue date"] *</label>
+                                <div id="IssuedDate"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Registration place"] *</label>
+                                <div id="PlaceRegistration"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+         var AllCities = new DevExpress.data.AspNet.createStore({
+                     key: "id",
+                     loadUrl:  "/api/CallBacksAPI/GetAllCities",
+                     onBeforeSend: function (method, ajaxOptions) {
+                     ajaxOptions.xhrFields = { withCredentials: true };
+            }
+         });
+
+        var check = function() {
+          if (document.getElementById('password').value ==
+            document.getElementById('confirm_password').value) {
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'matching';
+          } else {
+            document.getElementById('message').style.color = 'red';
+              document.getElementById('message').innerHTML = 'not matching';
+              document.getElementById('password').value = null;
+              document.getElementById('confirm_password').value = null;
+            document.getElementById('password').focus();
+          }
+        }
+
+        $(function () {
+            var Sex = [
+                { Id: 0, name: '@SharedLocalizer["Male"]' },
+                { Id: 1, name: '@SharedLocalizer["Female"]' }
+            ];
+
+            if ("@ViewBag.UserRole" == "Admin") {
+                var UserType = [
+                    { Id: 0, name: '@SharedLocalizer["Employee"]' },
+                    { Id: 1, name: '@SharedLocalizer["Entrepreneur"]' },
+                    { Id: 2, name: '@SharedLocalizer["Organization"]' }
+                ];
+            } else {
+                var UserType = [
+                   
+                    { Id: 1, name: '@SharedLocalizer["Entrepreneur"]' },
+                    { Id: 2, name: '@SharedLocalizer["Organization"]' }
+                ];
+            }
+
+            var NameOrganization = $("#NameOrganization").dxTextBox({
+                visible: false,
+                value: @Json.Serialize(Model.CreateOrganizationDTO.NameOrganization),
+                name: "CreateOrganizationDTO.NameOrganization",
+                placeholder:'@SharedLocalizer["Organization name"]',
+            }).dxTextBox("instance");
+
+            var TaxCode = $("#TaxCode").dxTextBox({
+                visible: false,
+                name: "CreateOrganizationDTO.TaxCode",
+                value: @Json.Serialize(Model.CreateOrganizationDTO.TaxCode),
+                placeholder: '@SharedLocalizer["Tax code"]',
+            }).dxTextBox("instance");
+
+            var Activity = $("#Activity").dxTextBox({
+                visible: false,
+                name: "CreateOrganizationDTO.Activity",
+                value: @Json.Serialize(Model.CreateOrganizationDTO.Activity),
+                placeholder: '@SharedLocalizer["Field of activity (Trading, Manufacturing, etc.)"]',
+            }).dxTextBox("instance");
+
+            var AddressOrganization = $("#AddressOrganization").dxTextBox({
+                visible: false,
+                name: "CreateOrganizationDTO.AddressOrganization",
+                value: @Json.Serialize(Model.CreateOrganizationDTO.AddressOrganization),
+                placeholder: '@SharedLocalizer["Organization address(with out city name)"]',
+            }).dxTextBox("instance");
+
+             var PhoneOrganization = $("#PhoneOrganization").dxTextBox({
+                 name: "CreateOrganizationDTO.PhoneOrganization",
+                 value: @Json.Serialize(Model.CreateOrganizationDTO.PhoneOrganization),
+                 visible: false,
+                 mask: "(+000)-00-00-00-00",
+                 maskInvalidMessage: '@SharedLocalizer["Please enter valid phone number"]'
+             }).dxTextBox("instance");
+
+            var MembershipDate = $("#MembershipDate").dxDateBox({
+                visible: false,
+                type: "date",
+                name: "CreateOrganizationDTO.MembershipDate",
+                value: @Json.Serialize(Model.CreateOrganizationDTO.MembershipDate),
+                width: 200,
+                displayFormat: "dd/MM/yyyy"
+            }).dxDateBox("instance");;
+
+            var SexVar =  $("#Sex").dxSelectBox({
+                dataSource: Sex,
+                visible: false,
+                displayExpr: "name",
+                valueExpr: "Id",
+                name: 'CreateOrganizationDTO.Sex',
+                value: @Json.Serialize(Model.CreateOrganizationDTO.Sex),
+                searchEnabled: true,
+                onValueChanged: function (e) {
+                    BirthPlace.option("visible", e.value != "Employee");
+                }
+            }).dxSelectBox("instance");
+
+            var CityId = $("#CityId").dxSelectBox({
+                dataSource: AllCities,
+                visible: false,
+                isRequired: true,
+                displayExpr: "name",
+                valueExpr: "id",
+                name: 'CreateOrganizationDTO.CityId',                
+                searchEnabled: true
+            }).dxSelectBox("instance");
+
+            var BirthPlace = $("#BirthPlace").dxTextBox({
+                visible: false,
+                value: @Json.Serialize(Model.CreateOrganizationDTO.BirthPlace),
+                name: "CreateOrganizationDTO.BirthPlace",
+                placeholder:'@SharedLocalizer["Birth Place including region name"]',
+            }).dxTextBox("instance");
+
+            var PassportSN = $("#PassportSN").dxTextBox({
+                visible: false,
+                value: @Json.Serialize(Model.CreateOrganizationDTO.PassportSN),
+                name: "CreateOrganizationDTO.PassportSN",
+                placeholder: '@SharedLocalizer["I-AS 000000 or A0000000"]',
+            }).dxTextBox("instance");
+
+            var IssuedBy = $("#IssuedBy").dxTextBox({
+                visible: false,
+                value: @Json.Serialize(Model.CreateOrganizationDTO.IssuedBy),
+                name: "CreateOrganizationDTO.IssuedBy"
+            }).dxTextBox("instance");
+
+            var IssuedDate = $("#IssuedDate").dxDateBox({
+                visible: false,
+                type: "date",
+                name: "CreateOrganizationDTO.IssuedDate",
+                value: @Json.Serialize(Model.CreateOrganizationDTO.IssuedDate),
+                width: 200,
+                displayFormat: "dd/MM/yyyy"
+            }).dxDateBox("instance");
+
+            var PlaceRegistration = $("#PlaceRegistration").dxTextBox({
+                visible: false,
+                name: "CreateOrganizationDTO.PlaceRegistration",
+                value: @Json.Serialize(Model.CreateOrganizationDTO.PlaceRegistration),
+                placeholder: '@SharedLocalizer["Registration place or permanent address"]',
+            }).dxTextBox("instance");
+
+            $("#selectType").dxSelectBox({
+                dataSource: UserType,
+                displayExpr: "name",
+                valueExpr: "Id",
+                value: @Json.Serialize(Model.CraeteApplicationUserDTO.EntreprenuerType),
+                name: 'CraeteApplicationUserDTO.EntreprenuerType',
+                searchEnabled: true,
+
+                onValueChanged: function (e) {
+                    NameOrganization.option("visible", e.value != 0);
+                    Activity.option("visible", e.value != 0);
+                    AddressOrganization.option("visible", e.value != 0);
+                    PhoneOrganization.option("visible", e.value != 0);
+                    MembershipDate.option("visible", e.value != 0);
+                    SexVar.option("visible", e.value != 0);
+                    CityId.option("visible", e.value != 0);
+                    BirthPlace.option("visible", e.value != 0);
+                    PassportSN.option("visible", e.value != 0);
+                    IssuedBy.option("visible", e.value != 0);
+                    IssuedDate.option("visible", e.value != 0);
+                    PlaceRegistration.option("visible", e.value != 0);
+                    TaxCode.option("visible", e.value != 0);
+                    var OrgData = document.getElementById('OrgData');
+                    var role = document.getElementById('roleList');
+                    if (e.value === 0) {
+                        role.style.visibility = 'visible';
+                        OrgData.style.visibility = 'hidden';
+                    } else {
+                        role.style.visibility = 'hidden';
+                        OrgData.style.visibility = 'visible';
+                    }
+                },
+                onInitialized: function (e) { }
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select User Type"]'
+                }]
+            });
+
+             $("#dataB").dxDateBox({
+                 type: "date",
+                 value: @Json.Serialize(Model.CraeteApplicationUserDTO.DateBirthday),
+                 name: "CraeteApplicationUserDTO.DateBirthday",
+                 placeholder: '@SharedLocalizer["Date of birth"]',
+                 width: 150,
+                 displayFormat: "dd/MM/yyyy"
+            }).dxValidator({
+                 validationRules: [{
+                 type: "required",
+                    message: '@SharedLocalizer["Enter date of birth"]'
+                }]
+            });
+
+            $("#phone").dxTextBox({
+                name: "CraeteApplicationUserDTO.PhoneNumber",
+                value: @Json.Serialize(Model.CraeteApplicationUserDTO.PhoneNumber),
+                mask: "(+000)-00-00-00-00",
+                maskInvalidMessage: '@SharedLocalizer["Please enter valid phone number"]'
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please enter phone number"]'
+                }]
+            });
+
+            $("#email").dxTextBox({
+                name: "CraeteApplicationUserDTO.Email",
+                value: @Json.Serialize(Model.CraeteApplicationUserDTO.Email),
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Email is empty"]'
+                },
+                    {
+                        type: "email",
+                        message: '@SharedLocalizer["Email is invalid"]'
+                    }
+                ]
+            });
+
+            $("#photo").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "CraeteApplicationUserDTO.Image",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            });
+
+
+            if (@Json.Serialize(Model.CraeteApplicationUserDTO.EntreprenuerType ) != 0)
+            {
+                NameOrganization.option("visible", true);
+                Activity.option("visible", true);
+                AddressOrganization.option("visible", true);
+                PhoneOrganization.option("visible", true);
+                MembershipDate.option("visible", true);
+                SexVar.option("visible", true);
+                CityId.option("visible", true);
+                BirthPlace.option("visible", true);
+                PassportSN.option("visible", true);
+                IssuedBy.option("visible", true);
+                IssuedDate.option("visible", true);
+                PlaceRegistration.option("visible", true);
+                TaxCode.option("visible", true);
+                var OrgData = document.getElementById('OrgData');
+                var role = document.getElementById('roleList');
+                role.style.visibility = 'hidden';
+                OrgData.style.visibility = 'visible';
+            }
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Add"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+
+        });
+
+
+    </script>
+
+}

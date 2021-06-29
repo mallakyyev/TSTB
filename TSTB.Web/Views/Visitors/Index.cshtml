@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "_StatisticsPartial";
+    Random rnd = new Random();
+}
+@model List<TSTB.BLL.ViewModel.CountryCount>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+<h2 class="text-xl font-semibold"> Statistics </h2>
+<div class="mt-4">
+
+    <div class="mt-4">
+        <h3>Bar Chart</h3>
+        <canvas id="bar-chart"></canvas>
+    </div>
+    <div class="mt-4">
+        <h3>Pie Chart</h3>
+        <canvas id="pie-chart"></canvas>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+    document.getElementById("Index").className = "aside-link-active";
+    var Country = [];
+    var Count = [];
+     var backcol = [];
+
+    @foreach (TSTB.BLL.ViewModel.CountryCount d in Model)
+    {
+        @:Country.push("@d.Country");
+        @:Count.push("@d.Count");
+        @:backcol.push('rgba(@rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255))')
+    }
+
+            new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                    labels: Country,
+                  datasets: [
+                    {
+                      label: "Visitors By Country",
+                      backgroundColor: backcol,
+                      data: Count,
+                    }
+                  ]
+                },
+                options: {
+                  legend: { display: false },
+                  title: {
+                    display: true,
+                    text: 'Visitors By Country'
+                  }
+                }
+            });
+
+    new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: Country,
+      datasets: [{
+        label: "Visitor Total",
+          backgroundColor: backcol,
+          data: Count
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Visitors By Country'
+      }
+    }
+});
+    </script>
+}
+

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<TSTB.BLL.DTOs.PartnersModelDTO.PartnersDTO>
+@using TSTB.Web
+@using TSTB.BLL.DTOs.LanguageDTO
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Partners"];
+}
+
+<div class="h-full xl:container xl:px-0 px-4">
+    <div class="mt-8 mb-16">
+        <div class="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-y-8 sm:gap-4 pb-8">
+            @foreach (var partner in Model)
+            {
+                <div class="rounded flex flex-col max-w-xs relative overflow-hidden">
+                    <img src="~/images/Partners/Logo/@partner.Logo" alt="" class="object-cover">
+                    <a asp-area="" asp-controller="Partner" asp-action="Detail" asp-route-id="@partner.Id" class="md:mt-5 md:mb-3 mt-2 mb-1 font-semibold hover:text-link">
+                        @partner.Name
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

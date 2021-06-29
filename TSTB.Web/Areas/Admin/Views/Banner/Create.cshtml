@@ -1,0 +1,198 @@
+﻿@model TSTB.BLL.DTOs.BannerModelDTO.CreateBannerDTO
+@using TSTB.Web
+@using TSTB.BLL.DTOs.LanguageDTO
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Create banner"];
+
+    int lngIndex = 0;
+    
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Create banner"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <form asp-action="Create" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+
+                            @foreach (LanguageDTO languageDTO in ViewBag.Languages)
+                            {
+                                <h2>@languageDTO.Name</h2>
+                                <hr />
+                                <input type="hidden" class="form-control" name="BannerTranslate[@lngIndex].LanguageCulture" value="@languageDTO.Culture" />
+                                
+                                <div class="form-group">
+                                    <label>@SharedLocalizer["Title"] *</label>
+                                    <div id="banner-name-@lngIndex"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>@SharedLocalizer["Short description"] *</label>
+                                    <div id="description-editor-@lngIndex"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>@SharedLocalizer["Picture"]</label>
+                                    <div id="files-@lngIndex"></div>
+                                </div>
+                                <br />
+
+                                <script>
+                                    $(function () {
+                                        $("#banner-name-@lngIndex").dxTextBox({
+                                            name: "BannerTranslate[@lngIndex].Title"
+                                        }).dxValidator({
+                                            validationRules: [{
+                                                type: "required",
+                                                message: '@SharedLocalizer["Enter title"]'
+                                            }]
+                                        });
+
+                                        $("#description-editor-@lngIndex").dxTextArea({
+                                            name: "BannerTranslate[@lngIndex].ShortDescription",
+                                            height: 90
+                                        }).dxValidator({
+                                            validationRules: [{
+                                                type: "required",
+                                                message: '@SharedLocalizer["Enter short description"]'
+                                            }]
+                                        });
+
+                                        $("#files-@lngIndex").dxFileUploader({
+                                            selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                                            name: "BannerTranslate[@lngIndex].FormFile",
+                                            labelText: '@SharedLocalizer["or drag picture"]',
+                                            accept: "image/*",
+                                            uploadMode: '@SharedLocalizer["or drag"]',
+                                            multiple: false,
+                                        }).dxValidator({
+                                            validationRules: [{
+                                                type: "required",
+                                                message: '@SharedLocalizer["Upload main picture"]'
+                                            }]
+                                        });
+                                    });
+                                </script>
+                                lngIndex++;
+                            }
+
+                        </div>
+                        <div class="col-md-6">
+                            <h2>@SharedLocalizer["Data"]</h2>
+                            <hr />
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Start date"] *</label>
+                                <div id="startdate"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["End date"] *</label>
+                                <div id="enddate"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Link"]</label>
+                                <div id="link"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Position"]</label>
+                                <div id="position"></div>
+                            </div>
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts 
+{
+    <script src="~/js/CustomStore.js"></script>
+    <script>
+         var position = [
+            { Id: 0, name: '@SharedLocalizer["On the left"]' },
+            { Id: 1, name: '@SharedLocalizer["On the right"]' },
+            { Id: 2, name: '@SharedLocalizer["On the middle"]' }
+        
+        ];
+
+        $(function () {
+            $("#published").dxCheckBox({
+                value: true,
+                text: '@SharedLocalizer["Active"]',
+                name: 'IsPublish',
+            });
+
+            $("#startdate").dxDateBox({
+                type: "date",
+                name: "StartDate",
+                placeholder: '@SharedLocalizer["Start date"]',
+                width: 150,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select start date"]'
+                }]
+            });
+
+            $("#enddate").dxDateBox({
+                type: "date",
+                name: "EndDate",
+                placeholder: '@SharedLocalizer["End date"]',
+                width: 150,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select end date"]'
+                }]
+            });
+
+            $("#link").dxTextBox({
+                name: "Link",
+                placeholder: '@SharedLocalizer["Link"]',
+            });
+
+             $("#position").dxSelectBox({
+                dataSource: position,
+                displayExpr: "name",
+                valueExpr: "Id",
+                name: 'BannerPosition',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select position"]'
+                }]
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Add"]',
+                type: "default",
+                useSubmitBehavior: true,
+            });
+
+            $("#summary").dxValidationSummary({});
+        });
+    </script>
+}

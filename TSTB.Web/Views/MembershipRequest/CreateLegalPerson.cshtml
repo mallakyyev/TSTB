@@ -1,0 +1,262 @@
+﻿@model TSTB.BLL.DTOs.MembershipRequestDTO.CreateMembershipRequestForEntreprenuerDTO
+@{
+    Layout = "_MembershipRequestPartial";
+}
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+
+
+@*<div class="bg-gray-100 h-full py-8">*@
+    <div class="container bg-white sm:pt-12 pt-4 relative">
+        <div class="lg:px-24 px-4">
+            <h1 class="font-bold text-2xl sm:text-3xl lg:max-w-3xl lg:text-3xl">
+                @SharedLocalizer["Upload your data"]
+            </h1>
+        </div>
+        <div class="h-1 w-full bg-gray-100 lg:mt-20 sm:mt-10 mt-4"></div>
+        <form asp-action="CreateLegalPerson" id="form" enctype="multipart/form-data">
+            <div class="col-md-12">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-row">
+
+                    <div class="col-md-11">
+                        <h2></h2>
+                        <hr />
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Phone number"] *</label>
+                                <div id="phone"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of patent"] *</label>
+                                <div id="patent"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of registration licence"] *</label>
+                                <div id="licence"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of your passport"] *</label>
+                                <div id="passport"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of declaration"] *</label>
+                                <div id="declaration"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of precept"] *</label>
+                                <div id="order"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of income report (for last year)"] *</label>
+                                <div id="income"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of enquery form"] *</label>
+                                <a href="~/Files/121.jpg" class="font-bold" style="color:blue">@SharedLocalizer["Download"]</a> <label>@SharedLocalizer["sample of the enquery form, print it, fill it out, sign it, scan it and upload"]</label>
+                                <div id="enquery"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of private form"] *</label>
+                                <a href="~/Files/1211.jpg" class="font-bold " style="color:blue">@SharedLocalizer["Download"]</a> <label>@SharedLocalizer["sample of the private form, print it, fill it out, sign it, scan it and upload"]</label>
+                                <div id="private"></div>
+                            </div>
+                        </div>
+                        <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Scanned copy of school certificate"] *</label>
+                                <div id="school"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:px-24 px-4 sm:mt-10 mt-4 pb-8">
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+@*</div>*@
+
+
+@section Scripts
+{
+
+    <script>
+        document.getElementById("Person").className = "aside-link-active";
+        document.getElementById("Person").style = "color : red";
+        $(function () {
+
+            $("#patent").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "Patent_Ustaw_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+             $("#licence").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "RegistrUdost_EGRPO_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+            $("#passport").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "Passport_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+            $("#declaration").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "Declaration_Certificate_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+            $("#enquery").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "EnqueryFrom_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+            $("#private").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "PrivateForm_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+            $("#order").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "CommandOrder_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+            $("#income").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "IncomeReport_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+             $("#school").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "SchoolCertificate_FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: "or drag",
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload picture"]'
+                }]
+            });
+
+             $("#phone").dxTextBox({
+                name: "PhoneNumber",
+                mask: "(+000)-00-00-00-00",
+                maskInvalidMessage: '@SharedLocalizer["Please enter valid phone number"]'
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please enter phone number"]'
+                }]
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Send request"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+        });
+
+    </script>
+}

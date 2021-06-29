@@ -1,0 +1,85 @@
+﻿@model IEnumerable<TSTB.BLL.ViewModel.SearchResultModel>
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Search"];
+}
+
+<div class="h-full xl:container xl:px-0 px-4 flex flex-col justify-center">
+    <div class="sm:pt-12 pt-4 relative">
+        <h1 class="sm:text-xl text-lg mb-8">
+            @SharedLocalizer["Number of results found"]: <span class="font-semibold">@Model.Count()</span>
+        </h1>
+
+        <!-- RESULTS -->
+        <div class="grid gap-y-2">
+            @foreach (TSTB.BLL.ViewModel.SearchResultModel t in Model)
+            {
+                if (t.ResultType == TSTB.DAL.Models.Enums.SearchResultType.ServiceType)
+                {
+                    <a asp-controller="ServiceType" asp-action="Details" asp-route-id="@t.SearchResultId" class="bg-white hover:shadow-md border border-gray-100 hover:border-none flex flex-col py-2 px-4 rounded cursor-pointer">
+                        <h3 class="sm:text-2xl text-xl font-semibold">@t.SearchResultTextinTitle</h3>
+                        <span class="text-gray-200 sm:text-base text-sm"> @SharedLocalizer["Service type"] </span>
+                    </a>
+                }
+                else if (t.ResultType == TSTB.DAL.Models.Enums.SearchResultType.News)
+                {
+                    <a asp-controller="News" asp-action="Details" asp-route-id="@t.SearchResultId" class="bg-white hover:shadow-md border border-gray-100 hover:border-none flex flex-col py-2 px-4 rounded cursor-pointer">
+                        <h3 class="sm:text-2xl text-xl font-semibold">@t.SearchResultTextinTitle</h3>
+                        <span class="text-gray-200 sm:text-base text-sm"> @SharedLocalizer["News"] </span>
+                    </a>
+                }
+                else if (t.ResultType == TSTB.DAL.Models.Enums.SearchResultType.NewsPaper)
+                {
+                    <a asp-controller="NewsPaper" asp-action="List" asp-route-id="@t.SearchResultId" class="bg-white hover:shadow-md border border-gray-100 hover:border-none flex flex-col py-2 px-4 rounded cursor-pointer">
+                        <h3 class="sm:text-2xl text-xl font-semibold">@t.SearchResultTextinTitle</h3>
+                        <span class="text-gray-200 sm:text-base text-sm"> @SharedLocalizer["News paper"] </span>
+                    </a>
+                }
+                else if (t.ResultType == TSTB.DAL.Models.Enums.SearchResultType.Services)
+                {
+                    <a asp-controller="Service" asp-action="Detail" asp-route-id="@t.SearchResultId" class="bg-white hover:shadow-md border border-gray-100 hover:border-none flex flex-col py-2 px-4 rounded cursor-pointer">
+                        <h3 class="sm:text-2xl text-xl font-semibold">@t.SearchResultTextinTitle</h3>
+                        <span class="text-gray-200 sm:text-base text-sm"> @SharedLocalizer["Service"] </span>
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Industry" asp-action="Detail" asp-route-id="@t.SearchResultId" class="bg-white hover:shadow-md border border-gray-100 hover:border-none flex flex-col py-2 px-4 rounded cursor-pointer">
+                        <h3 class="sm:text-2xl text-xl font-semibold">@t.SearchResultTextinTitle</h3>
+                        <span class="text-gray-200 sm:text-base text-sm"> @SharedLocalizer["Industries"] </span>
+                    </a>
+                }
+                <hr style="color:cornflowerblue" />
+            }
+        </div>
+        <!-- RESULTS -->
+
+        <!-- PAGINATION -->
+        @*<div class="py-4 mt-6">
+            <div class="flex">
+                <div class="px-3 py-1 cursor-pointer hover:underline border border-gray-100 rounded">
+                    Назад
+                </div>
+                <div class="mx-2 flex">
+                    <div class="px-3 py-1 mx-1 cursor-pointer hover:underline pagination-active border border-gray-100 rounded">
+                        1
+                    </div>
+                    <div class="px-3 py-1 mx-1 cursor-pointer hover:underline border border-gray-100 rounded">
+                        2
+                    </div>
+                    <div class="px-3 py-1 mx-1 cursor-pointer hover:underline border border-gray-100 rounded">
+                        3
+                    </div>
+                </div>
+                <div class="px-3 py-1 cursor-pointer hover:underline border border-gray-100 rounded">
+                    Вперед
+                </div>
+            </div>
+        </div>*@
+        <!-- PAGINATION -->
+    </div>
+</div>

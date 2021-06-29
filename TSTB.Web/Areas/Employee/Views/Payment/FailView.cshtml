@@ -1,0 +1,13 @@
+﻿@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@model string
+@{
+    ViewData["Title"] = "FailView";
+}
+
+<h2>@SharedLocalizer["Something went wrong please try again"]</h2>
+<a asp-action="Index" asp-controller="Payment" asp-area="Employee">@SharedLocalizer["Return"]</a>
+

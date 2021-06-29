@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "_StatisticsPartial";
+    Random rnd = new Random();
+}
+@model List<TSTB.BLL.ViewModel.YearlyCount>
+<h2 class="text-xl font-semibold"> Visitors Statistics by Year </h2>
+<div class="mt-4">
+
+    <h3>Linear Chart</h3>
+    <canvas id="line-chart" width="800" height="450"></canvas>
+    <h3>Bar Chart</h3>
+    <canvas id="myChart" width="500" height="300"></canvas>
+    <h3>Pie Chart</h3>
+    <canvas id="pie-chart" width="800" height="450"></canvas>
+
+</div>
+
+@section Scripts{
+    <script>
+
+    var Year = [];
+    var Count = [];
+    var backcol = [];
+     @foreach (TSTB.BLL.ViewModel.YearlyCount d in Model)
+    {
+        @:Year.push("@d.Year");
+        @:Count.push("@d.Count");
+        @:backcol.push('rgba(@rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255))')
+    }
+
+
+    document.getElementById("Yearly").className = "aside-link-active";
+     var ctx = document.getElementById("myChart");
+   var myChart = new Chart(ctx, {
+      type: 'bar',
+         data: {
+            labels: Year,
+            datasets: [
+               { label: 'Visitors by year',
+                    data: Count,
+                    backgroundColor: backcol,
+         }
+      ]
+   },
+   options: {
+      scales: {
+         yAxes: [{
+            ticks: {
+               beginAtZero:true
+            }
+         }]
+      }
+   }
+   });
+
+    new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+        data: {
+            labels: Year,
+      datasets: [{
+          label: "Visitors by Year",
+          backgroundColor: backcol,
+          data: Count
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Yearly Visitors'
+      }
+    }
+    });
+
+    new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: Year,
+      datasets: [{
+          data: Count,
+        label: "Yearly stats",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Yearly statistics'
+    }
+  }
+});
+    </script>
+}
+

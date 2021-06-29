@@ -1,0 +1,114 @@
+﻿@using TSTB.Web
+@using Microsoft.AspNetCore.Identity
+@using TSTB.DAL.Models.User
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="text-gray-200 select-none flex items-center cursor-pointer hover:text-white mr-4">
+
+        @if (User.IsInRole("Admin") || User.IsInRole("Content-Manager") || User.IsInRole("Registration-Manager"))
+        {
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Index" title="@SharedLocalizer["Administrator's office"]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="dashboard_24px">
+                        <path id="icon/action/dashboard_24px" fill-rule="evenodd" clip-rule="evenodd" d="M10 13H4C3.44995 13 3 12.55 3 12V4C3 3.45 3.44995 3 4 3H10C10.55 3 11 3.45 11 4V12C11 12.55 10.55 13 10 13ZM10 21H4C3.44995 21 3 20.55 3 20V16C3 15.45 3.44995 15 4 15H10C10.55 15 11 15.45 11 16V20C11 20.55 10.55 21 10 21ZM14 21H20C20.55 21 21 20.55 21 20V12C21 11.45 20.55 11 20 11H14C13.45 11 13 11.45 13 12V20C13 20.55 13.45 21 14 21ZM13 8V4C13 3.45 13.45 3 14 3H20C20.55 3 21 3.45 21 4V8C21 8.55 20.55 9 20 9H14C13.45 9 13 8.55 13 8Z"
+                              fill="#fff" fill-opacity="0.54" />
+                    </g>
+                </svg>
+            </a>
+        }
+        else if (User.IsInRole("Entrepreneur"))
+        {
+            <a asp-area="Employee" asp-controller="Employee" asp-action="Index" title="@SharedLocalizer["Entrepreneur's office"]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="dashboard_24px">
+                        <path id="icon/action/dashboard_24px" fill-rule="evenodd" clip-rule="evenodd" d="M10 13H4C3.44995 13 3 12.55 3 12V4C3 3.45 3.44995 3 4 3H10C10.55 3 11 3.45 11 4V12C11 12.55 10.55 13 10 13ZM10 21H4C3.44995 21 3 20.55 3 20V16C3 15.45 3.44995 15 4 15H10C10.55 15 11 15.45 11 16V20C11 20.55 10.55 21 10 21ZM14 21H20C20.55 21 21 20.55 21 20V12C21 11.45 20.55 11 20 11H14C13.45 11 13 11.45 13 12V20C13 20.55 13.45 21 14 21ZM13 8V4C13 3.45 13.45 3 14 3H20C20.55 3 21 3.45 21 4V8C21 8.55 20.55 9 20 9H14C13.45 9 13 8.55 13 8Z"
+                              fill="#fff" fill-opacity="0.54" />
+                    </g>
+                </svg>
+            </a>
+        }
+        else if (User.IsInRole("Accountant"))
+        {
+            <a asp-area="Employee" asp-controller="Employee" asp-action="Index" title="@SharedLocalizer["Accountant's office"]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="dashboard_24px">
+                        <path id="icon/action/dashboard_24px" fill-rule="evenodd" clip-rule="evenodd" d="M10 13H4C3.44995 13 3 12.55 3 12V4C3 3.45 3.44995 3 4 3H10C10.55 3 11 3.45 11 4V12C11 12.55 10.55 13 10 13ZM10 21H4C3.44995 21 3 20.55 3 20V16C3 15.45 3.44995 15 4 15H10C10.55 15 11 15.45 11 16V20C11 20.55 10.55 21 10 21ZM14 21H20C20.55 21 21 20.55 21 20V12C21 11.45 20.55 11 20 11H14C13.45 11 13 11.45 13 12V20C13 20.55 13.45 21 14 21ZM13 8V4C13 3.45 13.45 3 14 3H20C20.55 3 21 3.45 21 4V8C21 8.55 20.55 9 20 9H14C13.45 9 13 8.55 13 8Z"
+                              fill="#fff" fill-opacity="0.54" />
+                    </g>
+                </svg>
+            </a>
+        }
+    </div>
+
+    
+
+    <div class="text-gray-200 select-none flex items-center cursor-pointer hover:text-white mr-4">
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="clb-black mt-1">
+                <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32 16L21.3333 7.11111V12.4444H8.88889V19.5556H21.3333V24.8889L32 16ZM3.55556 3.55556H17.7778V0H3.55556C1.6 0 0 1.6 0 3.55556V28.4444C0 30.4 1.6 32 3.55556 32H17.7778V28.4444H3.55556V3.55556Z"
+                          fill="#fff"
+                          fill-opacity="0.54" />
+                </svg>
+            </button>            
+        </form>
+    </div>
+}
+else
+{
+    <a asp-area="Identity" asp-page="/Account/Login" title="Войти" class="text-gray-200 select-none flex items-center cursor-pointer hover:text-white">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.1111 16L12.4444 7.11111V12.4444H0V19.5556H12.4444V24.8889L23.1111 16ZM28.4444 28.4444H14.2222V32H28.4444C30.4 32 32 30.4 32 28.4444V3.55556C32 1.6 30.4 0 28.4444 0H14.2222V3.55556H28.4444V28.4444Z"
+                  fill="#fff"
+                  fill-opacity="0.54" />
+        </svg>
+    </a>
+}
+
+
+
+
+
+@*<ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item"><a class="nav-link text-dark">@SharedLocalizer["Hello " + User.Identity.Name!]</a></li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item"><a class="nav-link text-dark" asp-area="Admin" asp-controller="Admin" asp-action="Index">@SharedLocalizer["Admin panel"] </a></li>
+            }
+            else if (User.IsInRole("Entrepreneur"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Employee" asp-controller="Employee" asp-action="Index"> @SharedLocalizer["Personal Area"]</a>
+                </li>
+            }
+            else if (User.IsInRole("Accountant"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Employee" asp-controller="Employee" asp-action="Index"> @SharedLocalizer["Accountant Control"]</a>
+                </li>
+            }
+
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-dark">@SharedLocalizer["Log out"]</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">@SharedLocalizer["Login account"]</a>
+            </li>
+        }
+    </ul>*@

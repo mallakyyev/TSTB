@@ -1,0 +1,148 @@
+﻿@model TSTB.BLL.DTOs.NewsPaperModelDTO.CreateNewsPaperDataDTO
+
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+
+@{
+    ViewData["Title"] = SharedLocalizer["Create newspaper data"];
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Create newspaper data"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+
+            <form asp-action="Create" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <h2>@SharedLocalizer["Data"]</h2>
+                            <hr />
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Select newspaper"] *</label>
+                                <div id="newsSelection"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Main image"]</label>
+                                <div id="file"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Newspaper pictures"]</label>
+                                <div id="files"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>@SharedLocalizer["Date publish"]</label>
+                                <div id="dataPublish"></div>
+                            </div>
+                            <div class="form-group">
+                                <div id="published"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/CustomStore.js"></script>
+    <script>
+        var getNewsCategories = new DevExpress.data.AspNet.createStore({
+            key: "id",
+            loadUrl: "/api/NewsPaperAPI",
+            onBeforeSend: function (method, ajaxOptions) {
+                ajaxOptions.xhrFields = { withCredentials: true };
+            }
+        });
+
+        $(function () {
+            $("#newsSelection").dxSelectBox({
+                dataSource: getNewsCategories,
+                displayExpr: "name",
+                valueExpr: "id",
+                name: 'NewsPaperId',
+                searchEnabled: true
+            }).dxValidator({
+                 validationRules: [{
+                     type: "required",
+                    message: '@SharedLocalizer["Choose newspaper"]'
+                }]
+            });
+
+            $("#file").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a picture"]',
+                name: "FormFile",
+                labelText: '@SharedLocalizer["or drag picture"]',
+                accept: "image/*",
+                uploadMode: '@SharedLocalizer["or drag"]',
+                multiple: false,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload main picture"]'
+                }]
+            });
+
+            $("#files").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a pictures"]',
+                name: "FormFiles",
+                labelText: '@SharedLocalizer["or drag pictures"]',
+                accept: "image/*,.pdf",
+                uploadMode: "or drag",
+                multiple: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Upload pictures"]'
+                }]
+            });
+
+            $("#published").dxCheckBox({
+                text: '@SharedLocalizer["Active"]',
+                name: 'IsPublish',
+                value: true
+            });
+
+            $("#dataPublish").dxDateBox({
+                type: "date",
+                name: "DataOfPublish",
+                placeholder: '@SharedLocalizer["Date publish"]',
+                width: 150,
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please select newspaper publish date"]'
+                }]
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Add"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+
+            $("#summary").dxValidationSummary({});
+        });
+    </script>
+}

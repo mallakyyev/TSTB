@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "_StatisticsPartial";
+    Random rnd = new Random();
+}
+@model List<TSTB.BLL.ViewModel.CountryCount>
+<h2 class="text-xl font-semibold"> Visitors Statistics by Month </h2>
+<div class="mt-4">
+    <canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
+    <canvas id="doughnut-chart" width="800" height="450"></canvas>
+</div>
+
+@section Scripts{
+    <script>
+    document.getElementById("Monthly").className = "aside-link-active";
+    var Country = [];
+    var Count = [];
+    var backcol = [];
+     @foreach (TSTB.BLL.ViewModel.CountryCount d in Model)
+    {
+        @:Country.push("@d.Country");
+        @:Count.push("@d.Count");
+        @:backcol.push('rgba(@rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255) , @rnd.Next(1,255))')
+    }
+
+    new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+        data: {
+            labels: Country,
+      datasets: [
+        {
+              label: "Visitor distrebution by Month",
+              backgroundColor: backcol,
+              data: Count
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Montly Activities'
+      }
+    }
+    });
+
+    new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+        data: {
+            labels: Country,
+      datasets: [
+        {
+              label: "Visitor distrebution by Month",
+              backgroundColor: backcol,
+              data: Count
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Montly Activities'
+      }
+    }
+});
+    </script>
+}
+

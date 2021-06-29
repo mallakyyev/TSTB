@@ -1,0 +1,215 @@
+﻿@model TSTB.DAL.Models.MembershipRequest.MembershipRequest
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.BLL.DTOs.LanguageDTO
+
+@{
+    ViewData["Title"] = SharedLocalizer["Request"];
+    
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @SharedLocalizer["Request"]
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="gridContainer">
+            <div class="tab">
+
+                <button class="tablinks" onclick="openCity(event, 'Patent')">@SharedLocalizer["Copy of the patent or statutes"]</button>
+                <button class="tablinks" onclick="openCity(event, 'Register')">@SharedLocalizer["Copy of registration certificate or USREO"]</button>
+                <button class="tablinks" onclick="openCity(event, 'Passport')">@SharedLocalizer["Copy of the passport"]</button>
+                <button class="tablinks" onclick="openCity(event, 'Declaration')">@SharedLocalizer["Copy of the declaration or certificate"]</button>
+                <button class="tablinks" onclick="openCity(event, 'Enquery')">@SharedLocalizer["Statement in a specific form"]</button>
+                <button class="tablinks" onclick="openCity(event, 'Private')">@SharedLocalizer["Personal card in a specific form"]</button>
+                <button class="tablinks" onclick="openCity(event, 'School')">@SharedLocalizer["School certificate copy"]</button>
+                @if (Model.MembershipType == TSTB.DAL.Models.Enums.MembershipType.LegalPerson)
+                {
+                    <button class="tablinks" onclick="openCity(event, 'Command')">@SharedLocalizer["Copy of the precept"]</button>
+                    <button class="tablinks" onclick="openCity(event, 'Income')">@SharedLocalizer["Copy of the final income statement (last year)"]</button>
+                }
+            </div>
+            <form asp-action="Edit" id="form" enctype="multipart/form-data">
+                <div class="col-md-12">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-10">
+
+
+                            <div id="Patent" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.Patent_Ustaw" />
+                                <input type="hidden" name="Patent_Ustaw" value="@Model.Patent_Ustaw" />
+                            </div>
+                            <div id="Register" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.RegistrUdost_EGRPO" />
+                                <input type="hidden" name="RegistrUdost_EGRPO" value="@Model.RegistrUdost_EGRPO" />
+                            </div>
+
+                            <div id="Passport" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.Passport" />
+                                <input type="hidden" name="Passport" value="@Model.Passport" />
+                            </div>
+
+                            <div id="Declaration" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.Declaration_Certificate" />
+                                <input type="hidden" name="Declaration_Certificate" value="@Model.Declaration_Certificate" />
+                            </div>
+                            <div id="Enquery" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.EnqueryFrom" />
+                                <input type="hidden" name="EnqueryFrom" value="@Model.EnqueryFrom" />
+                            </div>
+                            <div id="Private" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.PrivateForm" />
+                                <input type="hidden" name="PrivateForm" value="@Model.PrivateForm" />
+                            </div>
+                            <div id="School" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.SchoolCertificate" />
+                                <input type="hidden" name="SchoolCertificate" value="@Model.SchoolCertificate" />
+                            </div>
+                            <div id="Command" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.CommandOrder" />
+                                <input type="hidden" name="CommandOrder" value="@Model.CommandOrder" />
+                            </div>
+                            <div id="Income" class="tabcontent">
+                                <img src="~/images/MembershipRequests/@Model.IncomeReport" />
+                                <input type="hidden" name="IncomeReport" value="@Model.IncomeReport" />
+                            </div>
+                            <hr />
+                            @if (Model.MembershipType == TSTB.DAL.Models.Enums.MembershipType.Entreprenuer)
+                            {
+                                <h2 class="font-bold">@SharedLocalizer["Entrepreneur"]</h2>
+                            }
+                            else
+                            {
+                                <h2 class="font-bold">@SharedLocalizer["Legal person"]</h2>
+                            }
+                            <input type="hidden" name="MembershipType" value="@Model.MembershipType" />
+                            <hr />
+                            <h2 class="font-bold">@SharedLocalizer["Phone number"] : @Model.PhoneNumber</h2>
+                            <input type="hidden" name="PhoneNumber" value="@Model.PhoneNumber" />
+                            <hr />
+                            <div class="form-group">
+                                <label class="font-bold">@SharedLocalizer["Membership request status"]</label>
+                                <div id="memstatus"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dx-fieldset">
+                    <br />
+                    <div id="summary"></div>
+                    <br />
+                    <div id="button"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function openCity(evt, cityName) {
+  // Declare all variables
+          var i, tabcontent, tablinks;
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+</script>
+@section Scripts{
+   
+    <script>
+
+         var Status = [         
+            { Id: 1, name: '@SharedLocalizer["Reviewed"]' },
+            { Id: 2, name: '@SharedLocalizer["Under review"]' }
+        ];
+        
+       
+        $(function () {
+            $("#memstatus").dxSelectBox({
+                dataSource: Status,
+                displayExpr: "name",
+                valueExpr: "Id",
+                value: @Html.Raw(Json.Serialize(Model.MembershipRequestStatus)),
+                name: 'MembershipRequestStatus',
+                searchEnabled: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Select membership status"]'
+                }]
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Edit"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+            $("#summary").dxValidationSummary({});
+
+        });
+
+    </script>
+
+}
+
+<style>
+    /* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: cornflowerblue;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>

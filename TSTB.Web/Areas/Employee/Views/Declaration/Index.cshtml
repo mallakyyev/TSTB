@@ -1,0 +1,153 @@
+﻿@using TSTB.Web.Areas.Admin.Utilities;
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Declaration management"];
+
+}
+
+<h2 class="text-xl font-semibold"> @SharedLocalizer["Declarations"]</h2>
+<div class="mt-4">
+    <div id="gridContainer">
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $("<style type='text/css'>#boxMX{display:none;background: #333;padding: 10px;border: 2px solid #ddd;float: left;font-size: 1.2em;position: fixed;top: 50%; left: 50%;z-index: 99999;box-shadow: 0px 0px 20px #999; -moz-box-shadow: 0px 0px 20px #999; -webkit-box-shadow: 0px 0px 20px #999; border-radius:6px 6px 6px 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; font:13px Arial, Helvetica, sans-serif; padding:6px 6px 4px;width:300px; color: white;}</style>").appendTo("head");
+        function alertMX(t) {
+            $("body").append($("<div id='boxMX'><p class='msgMX'></p><p>CLOSE</p></div>"));
+            $('.msgMX').text(t); var popMargTop = ($('#boxMX').height() + 24) / 2, popMargLeft = ($('#boxMX').width() + 24) / 2;
+            $('#boxMX').css({ 'margin-top': -popMargTop, 'margin-left': -popMargLeft }).fadeIn(600);
+            $("#boxMX").click(function () { $(this).remove(); });
+        };
+
+        var UserType = [
+            { Id: 0, name: '@SharedLocalizer["Pending"]' },
+            { Id: 1, name: '@SharedLocalizer["Confirmed"]' },
+            { Id: 2, name: '@SharedLocalizer["Rejected"]' }
+        ];
+
+        $(function () {
+            let url = '/api/DeclarationAPI';
+            var returnUrl = '@Context.Request.Path@Context.Request.QueryString';
+            $("#gridContainer").dxDataGrid({
+                dataSource: DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: url,
+                    insertUrl: url,
+                    updateUrl: url,
+                    deleteUrl: url,
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),
+                onInitNewRow: function(e) {
+                    var url = `@Url.Action("Create", "Declaration", new { Area = "Employee" })`;
+                    window.location = url;
+                },
+                selection: {
+                    mode: "multiple"
+                },
+                "export": {
+                    enabled: true,
+                    fileName: "Documents",
+                    allowExportSelectedData: true
+                },
+                filterPanel: {
+                    visible: false
+                },
+                filterRow: { visible: false },
+                remoteOperations: true,
+                onRowUpdating: function (e) {
+                    e.newData = Object.assign(e.oldData, e.newData)
+                },
+                scrolling: {
+                    mode: "virtual",
+                    rowRenderingMode: "virtual"
+                },
+                paging: {
+                    pageSize: 100
+                },
+                editing: {
+                    useIcons: true,
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    allowAdding: true
+                },
+                headerFilter: {
+                    visible: true
+                },
+                wordWrapEnabled: true,
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                searchPanel: {
+                    visible: true
+                },
+                stateStoring: {
+                    enabled: true,
+                    type: "localStorage",
+                    storageKey: "declarationEmployee"
+                },
+                columns: [
+                    {
+                        caption: '@SharedLocalizer["Date created"]',
+                        dataField: "date",
+                        allowHeaderFiltering: false
+                    },
+                    {
+                        dataField: "statusDeclaration",
+                        caption: '@SharedLocalizer["Status"]',
+                        lookup: {
+                            dataSource: UserType,
+                            displayExpr: "name",
+                            valueExpr: "Id"
+                        }
+                    },
+                    {
+                        caption: '@SharedLocalizer["Description"]',
+                        dataField: "description",
+                        allowHeaderFiltering: false
+                    },
+                    {
+                        caption: '@SharedLocalizer["Payment year"]',
+                        dataField: "yearDeclaration",
+                        width: "130",
+                        allowHeaderFiltering: false
+                    },
+                    {
+                        type: "buttons",
+                        width: 110,
+                        buttons: [
+                            {
+                                hint: '@SharedLocalizer["Edit"]',
+                                icon: "edit",
+                                onClick: function (e) {
+                                    var obj = JSON.parse(JSON.stringify(e.row.data));
+                                    if (obj.statusDeclaration == 2) {
+                                        var idString = e.row.data.id;
+                                        var url = `@Url.Action("Edit", "Declaration", new { Area = "Employee" })`;
+                                        window.location = url + '?id=' + idString;
+                                    }
+                                    else {
+                                        if (obj.statusDeclaration == 1)
+                                            alertMX("@SharedLocalizer["Payment request has been confirmed"] ");
+                                        else
+                                            alertMX("@SharedLocalizer["Payment request pending"] ");
+                                    }
+                                }
+                            }
+
+                        ]
+                    }
+                ]
+            });
+
+        });
+    </script>
+}

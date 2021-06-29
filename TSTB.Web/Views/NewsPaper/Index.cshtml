@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TSTB.BLL.DTOs.NewsPaperModelDTO.NewsPaperDataDTO>
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.Web.Extensions
+
+@{
+    Layout = "/Views/PressReleases/Layout.cshtml";
+    ViewData["Title"] = SharedLocalizer["News papers"];
+}
+
+<div class="h-full xl:container xl:px-0 px-4">
+    <div class="mt-8 mb-16">
+        <div class="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-y-8 sm:gap-4 pb-8">
+            @foreach (var newsPapper in Model)
+            {
+                <div class="rounded flex flex-col max-w-xs relative overflow-hidden">
+                    <img src="~/images/NewsPapers/NewsPaperDataImage/@newsPapper.Image" alt="" class="object-cover">
+                    <a asp-area="" asp-controller="NewsPaper" asp-action="NewsPaperDetails" asp-route-id="@newsPapper.Id" class="md:mt-5 md:mb-3 mt-2 mb-1 font-semibold hover:text-link">
+                        @newsPapper.NewsPaperName
+                    </a>
+                    <span class="opacity-50">@newsPapper.DataOfPublish.ToDateFormat()</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script>
+    document.getElementById("NewsPapers").className = "tag tag--active";
+</script>
+
+}

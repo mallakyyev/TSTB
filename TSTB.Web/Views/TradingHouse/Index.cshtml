@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TSTB.BLL.DTOs.TradingHousesDTO.TradingHouseDTO>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@{
+    ViewData["Title"] = SharedLocalizer["Trading houses"];
+}
+
+<div class="h-full xl:container xl:px-0 px-4 flex flex-col justify-center ">
+    <div class="bg-white sm:pt-12 pt-4 relative">
+        <h1 class="font-bold text-2xl sm:text-3xl lg:max-w-3xl lg:text-3xl text-primary">
+            @SharedLocalizer["Trading houses"]
+        </h1>
+    </div>
+    <div class="h-1 w-full bg-gray-100 lg:mt-20 sm:mt-10 mt-4"></div>
+    <section>
+        @foreach (var call in Model)
+        {
+            <article class="partner-container">
+                <h2 class="font-bold text-xl sm:text-2xl text-opacity-75"> @call.Name</h2>
+                <div class="mt-4 sm:grid  lg:grid-cols-2 grid-cols-3  ">
+                    <img src="~/images/TradingHouse/@call.Image" alt="" class="rounded object-cover w-full h-full  max-w-screen-sm lg:col-span-1 col-span-2 ">
+                    <div class="lg:pl-16 md:pl-6 sm:pl-3">
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Contact person name"]:
+                            </span>
+                            <br />
+                            @call.Person
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Address"]:
+                            </span>
+                            <br />
+                            @call.Address
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Phone"]:
+                            </span>
+                            <br />
+                            @call.Phone
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Email"]:
+                            </span>
+                            <br />
+                            @call.Email
+                        </p>
+                        <p class="my-2">
+                            <span class="font-semibold select-none">
+                                @SharedLocalizer["Web URL"]:
+                            </span>
+                            <br />
+                            @call.Site
+                        </p>
+                    </div>
+                </div>
+                <div class="description mt-2 max-w-6xl">
+                    @Html.Raw(call.Description)
+                </div>
+
+            </article>
+        }
+
+
+
+    </section>
+</div>

@@ -1,0 +1,145 @@
+﻿
+@model TSTB.BLL.DTOs.BillingModelDTO.EditDeclarationDTO
+@using TSTB.Web
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using TSTB.DAL.Models.Enums
+
+@{
+    ViewData["Title"] = SharedLocalizer["Edit yearly payment request"];
+}
+
+<h2 class="text-xl font-semibold"> @SharedLocalizer["Edit yearly payment request and send declaration for amount confirmation"]</h2>
+<div class="mt-4">
+    <div id="gridContainer">
+        <form asp-action="Edit" id="form" enctype="multipart/form-data">
+            <div class="col-md-12">
+                <input type="hidden" asp-for="Id" />
+
+                <input type="hidden" name="DateCreateDeclaration" value="@Model.DateCreateDeclaration" />
+                <input type="hidden" name="StatusDeclaration" value="@Model.StatusDeclaration" />
+                <input type="hidden" name="Description" value="@Model.Description" />
+                <input type="hidden" name="ApplicationUserId" value="@Model.ApplicationUserId" />
+                <input type="hidden" name="PaymentId" value="@Model.PaymentId" />
+                <input type="hidden" name="OldYear" value="@Model.OldYear" />
+                <div asp-validation-summary="All" class="text-danger">
+                    @if (ViewBag.ErrorList != null)
+                    {
+                        foreach (var err in ViewBag.ErrorList)
+                        {
+                            <p>@err.Description</p>
+                        }
+                    }
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <p class="text-danger">@SharedLocalizer["Rejected because"]:  @Model.Description</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>@SharedLocalizer["Choose year"]</label>
+                            <div id="yearPayment"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>@SharedLocalizer["Upload declaration obtained from tax office"]</label>
+                            <div id="photo"></div>
+                        </div>
+                        <div class="form-group">
+                            <div id="gridContainerPicture"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="dx-fieldset">
+                <br />
+                <div id="summary"></div>
+                <br />
+                <div id="button"></div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $(function () {
+            var yaers = [];
+            var year = new Date().getFullYear();
+            for (let y = year; y >= year - 10; y--) {
+                yaers.push(y);
+            }
+
+            $("#yearPayment").dxSelectBox({
+                items: yaers,
+                value: @Model.YearDeclaration,
+                name: "YearDeclaration",
+                placeholder: '@SharedLocalizer["Choose year"]',
+                showClearButton: true
+            }).dxValidator({
+                validationRules: [{
+                    type: "required",
+                    message: '@SharedLocalizer["Please choose year"]'
+                }]
+            });
+
+            $("#photo").dxFileUploader({
+                selectButtonText: '@SharedLocalizer["Choose a pictures"]',
+                name: "FormFiles",
+                labelText: '@SharedLocalizer["or drag pictures"]',
+                accept: "image/*",
+                uploadMode: '@SharedLocalizer["or drag"]',
+                multiple: true,
+            });
+
+            $("#gridContainerPicture").dxDataGrid({
+                dataSource: new DevExpress.data.AspNet.createStore({
+                    key: "id",
+                    loadUrl: "/api/DeclarationAPI/GetDeclarationFiles/" + @Json.Serialize(Model.Id),
+                    deleteUrl: "/api/DeclarationAPI/DeleteDeclartionFiles",
+                    onBeforeSend: function (method, ajaxOptions) {
+                        ajaxOptions.xhrFields = { withCredentials: true };
+                    }
+                }),
+                editing: {
+                    useIcons: true,
+                    allowUpdating: false,
+                    allowDeleting: true,
+                    allowAdding: false
+                },
+                showColumnLines: true,
+                showRowLines: true,
+                showBorders: true,
+                columns: [{
+                    caption: '@SharedLocalizer["Declaration scans"]',
+                    dataField: "name",
+                    allowFiltering: false,
+                    allowSorting: false,
+                    cellTemplate: function (container, options) {
+                        $("<div>")
+                            .append($("<img >", { "src": '/images/Declarations/' + options.value, "style": 'height: 700px; width: 100%; object-fit: contain' }))
+                            .appendTo(container);
+                    }
+                }]
+            });
+
+            $("#button").dxButton({
+                text: '@SharedLocalizer["Edit"]',
+                type: "success",
+                useSubmitBehavior: true,
+            });
+
+            $("#summary").dxValidationSummary({});
+
+        });
+
+    </script>
+
+}
